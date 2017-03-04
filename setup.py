@@ -11,7 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
-    'dlib>=19.2.0',
+    'dlib>=19.3.0',
     'numpy',
     'scikit-image'
 ]
@@ -22,7 +22,7 @@ test_requirements = [
 
 setup(
     name='face_recognition',
-    version='0.1.0',
+    version='0.1.2',
     description="Recognize faces from Python or from the command line",
     long_description=readme + '\n\n' + history,
     author="Adam Geitgey",
@@ -40,7 +40,6 @@ setup(
             'face_recognition=face_recognition.cli:main'
         ]
     },
-    include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
