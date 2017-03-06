@@ -99,7 +99,7 @@ Next, you need a second folder with the files you want to identify:
 
 ![unknown](https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png)
 
-Then in you simply run the commnad `face_recognition`, passing in
+Then in you simply run the command `face_recognition`, passing in
 the folder of known people and the folder (or single image) with unknown
 people and it tells you who is in each image:
 
@@ -213,10 +213,10 @@ depending on a black box library, [read my article](https://medium.com/@ageitgey
 
 * Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
   for creating dlib and for providing the trained facial feature detection and face encoding models
-  used in this library. For more information on the ResNet the powers the face encodings, check out
+  used in this library. For more information on the ResNet that powers the face encodings, check out
   his [blog post](http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html).
-* Everyone who works on all the awesome Python data science libraries like numpy, scipy, scikit-image,
+* Thanks to everyone who works on all the awesome Python data science libraries like numpy, scipy, scikit-image,
   pillow, etc, etc that makes this kind of stuff so easy and fun in Python.
-* [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
+* Thanks to [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
   [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage) project template
   for making Python project packaging way more tolerable.
