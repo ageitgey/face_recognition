@@ -47,9 +47,9 @@ def test_image(image_to_check, known_names, known_face_encodings):
         result = face_recognition.compare_faces(known_face_encodings, unknown_encoding)
 
         if True in result:
-            [print("{}|{}".format(image_to_check, name)) for is_match, name in zip(result, known_names) if is_match]
+            [print("{},{}".format(image_to_check, name)) for is_match, name in zip(result, known_names) if is_match]
         else:
-            print("{}|unknown_person".format(image_to_check))
+            print("{},unknown_person".format(image_to_check))
 
 
 def image_files_in_folder(folder):
