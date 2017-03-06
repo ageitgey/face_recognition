@@ -3,12 +3,12 @@
 import scipy.misc
 import dlib
 import numpy as np
-from pkg_resources import resource_filename
+import face_recognition_models
 
-predictor_model = resource_filename(__name__, "models/shape_predictor_68_face_landmarks.dat")
+predictor_model = face_recognition_models.pose_predictor_model_location()
 pose_predictor = dlib.shape_predictor(predictor_model)
 
-face_recognition_model = resource_filename(__name__, "models/dlib_face_recognition_resnet_model_v1.dat")
+face_recognition_model = face_recognition_models.face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
 

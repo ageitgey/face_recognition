@@ -52,7 +52,7 @@ class Test_face_recognition(unittest.TestCase):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "obama.jpg"))
         face_landmarks = api.face_landmarks(img)
 
-        assert list(face_landmarks[0].keys()) == ['chin', 'left_eyebrow', 'right_eyebrow', 'nose_bridge', 'nose_tip', 'left_eye', 'right_eye', 'top_lip', 'bottom_lip']
+        assert set(face_landmarks[0].keys()) == set(['chin', 'left_eyebrow', 'right_eyebrow', 'nose_bridge', 'nose_tip', 'left_eye', 'right_eye', 'top_lip', 'bottom_lip'])
         assert face_landmarks[0]['chin'] == [(369, 220), (372, 254), (378, 289), (384, 322), (395, 353), (414, 382), (437, 407), (464, 424), (495, 428), (527, 420), (552, 399), (576, 372), (594, 344), (604, 314)]
 
     def test_face_encodings(self):
