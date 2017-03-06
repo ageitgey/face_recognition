@@ -13,7 +13,7 @@ requirements = [
     'Click>=6.0',
     'dlib>=19.3.0',
     'numpy',
-    'scikit-image'
+    'scipy'
 ]
 
 test_requirements = [

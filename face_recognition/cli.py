@@ -7,7 +7,7 @@ import skimage.transform
 import skimage.util
 import skimage.io
 import warnings
-import api as face_recognition
+import face_recognition.api as face_recognition
 
 
 def scan_known_people(known_people_folder):

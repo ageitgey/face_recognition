@@ -26,7 +26,7 @@ class Test_face_recognition(unittest.TestCase):
 
     def test_raw_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "obama.jpg"))
-        detected_faces = api.raw_face_locations(img)
+        detected_faces = api._raw_face_locations(img)
 
         assert len(detected_faces) == 1
         assert detected_faces[0].top() == 142
@@ -41,7 +41,7 @@ class Test_face_recognition(unittest.TestCase):
 
     def test_raw_face_landmarks(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "obama.jpg"))
-        face_landmarks = api.raw_face_landmarks(img)
+        face_landmarks = api._raw_face_landmarks(img)
         example_landmark = face_landmarks[0].parts()[10]
 
         assert len(face_landmarks) == 1
@@ -87,9 +87,6 @@ class Test_face_recognition(unittest.TestCase):
 
     def test_command_line_interface(self):
         runner = CliRunner()
-        result = runner.invoke(cli.main)
-        assert result.exit_code == 0
-        assert 'face_recognition.cli.main' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
