@@ -199,6 +199,11 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Apply (horribly ugly) digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py)
 * [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
 
+## How Face Recognition Works
+
+If you want to learn how face location and recognition work instead of
+depending on a black box library, [read my article](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78).
+
 ## Caveats
 
 * The face recognition model is trained on adults does not work very well on children. It tends to mix
