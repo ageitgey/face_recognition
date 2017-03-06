@@ -249,8 +249,8 @@ How Face Recognition Works
 Caveats
 -------
 
--  The face recognition model is trained on adults does not work very
-   well on children. It tends to mix
+-  The face recognition model is trained on adults and does not work
+   very well on children. It tends to mix
    up children quite easy using the default comparison threshold of 0.6.
 
 Thanks
