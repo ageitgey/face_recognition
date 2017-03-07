@@ -8,4 +8,8 @@ coverage==4.1
 Sphinx==1.4.8
 cryptography==1.7
 PyYAML==3.11
-
+face_recognition_models
+Click>=6.0
+dlib>=19.3.0
+numpy
+scipy
