@@ -21,8 +21,11 @@ class Test_face_recognition(unittest.TestCase):
 
     def test_load_image_file(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "obama.jpg"))
-
         assert img.shape == (1137, 910, 3)
+
+    def test_load_image_file_32bit(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "32bit.png"))
+        assert img.shape == (1200, 626, 3)
 
     def test_raw_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "obama.jpg"))
@@ -31,6 +34,14 @@ class Test_face_recognition(unittest.TestCase):
         assert len(detected_faces) == 1
         assert detected_faces[0].top() == 142
         assert detected_faces[0].bottom() == 409
+
+    def test_raw_face_locations_32bit_image(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "32bit.png"))
+        detected_faces = api._raw_face_locations(img)
+
+        assert len(detected_faces) == 1
+        assert detected_faces[0].top() == 290
+        assert detected_faces[0].bottom() == 558
 
     def test_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), "test_images", "obama.jpg"))
