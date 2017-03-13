@@ -10,6 +10,6 @@ before_install:
 - sudo apt-get install -qq python-numpy python-scipy libboost-python-dev
 - pip install git+https://github.com/ageitgey/face_recognition_models
 
-install: pip install -r requirements.txt --use-mirrors
+install: pip install -r requirements.txt
 
 script: make test
