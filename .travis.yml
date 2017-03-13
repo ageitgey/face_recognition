@@ -13,4 +13,4 @@ before_install:
 
 install: pip install -r requirements.txt
 
-script: make test
+script: python -m tests.test_face_recognition
