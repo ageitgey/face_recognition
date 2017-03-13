@@ -11,7 +11,7 @@ This also provides a simple `face_recognition` command line tool that lets
 you do face recognition on a folder of images from the command line!
 
 ![](https://img.shields.io/pypi/v/face_recognition.svg)
-![](https://travis-ci.org/ageitgey/face_recognition)
+![](https://travis-ci.org/ageitgey/face_recognition.svg?branch=master)
 
 ## Features
 
@@ -63,29 +63,29 @@ results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 
 ## Installation
 
-Python 3 is fully supported. Python 2 should also work. Only macOS and
+Python 3 / Python 2 are fully supported. Only macOS and
 Linux are tested. I have no idea if this will work on Windows.
 
-1. First, install the required machine learning models using `pip3` (or `pip2` for Python 2):
+Step 1: Install the required machine learning models using `pip3` (or `pip2` for Python 2):
 
 ```bash
 pip3 install git+https://github.com/ageitgey/face_recognition_models
 ```
 
-2. Then you can install this module from pypi using `pip3` (or `pip2` for Python 2):
+Step 2: Install this module from pypi using `pip3` (or `pip2` for Python 2):
 
 ```bash
 pip3 install face_recognition
 ```
 
-NOTE: It's very likely that you will run into problems when pip tries to compile
+IMPORTANT NOTE: It's very likely that you will run into problems when pip tries to compile
 the `dlib` dependency. If that happens, check out this guide to installing
-dlib from source instead to fix the error:
+dlib from source (instead of from pip) to fix the error:
 
 [How to install dlib from source](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
 
 After manually installing `dlib`, try running `pip3 install face_recognition`
-again.
+again to complete your installation.
 
 ## Usage
 
