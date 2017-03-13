@@ -200,7 +200,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 All the examples are available [here](https://github.com/ageitgey/face_recognition/tree/master/examples).
 
-* [Find faces in an photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
+* [Find faces in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
 * [Identify specific facial features in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
 * [Apply (horribly ugly) digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py)
 * [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
@@ -212,7 +212,7 @@ depending on a black box library, [read my article](https://medium.com/@ageitgey
 
 ## Caveats
 
-* The face recognition model is trained on adults  and does not work very well on children. It tends to mix
+* The face recognition model is trained on adults and does not work very well on children. It tends to mix
   up children quite easy using the default comparison threshold of 0.6.
 
 ## Thanks

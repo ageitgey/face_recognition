@@ -77,28 +77,35 @@ Recognize who appears in each photo.
 Installation
 ------------
 
-| Python 3 is fully supported. Python 2 should also work. Only macOS and
+| Python 3 / Python 2 are fully supported. Only macOS and
 | Linux are tested. I have no idea if this will work on Windows.
 
-You can install this module from pypi using ``pip3`` (or ``pip2`` for
+Step 1: Install the required machine learning models using ``pip3`` (or
+``pip2`` for Python 2):
+
+.. code:: bash
+
+    pip3 install git+https://github.com/ageitgey/face_recognition_models
+
+Step 2: Install this module from pypi using ``pip3`` (or ``pip2`` for
 Python 2):
 
 .. code:: bash
 
-    $ pip3 install face_recognition
+    pip3 install face_recognition
 
-| It's very likely that you will run into problems when pip tries to
-  compile
+| IMPORTANT NOTE: It's very likely that you will run into problems when
+  pip tries to compile
 | the ``dlib`` dependency. If that happens, check out this guide to
   installing
-| dlib from source instead to fix the error:
+| dlib from source (instead of from pip) to fix the error:
 
 `How to install dlib from
 source <https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf>`__
 
 | After manually installing ``dlib``, try running
   ``pip3 install face_recognition``
-| again.
+| again to complete your installation.
 
 Usage
 -----
@@ -229,7 +236,7 @@ Python Code Examples
 All the examples are available
 `here <https://github.com/ageitgey/face_recognition/tree/master/examples>`__.
 
--  `Find faces in an
+-  `Find faces in a
    photograph <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
 -  `Identify specific facial features in a
    photograph <https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py>`__
@@ -275,7 +282,7 @@ Thanks
    for making Python project packaging way more tolerable.
 
 .. |image0| image:: https://img.shields.io/pypi/v/face_recognition.svg
-.. |image1| image:: https://travis-ci.org/ageitgey/face_recognition
+.. |image1| image:: https://travis-ci.org/ageitgey/face_recognition.svg?branch=master
 .. |image2| image:: https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png
 .. |image3| image:: https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png
 .. |image4| image:: https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png
