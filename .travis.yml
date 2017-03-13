@@ -1,9 +1,10 @@
+dist: trusty
+sudo: required
 language: python
 python:
   - "2.7"
   - "3.4"
   - "3.5"
-  - "3.6"
 
 before_install:
 - sudo apt-get -qq update
