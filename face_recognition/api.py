@@ -3,7 +3,14 @@
 import scipy.misc
 import dlib
 import numpy as np
-import face_recognition_models
+
+try:
+    import face_recognition_models
+except:
+    print("Please install `face_recognition_models` with this command before using `face_recognition`:")
+    print()
+    print("pip install git+https://github.com/ageitgey/face_recognition_models")
+    quit()
 
 predictor_model = face_recognition_models.pose_predictor_model_location()
 pose_predictor = dlib.shape_predictor(predictor_model)

@@ -66,13 +66,19 @@ results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 Python 3 is fully supported. Python 2 should also work. Only macOS and
 Linux are tested. I have no idea if this will work on Windows.
 
-You can install this module from pypi using `pip3` (or `pip2` for Python 2):
+1. First, install the required machine learning models using `pip3` (or `pip2` for Python 2):
 
 ```bash
-$ pip3 install face_recognition
+pip3 install git+https://github.com/ageitgey/face_recognition_models
 ```
 
-It's very likely that you will run into problems when pip tries to compile
+2. Then you can install this module from pypi using `pip3` (or `pip2` for Python 2):
+
+```bash
+pip3 install face_recognition
+```
+
+NOTE: It's very likely that you will run into problems when pip tries to compile
 the `dlib` dependency. If that happens, check out this guide to installing
 dlib from source instead to fix the error:
 
