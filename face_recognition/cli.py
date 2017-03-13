@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import print_function
 import click
 import os
 import re
-import skimage.transform
-import skimage.util
-import skimage.io
+import scipy.misc
 import warnings
 import face_recognition.api as face_recognition
-
 
 def scan_known_people(known_people_folder):
     known_names = []
@@ -39,7 +36,7 @@ def test_image(image_to_check, known_names, known_face_encodings):
         scale_factor = 1600 / unknown_image.shape[1]
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            unknown_image = skimage.util.img_as_ubyte(skimage.transform.rescale(unknown_image, scale=scale_factor))
+            unknown_image = scipy.misc.imresize(unknown_image, scale_factor)
 
     unknown_encodings = face_recognition.face_encodings(unknown_image)
 
