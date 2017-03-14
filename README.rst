@@ -15,8 +15,9 @@ Face Recognition
   that lets
 | you do face recognition on a folder of images from the command line!
 
-| |image0|
-| |image1|
+| |PyPI|
+| |Build Status|
+| |Documentation Status|
 
 Features
 --------
@@ -26,7 +27,7 @@ Find faces in pictures
 
 Find all the faces that appear in a picture:
 
-|image2|
+|image3|
 
 .. code:: python
 
@@ -40,7 +41,7 @@ Find and manipulate facial features in pictures
 Get the locations and outlines of each person's eyes, nose, mouth and
 chin.
 
-|image3|
+|image4|
 
 .. code:: python
 
@@ -54,14 +55,14 @@ chin.
   make-up <https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py>`__
   (think 'Meitu'):
 
-|image4|
+|image5|
 
 Identify faces in pictures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Recognize who appears in each photo.
 
-|image5|
+|image6|
 
 .. code:: python
 
@@ -167,7 +168,8 @@ Python Module
   manipulate
 | faces with just a couple of lines of code. It's super easy!
 
-API Docs: https://face-recognition.readthedocs.io.
+API Docs:
+`https://face-recognition.readthedocs.io <https://face-recognition.readthedocs.io/en/latest/face_recognition.html>`__.
 
 Automatically find all the faces in an image
 ''''''''''''''''''''''''''''''''''''''''''''
@@ -281,12 +283,16 @@ Thanks
    project template
    for making Python project packaging way more tolerable.
 
-.. |image0| image:: https://img.shields.io/pypi/v/face_recognition.svg
-.. |image1| image:: https://travis-ci.org/ageitgey/face_recognition.svg?branch=master
-.. |image2| image:: https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png
-.. |image3| image:: https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png
-.. |image4| image:: https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png
-.. |image5| image:: https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png
+.. |PyPI| image:: https://img.shields.io/pypi/v/face_recognition.svg
+   :target: https://pypi.python.org/pypi/face_recognition
+.. |Build Status| image:: https://travis-ci.org/ageitgey/face_recognition.svg?branch=master
+   :target: https://travis-ci.org/ageitgey/face_recognition
+.. |Documentation Status| image:: https://readthedocs.org/projects/face-recognition/badge/?version=latest
+   :target: http://face-recognition.readthedocs.io/en/latest/?badge=latest
+.. |image3| image:: https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png
+.. |image4| image:: https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png
+.. |image5| image:: https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png
+.. |image6| image:: https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png
 .. |known| image:: https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png
 .. |unknown| image:: https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png
 

@@ -10,8 +10,10 @@ built with deep learning. The model has an accuracy of 99.38% on the
 This also provides a simple `face_recognition` command line tool that lets
 you do face recognition on a folder of images from the command line!
 
-![](https://img.shields.io/pypi/v/face_recognition.svg)
-![](https://travis-ci.org/ageitgey/face_recognition.svg?branch=master)
+
+[![PyPI](https://img.shields.io/pypi/v/face_recognition.svg)](https://pypi.python.org/pypi/face_recognition)
+[![Build Status](https://travis-ci.org/ageitgey/face_recognition.svg?branch=master)](https://travis-ci.org/ageitgey/face_recognition)
+[![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
 
 ## Features
 
@@ -138,7 +140,7 @@ unknown_person
 You can import the `face_recognition` module and then easily manipulate
 faces with just a couple of lines of code. It's super easy!
 
-API Docs: [https://face-recognition.readthedocs.io](https://face-recognition.readthedocs.io).
+API Docs: [https://face-recognition.readthedocs.io](https://face-recognition.readthedocs.io/en/latest/face_recognition.html).
 
 ##### Automatically find all the faces in an image
 
