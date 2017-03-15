@@ -68,13 +68,7 @@ results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 Python 3 / Python 2 are fully supported. Only macOS and
 Linux are tested. I have no idea if this will work on Windows.
 
-Step 1: Install the required machine learning models using `pip3` (or `pip2` for Python 2):
-
-```bash
-pip3 install git+https://github.com/ageitgey/face_recognition_models
-```
-
-Step 2: Install this module from pypi using `pip3` (or `pip2` for Python 2):
+Install this module from pypi using `pip3` (or `pip2` for Python 2):
 
 ```bash
 pip3 install face_recognition
