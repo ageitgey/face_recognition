@@ -14,6 +14,7 @@ requirements = [
     'Click>=6.0',
     'dlib>=19.3.0',
     'numpy',
+    'Pillow',
     'scipy'
 ]
 
@@ -23,7 +24,7 @@ test_requirements = [
 
 setup(
     name='face_recognition',
-    version='0.1.7',
+    version='0.1.8',
     description="Recognize faces from Python or from the command line",
     long_description=readme + '\n\n' + history,
     author="Adam Geitgey",
@@ -46,7 +47,7 @@ setup(
     zip_safe=False,
     keywords='face_recognition',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
