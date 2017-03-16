@@ -114,27 +114,11 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(len(encodings[0]), 128)
 
     def test_compare_faces(self):
-        img_a1 = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
-        img_a2 = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama2.jpg'))
-        img_a3 = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama3.jpg'))
+        img_a1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        img_a2 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama2.jpg'))
+        img_a3 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama3.jpg'))
 
-        img_b1 = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'biden.jpg'))
+        img_b1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'biden.jpg'))
 
         face_encoding_a1 = api.face_encodings(img_a1)[0]
         face_encoding_a2 = api.face_encodings(img_a2)[0]
