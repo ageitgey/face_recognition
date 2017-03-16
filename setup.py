@@ -15,7 +15,7 @@ requirements = [
     'dlib>=19.3.0',
     'numpy',
     'Pillow',
-    'scipy'
+    'scipy>=0.17.0'
 ]
 
 test_requirements = [
