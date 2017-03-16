@@ -20,27 +20,15 @@ from face_recognition import cli
 class Test_face_recognition(unittest.TestCase):
 
     def test_load_image_file(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         self.assertEqual(img.shape, (1137, 910, 3))
 
     def test_load_image_file_32bit(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                '32bit.png'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', '32bit.png'))
         self.assertEqual(img.shape, (1200, 626, 3))
 
     def test_raw_face_locations(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         detected_faces = api._raw_face_locations(img)
 
         self.assertEqual(len(detected_faces), 1)
@@ -48,11 +36,7 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(detected_faces[0].bottom(), 409)
 
     def test_raw_face_locations_32bit_image(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                '32bit.png'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', '32bit.png'))
         detected_faces = api._raw_face_locations(img)
 
         self.assertEqual(len(detected_faces), 1)
@@ -60,22 +44,14 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(detected_faces[0].bottom(), 558)
 
     def test_face_locations(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         detected_faces = api.face_locations(img)
 
         self.assertEqual(len(detected_faces), 1)
         self.assertEqual(detected_faces[0], (142, 617, 409, 349))
 
     def test_raw_face_landmarks(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         face_landmarks = api._raw_face_landmarks(img)
         example_landmark = face_landmarks[0].parts()[10]
 
@@ -84,11 +60,7 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual((example_landmark.x, example_landmark.y), (552, 399))
 
     def test_face_landmarks(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         face_landmarks = api.face_landmarks(img)
 
         self.assertEqual(
@@ -103,11 +75,7 @@ class Test_face_recognition(unittest.TestCase):
              (552, 399), (576, 372), (594, 344), (604, 314)])
 
     def test_face_encodings(self):
-        img = api.load_image_file(
-            os.path.join(
-                os.path.dirname(__file__),
-                'test_images',
-                'obama.jpg'))
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         encodings = api.face_encodings(img)
 
         self.assertEqual(len(encodings), 1)
