@@ -12,6 +12,8 @@ except:
     print("pip install git+https://github.com/ageitgey/face_recognition_models")
     quit()
 
+face_detector = dlib.get_frontal_face_detector()
+
 predictor_model = face_recognition_models.pose_predictor_model_location()
 pose_predictor = dlib.shape_predictor(predictor_model)
 
@@ -37,6 +39,17 @@ def _css_to_rect(css):
     :return: a dlib `rect` object
     """
     return dlib.rectangle(css[3], css[0], css[1], css[2])
+
+
+def _trim_css_to_bounds(css, image_shape):
+    """
+    Make sure a tuple in (top, right, bottom, left) order is within the bounds of the image.
+
+    :param css:  plain tuple representation of the rect in (top, right, bottom, left) order
+    :param image_shape: numpy shape of the image array
+    :return: a trimmed plain tuple representation of the rect in (top, right, bottom, left) order
+    """
+    return max(css[0], 0), min(css[1], image_shape[1]), min(css[2], image_shape[0]), max(css[3], 0)
 
 
 def _face_distance(faces, face_to_compare):
@@ -70,7 +83,6 @@ def _raw_face_locations(img, number_of_times_to_upsample=1):
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
     :return: A list of dlib 'rect' objects of found face locations
     """
-    face_detector = dlib.get_frontal_face_detector()
     return face_detector(img, number_of_times_to_upsample)
 
 
@@ -82,7 +94,7 @@ def face_locations(img, number_of_times_to_upsample=1):
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
     :return: A list of tuples of found face locations in css (top, right, bottom, left) order
     """
-    return [_rect_to_css(face) for face in _raw_face_locations(img, number_of_times_to_upsample)]
+    return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample)]
 
 
 def _raw_face_landmarks(face_image, face_locations=None):
