@@ -81,15 +81,7 @@ Installation
 | Python 3 / Python 2 are fully supported. Only macOS and
 | Linux are tested. I have no idea if this will work on Windows.
 
-Step 1: Install the required machine learning models using ``pip3`` (or
-``pip2`` for Python 2):
-
-.. code:: bash
-
-    pip3 install git+https://github.com/ageitgey/face_recognition_models
-
-Step 2: Install this module from pypi using ``pip3`` (or ``pip2`` for
-Python 2):
+Install this module from pypi using ``pip3`` (or ``pip2`` for Python 2):
 
 .. code:: bash
 
@@ -247,6 +239,9 @@ All the examples are available
 -  `Find and recognize unknown faces in a photograph based on
    photographs of known
    people <https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py>`__
+-  `Recognize faces in live video using your webcam (Requires OpenCV to
+   be
+   installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py>`__
 
 How Face Recognition Works
 --------------------------
