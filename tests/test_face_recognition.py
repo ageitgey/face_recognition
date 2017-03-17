@@ -50,6 +50,19 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(len(detected_faces), 1)
         self.assertEqual(detected_faces[0], (142, 617, 409, 349))
 
+    def test_partial_face_locations(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama_partial_face.jpg'))
+        detected_faces = api.face_locations(img)
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertEqual(detected_faces[0], (142, 191, 365, 0))
+
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama_partial_face2.jpg'))
+        detected_faces = api.face_locations(img)
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertEqual(detected_faces[0], (142, 551, 409, 349))
+
     def test_raw_face_landmarks(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         face_landmarks = api._raw_face_landmarks(img)
