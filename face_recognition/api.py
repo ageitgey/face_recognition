@@ -61,7 +61,7 @@ def _face_distance(faces, face_to_compare):
     :param face_to_compare: A face encoding to compare against
     :return: A list with the distance for each face in the same order as the 'faces' array
     """
-    return np.array([np.linalg.norm(face - face_to_compare) for face in faces])
+    return np.linalg.norm(faces - face_to_compare, axis=1)
 
 
 def load_image_file(filename, mode='RGB'):
