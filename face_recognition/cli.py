@@ -7,6 +7,7 @@ import scipy.misc
 import warnings
 import face_recognition.api as face_recognition
 
+
 def scan_known_people(known_people_folder):
     known_names = []
     known_face_encodings = []
@@ -52,6 +53,7 @@ def test_image(image_to_check, known_names, known_face_encodings):
 def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
 
+
 @click.command()
 @click.argument('known_people_folder')
 @click.argument('image_to_check')
@@ -62,6 +64,7 @@ def main(known_people_folder, image_to_check):
         [test_image(image_file, known_names, known_face_encodings) for image_file in image_files_in_folder(image_to_check)]
     else:
         test_image(image_to_check, known_names, known_face_encodings)
+
 
 if __name__ == "__main__":
     main()
