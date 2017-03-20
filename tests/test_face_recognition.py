@@ -112,9 +112,9 @@ class Test_face_recognition(unittest.TestCase):
             face_encoding_b1]
 
         match_results = api.compare_faces(faces_to_compare, face_encoding_a1)
-        self.assertIs(match_results[0], True)
-        self.assertIs(match_results[1], True)
-        self.assertIs(match_results[2], False)
+        self.assertTrue(match_results[0])
+        self.assertTrue(match_results[1])
+        self.assertFalse(match_results[2])
 
     def test_command_line_interface(self):
         target_string = '--help  Show this message and exit.'
