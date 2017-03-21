@@ -1,6 +1,13 @@
 History
 =======
 
+0.1.10 (2017-03-21)
+-------------------
+
+* Minor pref improvements with face comparisons.
+* Test updates.
+
+
 0.1.9 (2017-03-16)
 ------------------
 
