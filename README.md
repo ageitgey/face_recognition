@@ -212,6 +212,22 @@ depending on a black box library, [read my article](https://medium.com/@ageitgey
 * The face recognition model is trained on adults and does not work very well on children. It tends to mix
   up children quite easy using the default comparison threshold of 0.6.
 
+## Common Issues
+
+##### Issue: `Illegal instruction (core dumped)` when using face_recognition or running examples.
+
+Solution: `dlib` is compiled with SSE4 or AVX support, but your CPU is too old and doesn't support that.
+You'll need to recompile `dlib` after [making the code change outlined here](https://github.com/ageitgey/face_recognition/issues/11#issuecomment-287398611).
+
+##### Issue: `RuntimeError: Unsupported image type, must be 8bit gray or RGB image.` when running the webcam example.
+
+Solution: Your webcam probably isn't set up correctly with OpenCV. [Look here for more](https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779524).
+
+##### Issue: `MemoryError` when running `pip2 install face_recognition`
+
+Solution: The face_recognition_models file is too big for your available pip cache memory. Instead,
+try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
+
 ## Thanks
 
 * Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
