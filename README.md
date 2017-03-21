@@ -212,6 +212,15 @@ depending on a black box library, [read my article](https://medium.com/@ageitgey
 * The face recognition model is trained on adults and does not work very well on children. It tends to mix
   up children quite easy using the default comparison threshold of 0.6.
 
+## Deployment to Cloud Hosts (Heroku, AWS, etc)
+
+Since `face_recognition` depends on `dlib` which is written in C++, it can be tricky to deploy an app
+using it to a cloud hosting provider like Heroku or AWS.
+
+To make things easier, there's an example Dockerfile in this repo that shows how to run an app built with
+`face_recognition` in a [Docker](https://www.docker.com/) container. With that, you should be able to deploy
+to any service that supports Docker images.
+
 ## Common Issues
 
 ##### Issue: `Illegal instruction (core dumped)` when using face_recognition or running examples.
