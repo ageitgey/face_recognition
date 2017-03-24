@@ -200,7 +200,8 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Identify specific facial features in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
 * [Apply (horribly ugly) digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py)
 * [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
-* [Recognize faces in live video using your webcam (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py)
+* [Recognize faces in live video using your webcam - Simple / Slower Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py)
+* [Recognize faces in live video using your webcam - Faster Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
 
 ## How Face Recognition Works
 
@@ -228,7 +229,7 @@ to any service that supports Docker images.
 Solution: `dlib` is compiled with SSE4 or AVX support, but your CPU is too old and doesn't support that.
 You'll need to recompile `dlib` after [making the code change outlined here](https://github.com/ageitgey/face_recognition/issues/11#issuecomment-287398611).
 
-##### Issue: `RuntimeError: Unsupported image type, must be 8bit gray or RGB image.` when running the webcam example.
+##### Issue: `RuntimeError: Unsupported image type, must be 8bit gray or RGB image.` when running the webcam examples.
 
 Solution: Your webcam probably isn't set up correctly with OpenCV. [Look here for more](https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779524).
 

@@ -1,7 +1,8 @@
 import face_recognition
 import cv2
 
-# This is a super simple demo of running face recognition on live video from your webcam.
+# This is a super simple (but slow) example of running face recognition on live video from your webcam.
+# There's a second example that's a little more complicated but runs faster.
 
 # PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
 # OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
