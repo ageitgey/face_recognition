@@ -63,10 +63,18 @@ unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
 results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 ```
 
+You can even use this library with other Python libraries to do real-time face recognition:
+
+![](https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif)
+
+See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) for the code.
+
 ## Installation
 
 Python 3 / Python 2 are fully supported. Only macOS and
-Linux are tested. I have no idea if this will work on Windows.
+Linux are tested. I have no idea if this will work on Windows. A 
+[pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b)
+is also available.
 
 Install this module from pypi using `pip3` (or `pip2` for Python 2):
 
@@ -82,6 +90,9 @@ dlib from source (instead of from pip) to fix the error:
 
 After manually installing `dlib`, try running `pip3 install face_recognition`
 again to complete your installation.
+
+If you are still having trouble installing this, you can also try out this
+[pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
 
 ## Usage
 
@@ -190,7 +201,6 @@ else:
 
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
  to try it out.
-
 
 ## Python Code Examples
 
