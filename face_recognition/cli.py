@@ -22,9 +22,9 @@ def scan_known_people(known_people_folder):
 
         if len(encodings) == 0:
             click.echo("WARNING: No faces found in {}. Ignoring file.".format(file))
-
-        known_names.append(basename)
-        known_face_encodings.append(encodings[0])
+        else:
+            known_names.append(basename)
+            known_face_encodings.append(encodings[0])
 
     return known_names, known_face_encodings
 
