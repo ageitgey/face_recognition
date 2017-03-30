@@ -1,6 +1,12 @@
 History
 =======
 
+0.1.11 (2017-03-30)
+-------------------
+
+* Fixed a minor bug in the command-line interface.
+
+
 0.1.10 (2017-03-21)
 -------------------
 
