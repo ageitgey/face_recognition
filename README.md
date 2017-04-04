@@ -72,7 +72,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 ## Installation
 
 Python 3 / Python 2 are fully supported. Only macOS and
-Linux are tested. I have no idea if this will work on Windows. A 
+Linux are tested. I have no idea if this will work on Windows. A
 [pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b)
 is also available.
 
@@ -212,6 +212,7 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
 * [Recognize faces in live video using your webcam - Simple / Slower Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py)
 * [Recognize faces in live video using your webcam - Faster Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
+* [Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
 
 ## How Face Recognition Works
 
