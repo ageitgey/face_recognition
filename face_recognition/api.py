@@ -3,7 +3,8 @@
 import scipy.misc
 import dlib
 import numpy as np
-import urllib, cStringIO
+import urllib
+import cStringIO
 
 try:
     import face_recognition_models
