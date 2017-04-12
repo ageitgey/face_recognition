@@ -122,7 +122,7 @@ def face_landmarks(face_image, face_locations=None):
 
     # For a definition of each point index, see https://cdn-images-1.medium.com/max/1600/1*AbEg31EgkbXSQehuNJBlWg.png
     return [{
-        "chin": points[0:14],
+        "chin": points[0:17],
         "left_eyebrow": points[17:22],
         "right_eyebrow": points[22:27],
         "nose_bridge": points[27:31],
