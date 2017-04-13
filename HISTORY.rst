@@ -1,6 +1,12 @@
 History
 =======
 
+0.1.12 (2017-04-13)
+-------------------
+
+* Fixed: Face landmarks wasn't returning all chin points.
+
+
 0.1.11 (2017-03-30)
 -------------------
 
