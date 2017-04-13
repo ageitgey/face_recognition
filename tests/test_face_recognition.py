@@ -86,7 +86,8 @@ class Test_face_recognition(unittest.TestCase):
             face_landmarks[0]['chin'],
             [(369, 220), (372, 254), (378, 289), (384, 322), (395, 353),
              (414, 382), (437, 407), (464, 424), (495, 428), (527, 420),
-             (552, 399), (576, 372), (594, 344), (604, 314)])
+             (552, 399), (576, 372), (594, 344), (604, 314), (610, 282),
+             (613, 250), (615, 219)])
 
     def test_face_encodings(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
