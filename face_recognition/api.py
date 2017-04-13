@@ -81,7 +81,7 @@ def load_image_file(filename, mode='RGB'):
 
 def load_image_url(url, mode='RGB'):
     """
-    Loads an image url into a numpy array 
+    Loads an image data from url into a numpy array 
 
     :param url: image url to load
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
