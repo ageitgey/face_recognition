@@ -74,7 +74,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 Requirements:
 * Python 3+ or Python 2.7
 * macOS or Linux (Windows untested)
-* [Also can run on a Raspberry Pi 2+ (follow this specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
+* [Also can run on a Raspberry Pi 2+ (follow these specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
 * A [pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) is also available.
 
 Install this module from pypi using `pip3` (or `pip2` for Python 2):
