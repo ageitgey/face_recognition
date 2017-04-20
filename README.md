@@ -71,10 +71,11 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 ## Installation
 
-Python 3 / Python 2 are fully supported. Only macOS and
-Linux are tested. I have no idea if this will work on Windows. A
-[pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b)
-is also available.
+Requirements:
+* Python 3+ or Python 2.7
+* macOS or Linux (Windows untested)
+* [Also can run on a Raspberry Pi 2+ (follow this specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
+* A [pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) is also available.
 
 Install this module from pypi using `pip3` (or `pip2` for Python 2):
 
@@ -212,6 +213,7 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
 * [Recognize faces in live video using your webcam - Simple / Slower Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py)
 * [Recognize faces in live video using your webcam - Faster Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
+* [Recognize faces on a Raspberry Pi w/ camera](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py)
 * [Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
 
 ## How Face Recognition Works
