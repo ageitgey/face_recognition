@@ -75,11 +75,27 @@ Recognize who appears in each photo.
 
     results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 
+You can even use this library with other Python libraries to do
+real-time face recognition:
+
+|image7|
+
+See `this
+example <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py>`__
+for the code.
+
 Installation
 ------------
 
-| Python 3 / Python 2 are fully supported. Only macOS and
-| Linux are tested. I have no idea if this will work on Windows.
+Requirements:
+
+-  Python 3+ or Python 2.7
+-  macOS or Linux (Windows untested)
+-  `Also can run on a Raspberry Pi 2+ (follow these specific
+   instructions) <https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65>`__
+-  A `pre-configured VM
+   image <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__
+   is also available.
 
 Install this module from pypi using ``pip3`` (or ``pip2`` for Python 2):
 
@@ -99,6 +115,11 @@ source <https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf>`__
 | After manually installing ``dlib``, try running
   ``pip3 install face_recognition``
 | again to complete your installation.
+
+| If you are still having trouble installing this, you can also try out
+  this
+| `pre-configured
+  VM <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__.
 
 Usage
 -----
@@ -239,9 +260,16 @@ All the examples are available
 -  `Find and recognize unknown faces in a photograph based on
    photographs of known
    people <https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py>`__
--  `Recognize faces in live video using your webcam (Requires OpenCV to
-   be
+-  `Recognize faces in live video using your webcam - Simple / Slower
+   Version (Requires OpenCV to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py>`__
+-  `Recognize faces in live video using your webcam - Faster Version
+   (Requires OpenCV to be
+   installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py>`__
+-  `Recognize faces on a Raspberry Pi w/
+   camera <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py>`__
+-  `Run a web service to recognize faces via HTTP (Requires Flask to be
+   installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py>`__
 
 How Face Recognition Works
 --------------------------
@@ -257,11 +285,24 @@ Caveats
    very well on children. It tends to mix
    up children quite easy using the default comparison threshold of 0.6.
 
+Deployment to Cloud Hosts (Heroku, AWS, etc)
+--------------------------------------------
+
+| Since ``face_recognition`` depends on ``dlib`` which is written in
+  C++, it can be tricky to deploy an app
+| using it to a cloud hosting provider like Heroku or AWS.
+
+| To make things easier, there's an example Dockerfile in this repo that
+  shows how to run an app built with
+| ``face_recognition`` in a `Docker <https://www.docker.com/>`__
+  container. With that, you should be able to deploy
+| to any service that supports Docker images.
+
 Common Issues
 -------------
 
-Issue: ``Illegal instruction (core dumped)`` when using face\_recognition or running examples.
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Issue: ``Illegal instruction (core dumped)`` when using
+face\_recognition or running examples.
 
 | Solution: ``dlib`` is compiled with SSE4 or AVX support, but your CPU
   is too old and doesn't support that.
@@ -269,15 +310,15 @@ Issue: ``Illegal instruction (core dumped)`` when using face\_recognition or run
   outlined
   here <https://github.com/ageitgey/face_recognition/issues/11#issuecomment-287398611>`__.
 
-Issue: ``RuntimeError: Unsupported image type, must be 8bit gray or RGB image.`` when running the webcam example.
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Issue:
+``RuntimeError: Unsupported image type, must be 8bit gray or RGB image.``
+when running the webcam examples.
 
 Solution: Your webcam probably isn't set up correctly with OpenCV. `Look
 here for
 more <https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779524>`__.
 
 Issue: ``MemoryError`` when running ``pip2 install face_recognition``
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 | Solution: The face\_recognition\_models file is too big for your
   available pip cache memory. Instead,
@@ -315,6 +356,7 @@ Thanks
 .. |image4| image:: https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png
 .. |image5| image:: https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png
 .. |image6| image:: https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png
+.. |image7| image:: https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif
 .. |known| image:: https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png
 .. |unknown| image:: https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png
 

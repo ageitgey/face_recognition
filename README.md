@@ -237,16 +237,16 @@ to any service that supports Docker images.
 
 ## Common Issues
 
-##### Issue: `Illegal instruction (core dumped)` when using face_recognition or running examples.
+Issue: `Illegal instruction (core dumped)` when using face_recognition or running examples.
 
 Solution: `dlib` is compiled with SSE4 or AVX support, but your CPU is too old and doesn't support that.
 You'll need to recompile `dlib` after [making the code change outlined here](https://github.com/ageitgey/face_recognition/issues/11#issuecomment-287398611).
 
-##### Issue: `RuntimeError: Unsupported image type, must be 8bit gray or RGB image.` when running the webcam examples.
+Issue: `RuntimeError: Unsupported image type, must be 8bit gray or RGB image.` when running the webcam examples.
 
 Solution: Your webcam probably isn't set up correctly with OpenCV. [Look here for more](https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779524).
 
-##### Issue: `MemoryError` when running `pip2 install face_recognition`
+Issue: `MemoryError` when running `pip2 install face_recognition`
 
 Solution: The face_recognition_models file is too big for your available pip cache memory. Instead,
 try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
