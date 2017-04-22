@@ -1,6 +1,12 @@
 History
 =======
 
+0.1.14 (2017-04-22)
+-------------------
+
+* Fixed a ValueError crash when using the CLI on Python 2.7
+
+
 0.1.13 (2017-04-20)
 -------------------
 

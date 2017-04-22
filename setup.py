@@ -25,7 +25,7 @@ test_requirements = [
 
 setup(
     name='face_recognition',
-    version='0.1.13',
+    version='0.1.14',
     description="Recognize faces from Python or from the command line",
     long_description=readme + '\n\n' + history,
     author="Adam Geitgey",
