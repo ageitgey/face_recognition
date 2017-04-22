@@ -34,7 +34,7 @@ def test_image(image_to_check, known_names, known_face_encodings):
 
     # Scale down image if it's giant so things run a little faster
     if unknown_image.shape[1] > 1600:
-        scale_factor = 1600 / unknown_image.shape[1]
+        scale_factor = 1600.0 / unknown_image.shape[1]
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             unknown_image = scipy.misc.imresize(unknown_image, scale_factor)
