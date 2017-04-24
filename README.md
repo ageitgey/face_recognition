@@ -17,9 +17,9 @@ you do face recognition on a folder of images from the command line!
 
 ## Features
 
-#### Find faces in pictures
+#### Find Faces in Pictures
 
-Find all the faces that appear in a picture:
+Find all faces that appear in a picture:
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png)
 
@@ -29,7 +29,7 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_locations = face_recognition.face_locations(image)
 ```
 
-#### Find and manipulate facial features in pictures
+#### Find and Manipulate Facial Features in Pictures
 
 Get the locations and outlines of each person's eyes, nose, mouth and chin.
 
@@ -41,14 +41,14 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 ```
 
-Finding facial features is super useful for lots of important stuff. But you can also use for really stupid stuff
+Finding facial features is useful in many professional scenarios and use cases, but you can also use it for stupid stuff
 like applying [digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (think 'Meitu'):
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png)
 
-#### Identify faces in pictures
+#### Identify Faces in Pictures
 
-Recognize who appears in each photo.
+Recognize who appears in each photo by comparing to a library of known faces.
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png)
 
@@ -74,7 +74,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 Requirements:
 * Python 3+ or Python 2.7
 * macOS or Linux (Windows untested)
-* [Also can run on a Raspberry Pi 2+ (follow these specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
+* [Can also run on a Raspberry Pi 2+ (follow these specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
 * A [pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) is also available.
 
 Install this module from pypi using `pip3` (or `pip2` for Python 2):
@@ -85,14 +85,14 @@ pip3 install face_recognition
 
 IMPORTANT NOTE: It's very likely that you will run into problems when pip tries to compile
 the `dlib` dependency. If that happens, check out this guide to installing
-dlib from source (instead of from pip) to fix the error:
+dlib directly from source (instead of from pip) to fix the error:
 
 [How to install dlib from source](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
 
-After manually installing `dlib`, try running `pip3 install face_recognition`
+After manually installing `dlib`, run `pip3 install face_recognition`
 again to complete your installation.
 
-If you are still having trouble installing this, you can also try out this
+If you are still having trouble, try the
 [pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
 
 ## Usage
@@ -101,7 +101,7 @@ If you are still having trouble installing this, you can also try out this
 
 When you install `face_recognition`, you get a simple command-line program
 called `face_recognition` that you can use to recognize faces in a
-photograph or folder full for photographs.
+photograph or folder full of photographs.
 
 First, you need to provide a folder with one picture of each person you
 already know. There should be one image file for each person with the
@@ -113,9 +113,9 @@ Next, you need a second folder with the files you want to identify:
 
 ![unknown](https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png)
 
-Then in you simply run the command `face_recognition`, passing in
+Then simply run the command `face_recognition`, passing in
 the folder of known people and the folder (or single image) with unknown
-people and it tells you who is in each image:
+people, to find out who is in each image:
 
 ```bash
 $ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/
@@ -130,8 +130,8 @@ with the filename and the name of the person found.
 An `unknown_person` is a face in the image that didn't match anyone in
 your folder of known people.
 
-If you simply want to know the names of the people in each photograph but don't
-care about file names, you could do this:
+If you want to know the names of the people in each photograph but don't
+care about file names, run the following command instead:
 
 ```bash
 $ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/ | cut -d ',' -f2
@@ -144,11 +144,11 @@ unknown_person
 #### Python Module
 
 You can import the `face_recognition` module and then easily manipulate
-faces with just a couple of lines of code. It's super easy!
+faces with just a few lines of code. It's super easy!
 
 API Docs: [https://face-recognition.readthedocs.io](https://face-recognition.readthedocs.io/en/latest/face_recognition.html).
 
-##### Automatically find all the faces in an image
+##### Automatically Find All Faces in a Photo
 
 ```python
 import face_recognition
@@ -156,13 +156,13 @@ import face_recognition
 image = face_recognition.load_image_file("my_picture.jpg")
 face_locations = face_recognition.face_locations(image)
 
-# face_locations is now an array listing the co-ordinates of each face!
+# face_locations is now an array listing the co-ordinates of each face
 ```
 
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
  to try it out.
 
-##### Automatically locate the facial features of a person in an image
+##### Automatically Locate the Facial Features of a Person in a Photo
 
 ```python
 import face_recognition
@@ -170,14 +170,14 @@ import face_recognition
 image = face_recognition.load_image_file("my_picture.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 
-# face_landmarks_list is now an array with the locations of each facial feature in each face.
-# face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye.
+# face_landmarks_list is now an array with the locations of each facial feature in each face
+# face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye
 ```
 
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
  to try it out.
 
-##### Recognize faces in images and identify who they are
+##### Recognize Faces in Photos and Identify Who They Are
 
 ```python
 import face_recognition
@@ -185,12 +185,12 @@ import face_recognition
 picture_of_me = face_recognition.load_image_file("me.jpg")
 my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
 
-# my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face!
+# my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face
 
 unknown_picture = face_recognition.load_image_file("unknown.jpg")
 unknown_face_encoding = face_recognition.face_encodings(unknown_picture)[0]
 
-# Now we can see the two face encodings are of the same person with `compare_faces`!
+# Now we can see the two face encodings are of the same person with `compare_faces`
 
 results = face_recognition.compare_faces([my_face_encoding], unknown_face_encoding)
 
@@ -218,13 +218,13 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 
 ## How Face Recognition Works
 
-If you want to learn how face location and recognition work instead of
+If you want to learn how facial feature location and face recognition works instead of
 depending on a black box library, [read my article](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78).
 
 ## Caveats
 
 * The face recognition model is trained on adults and does not work very well on children. It tends to mix
-  up children quite easy using the default comparison threshold of 0.6.
+  up children quite easily using the default comparison threshold of 0.6.
 
 ## Deployment to Cloud Hosts (Heroku, AWS, etc)
 
@@ -244,12 +244,12 @@ You'll need to recompile `dlib` after [making the code change outlined here](htt
 
 Issue: `RuntimeError: Unsupported image type, must be 8bit gray or RGB image.` when running the webcam examples.
 
-Solution: Your webcam probably isn't set up correctly with OpenCV. [Look here for more](https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779524).
+Solution: Your webcam probably isn't set up correctly with OpenCV. [Read this for more info](https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779524).
 
 Issue: `MemoryError` when running `pip2 install face_recognition`
 
 Solution: The face_recognition_models file is too big for your available pip cache memory. Instead,
-try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
+try `pip2 --no-cache-dir install face_recognition` to bypass the error.
 
 ## Thanks
 
