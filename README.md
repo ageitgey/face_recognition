@@ -251,6 +251,10 @@ Issue: `MemoryError` when running `pip2 install face_recognition`
 Solution: The face_recognition_models file is too big for your available pip cache memory. Instead,
 try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
 
+Issue: `AttributeError: 'module' object has no attribute 'face_recognition_model_v1'`
+
+Solution: The version of `dlib` you have installed is too old. You need version 19.4 or newer. Upgrade `dlib`.
+
 ## Thanks
 
 * Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
