@@ -255,6 +255,10 @@ Issue: `AttributeError: 'module' object has no attribute 'face_recognition_model
 
 Solution: The version of `dlib` you have installed is too old. You need version 19.4 or newer. Upgrade `dlib`.
 
+Issue: `TypeError: imread() got an unexpected keyword argument 'mode'`
+
+Solution: The version of `scipy` you have installed is too old. You need version 0.17 or newer. Upgrade `scipy`.
+
 ## Thanks
 
 * Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
