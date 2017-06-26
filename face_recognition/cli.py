@@ -10,6 +10,7 @@ import multiprocessing
 import itertools
 import sys
 
+
 def scan_known_people(known_people_folder):
     known_names = []
     known_face_encodings = []
