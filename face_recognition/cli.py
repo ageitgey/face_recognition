@@ -6,6 +6,9 @@ import re
 import scipy.misc
 import warnings
 import face_recognition.api as face_recognition
+import multiprocessing
+import itertools
+import sys
 
 
 def scan_known_people(known_people_folder):
@@ -54,14 +57,40 @@ def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
 
 
+def process_images_in_process_pool(images_to_check, known_names, known_face_encodings, number_of_cpus):
+    if number_of_cpus == -1:
+        processes = None
+    else:
+        processes = number_of_cpus
+
+    # macOS will crash due to a bug in libdispatch if you don't use 'forkserver'
+    context = multiprocessing
+    if "forkserver" in multiprocessing.get_all_start_methods():
+        context = multiprocessing.get_context("forkserver")
+
+    pool = context.Pool(processes=processes)
+    function_parameters = zip(images_to_check, itertools.repeat(known_names), itertools.repeat(known_face_encodings))
+
+    pool.starmap(test_image, function_parameters)
+
+
 @click.command()
 @click.argument('known_people_folder')
 @click.argument('image_to_check')
-def main(known_people_folder, image_to_check):
+@click.option('--cpus', default=1, help='number of CPU cores to use in parallel (can speed up processing lots of images). -1 means "use all in system"')
+def main(known_people_folder, image_to_check, cpus):
     known_names, known_face_encodings = scan_known_people(known_people_folder)
 
+    # Multi-core processing only supported on Python 3.4 or greater
+    if (sys.version_info < (3, 4)) and cpus != 1:
+        click.echo("WARNING: Multi-processing support requires Python 3.4 or greater. Falling back to single-threaded processing!")
+        cpus = 1
+
     if os.path.isdir(image_to_check):
-        [test_image(image_file, known_names, known_face_encodings) for image_file in image_files_in_folder(image_to_check)]
+        if cpus == 1:
+            [test_image(image_file, known_names, known_face_encodings) for image_file in image_files_in_folder(image_to_check)]
+        else:
+            process_images_in_process_pool(image_files_in_folder(image_to_check), known_names, known_face_encodings, cpus)
     else:
         test_image(image_to_check, known_names, known_face_encodings)
 

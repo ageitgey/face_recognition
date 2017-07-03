@@ -140,6 +140,18 @@ Barack Obama
 unknown_person
 ```
 
+Face recognition can also be done in parallel if you have a computer with
+multiple CPU cores. For example if your system has 4 CPU cores, you can
+process about 4 times as many images in the same amount of time by using
+all your CPU cores in parallel.
+
+If you are using Python 3.4 or newer, pass in a `--cpus <number_of_cpu_cores_to_use>` parameter:
+
+```bash
+$ face_recognition -cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
+```
+
+You can also pass in `--cpus -1` to use all CPU cores in your system.
 
 #### Python Module
 
@@ -215,6 +227,7 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Recognize faces in live video using your webcam - Faster Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
 * [Recognize faces on a Raspberry Pi w/ camera](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py)
 * [Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
+* [Compare faces by numeric face distance instead of only True/False matches](https://github.com/ageitgey/face_recognition/blob/master/examples/face_distance.py)
 
 ## How Face Recognition Works
 
@@ -250,6 +263,14 @@ Issue: `MemoryError` when running `pip2 install face_recognition`
 
 Solution: The face_recognition_models file is too big for your available pip cache memory. Instead,
 try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
+
+Issue: `AttributeError: 'module' object has no attribute 'face_recognition_model_v1'`
+
+Solution: The version of `dlib` you have installed is too old. You need version 19.4 or newer. Upgrade `dlib`.
+
+Issue: `TypeError: imread() got an unexpected keyword argument 'mode'`
+
+Solution: The version of `scipy` you have installed is too old. You need version 0.17 or newer. Upgrade `scipy`.
 
 ## Thanks
 
