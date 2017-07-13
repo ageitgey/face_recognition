@@ -1,6 +1,15 @@
 History
 =======
 
+0.2.0 (2017-06-03)
+------------------
+
+* The CLI can now take advantage of multiple CPUs. Just pass in the -cpus X parameter where X is the number of CPUs to use.
+* Added face_distance.py example
+* Improved CLI tests to actually test the CLI functionality
+* Updated facerec_on_raspberry_pi.py to capture in rgb (not bgr) format.
+
+
 0.1.14 (2017-04-22)
 -------------------
 
