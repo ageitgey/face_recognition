@@ -169,4 +169,4 @@ def compare_faces_tolerances(known_face_encodings, face_encoding_to_check, toler
     :param tolerance: How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.
     :return: A list of True/False and tolerance value dicts indicating which known_face_encodings match the face encoding to check
     """
-    return list({"match": v <= tolerance, "tolerance": v} for v in face_distance(known_face_encodings, face_encoding_to_check) if v <= tolerance)
+    return list({"match": v <= tolerance, "tolerance": v} for v in face_distance(known_face_encodings, face_encoding_to_check))
