@@ -8,7 +8,7 @@ To use Face Recognition in a project::
 
 See the examples in the /examples folder on github for how to use each function.
 
-You can also check the API docs for the 'face_recognition' module to see the possible paramters for each function.
+You can also check the API docs for the 'face_recognition' module to see the possible parameters for each function.
 
 The basic idea is that first you load an image::
 
