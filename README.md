@@ -130,6 +130,20 @@ with the filename and the name of the person found.
 An `unknown_person` is a face in the image that didn't match anyone in
 your folder of known people.
 
+If you are getting multiple matches for the same person, it might be that
+the people in your photos look very similar and a lower tolerance value
+is needed to make face comparisons more strict.
+
+You can do that with the `--tolerance` parameter. The default tolerance
+value is 0.6 and lower numbers make face comparisons more strict:
+
+```bash
+$ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictures/
+
+/unknown_pictures/unknown.jpg,Barack Obama
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
+```
+
 If you simply want to know the names of the people in each photograph but don't
 care about file names, you could do this:
 

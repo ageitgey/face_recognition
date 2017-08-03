@@ -183,7 +183,7 @@ class Test_face_recognition(unittest.TestCase):
         self.assertListEqual(match_results, [])
 
     def test_command_line_interface_options(self):
-        target_string = '--help          Show this message and exit.'
+        target_string = '--help             Show this message and exit.'
         runner = CliRunner()
         help_result = runner.invoke(cli.main, ['--help'])
         self.assertEqual(help_result.exit_code, 0)
@@ -195,7 +195,18 @@ class Test_face_recognition(unittest.TestCase):
         image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
         image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
 
-        help_result = runner.invoke(cli.main, args=[image_folder, image_file])
+        result = runner.invoke(cli.main, args=[image_folder, image_file])
 
-        self.assertEqual(help_result.exit_code, 0)
-        self.assertTrue(target_string in help_result.output)
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue(target_string in result.output)
+
+    def test_command_line_interface_tolerance(self):
+        target_string = 'obama.jpg,obama'
+        runner = CliRunner()
+        image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
+        image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
+
+        result = runner.invoke(cli.main, args=[image_folder, image_file, "--tolerance", "0.55"])
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue(target_string in result.output)
