@@ -67,15 +67,15 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
-def load_image_file(filename, mode='RGB'):
+def load_image_file(name, mode='RGB'):
     """
     Loads an image file (.jpg, .png, etc) into a numpy array
 
-    :param filename: image file to load
+    :param name: image file name or file object to load
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
-    return scipy.misc.imread(filename, mode=mode)
+    return scipy.misc.imread(name, mode=mode)
 
 
 def _raw_face_locations(img, number_of_times_to_upsample=1):
