@@ -130,6 +130,8 @@ with the filename and the name of the person found.
 An `unknown_person` is a face in the image that didn't match anyone in
 your folder of known people.
 
+##### Adjusting Tolerance / Sensitivity
+
 If you are getting multiple matches for the same person, it might be that
 the people in your photos look very similar and a lower tolerance value
 is needed to make face comparisons more strict.
@@ -144,6 +146,18 @@ $ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictu
 /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
 ```
 
+If you want to see the face distance calculated for each match in order
+to adjust the tolerance setting, you can use `--show-distance true`:
+
+```bash
+$ face_recognition --show-distance true ./pictures_of_people_i_know/ ./unknown_pictures/
+
+/unknown_pictures/unknown.jpg,Barack Obama,0.378542298956785
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None
+```
+
+##### More Examples
+
 If you simply want to know the names of the people in each photograph but don't
 care about file names, you could do this:
 
@@ -154,7 +168,9 @@ Barack Obama
 unknown_person
 ```
 
-Face recognition can also be done in parallel if you have a computer with
+##### Speeding up Face Recognition
+
+Face recognition can be done in parallel if you have a computer with
 multiple CPU cores. For example if your system has 4 CPU cores, you can
 process about 4 times as many images in the same amount of time by using
 all your CPU cores in parallel.
