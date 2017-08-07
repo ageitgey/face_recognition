@@ -32,7 +32,14 @@ def scan_known_people(known_people_folder):
     return known_names, known_face_encodings
 
 
-def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6):
+def print_result(filename, name, distance, show_distance=False):
+    if show_distance:
+        print("{},{},{}".format(filename, name, distance))
+    else:
+        print("{},{}".format(filename, name))
+
+
+def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6, show_distance=False):
     unknown_image = face_recognition.load_image_file(image_to_check)
 
     # Scale down image if it's giant so things run a little faster
@@ -45,19 +52,20 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6)
     unknown_encodings = face_recognition.face_encodings(unknown_image)
 
     for unknown_encoding in unknown_encodings:
-        result = face_recognition.compare_faces(known_face_encodings, unknown_encoding, tolerance=tolerance)
+        distances = face_recognition.face_distance(known_face_encodings, unknown_encoding)
+        result = list(distances <= tolerance)
 
         if True in result:
-            [print("{},{}".format(image_to_check, name)) for is_match, name in zip(result, known_names) if is_match]
+            [print_result(image_to_check, name, distance, show_distance) for is_match, name, distance in zip(result, known_names, distances) if is_match]
         else:
-            print("{},unknown_person".format(image_to_check))
+            print_result(image_to_check, "unknown_person", None, show_distance)
 
 
 def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
 
 
-def process_images_in_process_pool(images_to_check, known_names, known_face_encodings, number_of_cpus, tolerance):
+def process_images_in_process_pool(images_to_check, known_names, known_face_encodings, number_of_cpus, tolerance, show_distance):
     if number_of_cpus == -1:
         processes = None
     else:
@@ -69,7 +77,14 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
         context = multiprocessing.get_context("forkserver")
 
     pool = context.Pool(processes=processes)
-    function_parameters = zip(images_to_check, itertools.repeat(known_names), itertools.repeat(known_face_encodings),  itertools.repeat(tolerance))
+
+    function_parameters = zip(
+        images_to_check,
+        itertools.repeat(known_names),
+        itertools.repeat(known_face_encodings),
+        itertools.repeat(tolerance),
+        itertools.repeat(show_distance)
+    )
 
     pool.starmap(test_image, function_parameters)
 
@@ -79,7 +94,8 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
 @click.argument('image_to_check')
 @click.option('--cpus', default=1, help='number of CPU cores to use in parallel (can speed up processing lots of images). -1 means "use all in system"')
 @click.option('--tolerance', default=0.6, help='Tolerance for face comparisons. Default is 0.6. Lower this if you get multiple matches for the same person.')
-def main(known_people_folder, image_to_check, cpus, tolerance):
+@click.option('--show-distance', default=False, type=bool, help='Output face distance. Useful for tweaking tolerance setting.')
+def main(known_people_folder, image_to_check, cpus, tolerance, show_distance):
     known_names, known_face_encodings = scan_known_people(known_people_folder)
 
     # Multi-core processing only supported on Python 3.4 or greater
@@ -89,11 +105,11 @@ def main(known_people_folder, image_to_check, cpus, tolerance):
 
     if os.path.isdir(image_to_check):
         if cpus == 1:
-            [test_image(image_file, known_names, known_face_encodings, tolerance) for image_file in image_files_in_folder(image_to_check)]
+            [test_image(image_file, known_names, known_face_encodings, tolerance, show_distance) for image_file in image_files_in_folder(image_to_check)]
         else:
-            process_images_in_process_pool(image_files_in_folder(image_to_check), known_names, known_face_encodings, cpus, tolerance)
+            process_images_in_process_pool(image_files_in_folder(image_to_check), known_names, known_face_encodings, cpus, tolerance, show_distance)
     else:
-        test_image(image_to_check, known_names, known_face_encodings)
+        test_image(image_to_check, known_names, known_face_encodings, tolerance, show_distance)
 
 
 if __name__ == "__main__":
