@@ -1,7 +1,7 @@
 History
 =======
 
-0.2.2 (2017-06-03)
+0.2.2 (2017-07-07)
 ------------------
 
 * Added --show-distance to cli
@@ -9,7 +9,7 @@ History
 * Added benchmark.py to examples
 
 
-0.2.1 (2017-06-03)
+0.2.1 (2017-07-03)
 ------------------
 
 * Added --tolerance to cli
