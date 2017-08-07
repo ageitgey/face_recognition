@@ -6,6 +6,7 @@ History
 
 * Added --show-distance to cli
 * Fixed a bug where --tolerance was ignored in cli if testing a single image
+* Added benchmark.py to examples
 
 
 0.2.1 (2017-06-03)
