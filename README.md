@@ -73,7 +73,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 Requirements:
 * Python 3+ or Python 2.7
-* macOS or Linux (Windows untested)
+* macOS or Linux or Windows 
 * [Also can run on a Raspberry Pi 2+ (follow these specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
 * A [pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) is also available.
 
@@ -178,7 +178,7 @@ all your CPU cores in parallel.
 If you are using Python 3.4 or newer, pass in a `--cpus <number_of_cpu_cores_to_use>` parameter:
 
 ```bash
-$ face_recognition -cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
+$ face_recognition --cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
 ```
 
 You can also pass in `--cpus -1` to use all CPU cores in your system.
