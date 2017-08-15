@@ -178,7 +178,7 @@ all your CPU cores in parallel.
 If you are using Python 3.4 or newer, pass in a `--cpus <number_of_cpu_cores_to_use>` parameter:
 
 ```bash
-$ face_recognition -cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
+$ face_recognition --cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
 ```
 
 You can also pass in `--cpus -1` to use all CPU cores in your system.
