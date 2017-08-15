@@ -3,6 +3,8 @@
 import scipy.misc
 import dlib
 import numpy as np
+from six.moves.urllib.request import build_opener
+from io import BytesIO
 
 try:
     import face_recognition_models
@@ -75,6 +77,21 @@ def load_image_file(file, mode='RGB'):
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
+    return scipy.misc.imread(file, mode=mode)
+
+
+def load_image_url(url, mode='RGB'):
+    """
+    Loads an image data from url into a numpy array
+
+    :param url: image url to load
+    :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
+    :return: image contents as numpy array
+    """
+    opener = build_opener()
+    opener.addheaders = [('User-Agent', 'Mozilla/5.0')]
+
+    file = BytesIO(opener.open(url).read())
     return scipy.misc.imread(file, mode=mode)
 
 
