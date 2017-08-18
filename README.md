@@ -204,6 +204,24 @@ face_locations = face_recognition.face_locations(image)
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
  to try it out.
 
+You can also opt-in to a somewhat more accurate deep-learning-based face detection model.
+
+Note: GPU acceleration (via nvidia's CUDA library) is required for good
+performance with this model. You'll also want to enable CUDA support
+when compliling `dlib`.
+
+```python
+import face_recognition
+
+image = face_recognition.load_image_file("my_picture.jpg")
+face_locations = face_recognition.face_locations(image, model="cnn")
+
+# face_locations is now an array listing the co-ordinates of each face!
+```
+
+See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py)
+ to try it out.
+
 ##### Automatically locate the facial features of a person in an image
 
 ```python
@@ -250,6 +268,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 All the examples are available [here](https://github.com/ageitgey/face_recognition/tree/master/examples).
 
 * [Find faces in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
+* [Find faces in a photograph (using deep learning)](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py)
 * [Identify specific facial features in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
 * [Apply (horribly ugly) digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py)
 * [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)

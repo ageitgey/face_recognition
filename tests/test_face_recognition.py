@@ -36,6 +36,14 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(detected_faces[0].top(), 142)
         self.assertEqual(detected_faces[0].bottom(), 409)
 
+    def test_cnn_raw_face_locations(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        detected_faces = api._raw_face_locations(img, model="cnn")
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertEqual(detected_faces[0].top(), 144)
+        self.assertEqual(detected_faces[0].bottom(), 389)
+
     def test_raw_face_locations_32bit_image(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', '32bit.png'))
         detected_faces = api._raw_face_locations(img)
@@ -44,12 +52,27 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(detected_faces[0].top(), 290)
         self.assertEqual(detected_faces[0].bottom(), 558)
 
+    def test_cnn_raw_face_locations_32bit_image(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', '32bit.png'))
+        detected_faces = api._raw_face_locations(img, model="cnn")
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertEqual(detected_faces[0].top(), 259)
+        self.assertEqual(detected_faces[0].bottom(), 552)
+
     def test_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         detected_faces = api.face_locations(img)
 
         self.assertEqual(len(detected_faces), 1)
         self.assertEqual(detected_faces[0], (142, 617, 409, 349))
+
+    def test_cnn_face_locations(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        detected_faces = api.face_locations(img, model="cnn")
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertEqual(detected_faces[0], (144, 608, 389, 363))
 
     def test_partial_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama_partial_face.jpg'))

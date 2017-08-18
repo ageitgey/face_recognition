@@ -17,6 +17,9 @@ face_detector = dlib.get_frontal_face_detector()
 predictor_model = face_recognition_models.pose_predictor_model_location()
 pose_predictor = dlib.shape_predictor(predictor_model)
 
+cnn_face_detection_model = face_recognition_models.cnn_face_detector_model_location()
+cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
+
 face_recognition_model = face_recognition_models.face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
@@ -78,26 +81,31 @@ def load_image_file(filename, mode='RGB'):
     return scipy.misc.imread(filename, mode=mode)
 
 
-def _raw_face_locations(img, number_of_times_to_upsample=1):
+def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
     """
     Returns an array of bounding boxes of human faces in a image
 
     :param img: An image (as a numpy array)
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
+    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
     :return: A list of dlib 'rect' objects of found face locations
     """
-    return face_detector(img, number_of_times_to_upsample)
+    if model == "cnn":
+        return cnn_face_detector.cnn_face_detector(img, number_of_times_to_upsample)
+    else:
+        return face_detector(img, number_of_times_to_upsample)
 
 
-def face_locations(img, number_of_times_to_upsample=1):
+def face_locations(img, number_of_times_to_upsample=1, model="hog"):
     """
     Returns an array of bounding boxes of human faces in a image
 
     :param img: An image (as a numpy array)
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
+    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
     :return: A list of tuples of found face locations in css (top, right, bottom, left) order
     """
-    return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample)]
+    return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
 
 
 def _raw_face_landmarks(face_image, face_locations=None):
