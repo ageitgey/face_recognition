@@ -1,19 +1,23 @@
 Face Recognition
 ================
 
-Recognize and manipulate faces from Python or from the command line with
-the world's simplest face recognition library.
+| Recognize and manipulate faces from Python or from the command line
+  with
+| the world's simplest face recognition library.
 
-Built using `dlib <http://dlib.net/>`__'s state-of-the-art face
-recognition built with deep learning. The model has an accuracy of
-99.38% on the `Labeled Faces in the
-Wild <http://vis-www.cs.umass.edu/lfw/>`__ benchmark.
+| Built using `dlib <http://dlib.net/>`__'s state-of-the-art face
+  recognition
+| built with deep learning. The model has an accuracy of 99.38% on the
+| `Labeled Faces in the Wild <http://vis-www.cs.umass.edu/lfw/>`__
+  benchmark.
 
-This also provides a simple ``face_recognition`` command line tool that
-lets you do face recognition on a folder of images from the command
-line!
+| This also provides a simple ``face_recognition`` command line tool
+  that lets
+| you do face recognition on a folder of images from the command line!
 
-|PyPI| |Build Status| |Documentation Status|
+| |PyPI|
+| |Build Status|
+| |Documentation Status|
 
 Features
 --------
@@ -23,8 +27,7 @@ Find faces in pictures
 
 Find all the faces that appear in a picture:
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png
-   :alt: 
+|image3|
 
 .. code:: python
 
@@ -38,8 +41,7 @@ Find and manipulate facial features in pictures
 Get the locations and outlines of each person's eyes, nose, mouth and
 chin.
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png
-   :alt: 
+|image4|
 
 .. code:: python
 
@@ -47,21 +49,20 @@ chin.
     image = face_recognition.load_image_file("your_file.jpg")
     face_landmarks_list = face_recognition.face_landmarks(image)
 
-Finding facial features is super useful for lots of important stuff. But
-you can also use for really stupid stuff like applying `digital
-make-up <https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py>`__
-(think 'Meitu'):
+| Finding facial features is super useful for lots of important stuff.
+  But you can also use for really stupid stuff
+| like applying `digital
+  make-up <https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py>`__
+  (think 'Meitu'):
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png
-   :alt: 
+|image5|
 
 Identify faces in pictures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Recognize who appears in each photo.
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png
-   :alt: 
+|image6|
 
 .. code:: python
 
@@ -77,8 +78,7 @@ Recognize who appears in each photo.
 You can even use this library with other Python libraries to do
 real-time face recognition:
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif
-   :alt: 
+|image7|
 
 See `this
 example <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py>`__
@@ -87,12 +87,15 @@ for the code.
 Installation
 ------------
 
-Requirements: \* Python 3+ or Python 2.7 \* macOS or Linux (Windows
-untested) \* `Also can run on a Raspberry Pi 2+ (follow these specific
-instructions) <https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65>`__
-\* A `pre-configured VM
-image <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__
-is also available.
+Requirements:
+
+-  Python 3+ or Python 2.7
+-  macOS or Linux (Windows untested)
+-  `Also can run on a Raspberry Pi 2+ (follow these specific
+   instructions) <https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65>`__
+-  A `pre-configured VM
+   image <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__
+   is also available.
 
 Install this module from pypi using ``pip3`` (or ``pip2`` for Python 2):
 
@@ -100,20 +103,23 @@ Install this module from pypi using ``pip3`` (or ``pip2`` for Python 2):
 
     pip3 install face_recognition
 
-IMPORTANT NOTE: It's very likely that you will run into problems when
-pip tries to compile the ``dlib`` dependency. If that happens, check out
-this guide to installing dlib from source (instead of from pip) to fix
-the error:
+| IMPORTANT NOTE: It's very likely that you will run into problems when
+  pip tries to compile
+| the ``dlib`` dependency. If that happens, check out this guide to
+  installing
+| dlib from source (instead of from pip) to fix the error:
 
 `How to install dlib from
 source <https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf>`__
 
-After manually installing ``dlib``, try running
-``pip3 install face_recognition`` again to complete your installation.
+| After manually installing ``dlib``, try running
+  ``pip3 install face_recognition``
+| again to complete your installation.
 
-If you are still having trouble installing this, you can also try out
-this `pre-configured
-VM <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__.
+| If you are still having trouble installing this, you can also try out
+  this
+| `pre-configured
+  VM <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__.
 
 Usage
 -----
@@ -121,29 +127,26 @@ Usage
 Command-Line Interface
 ^^^^^^^^^^^^^^^^^^^^^^
 
-When you install ``face_recognition``, you get a simple command-line
-program called ``face_recognition`` that you can use to recognize faces
-in a photograph or folder full for photographs.
+| When you install ``face_recognition``, you get a simple command-line
+  program
+| called ``face_recognition`` that you can use to recognize faces in a
+| photograph or folder full for photographs.
 
-First, you need to provide a folder with one picture of each person you
-already know. There should be one image file for each person with the
-files named according to who is in the picture:
+| First, you need to provide a folder with one picture of each person
+  you
+| already know. There should be one image file for each person with the
+| files named according to who is in the picture:
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png
-   :alt: known
-
-   known
+|known|
 
 Next, you need a second folder with the files you want to identify:
 
-.. figure:: https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png
-   :alt: unknown
+|unknown|
 
-   unknown
-
-Then in you simply run the command ``face_recognition``, passing in the
-folder of known people and the folder (or single image) with unknown
-people and it tells you who is in each image:
+| Then in you simply run the command ``face_recognition``, passing in
+| the folder of known people and the folder (or single image) with
+  unknown
+| people and it tells you who is in each image:
 
 .. code:: bash
 
@@ -152,22 +155,26 @@ people and it tells you who is in each image:
     /unknown_pictures/unknown.jpg,Barack Obama
     /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
 
-There's one line in the output for each face. The data is
-comma-separated with the filename and the name of the person found.
+| There's one line in the output for each face. The data is
+  comma-separated
+| with the filename and the name of the person found.
 
-An ``unknown_person`` is a face in the image that didn't match anyone in
-your folder of known people.
+| An ``unknown_person`` is a face in the image that didn't match anyone
+  in
+| your folder of known people.
 
 Adjusting Tolerance / Sensitivity
 '''''''''''''''''''''''''''''''''
 
-If you are getting multiple matches for the same person, it might be
-that the people in your photos look very similar and a lower tolerance
-value is needed to make face comparisons more strict.
+| If you are getting multiple matches for the same person, it might be
+  that
+| the people in your photos look very similar and a lower tolerance
+  value
+| is needed to make face comparisons more strict.
 
-You can do that with the ``--tolerance`` parameter. The default
-tolerance value is 0.6 and lower numbers make face comparisons more
-strict:
+| You can do that with the ``--tolerance`` parameter. The default
+  tolerance
+| value is 0.6 and lower numbers make face comparisons more strict:
 
 .. code:: bash
 
@@ -176,8 +183,9 @@ strict:
     /unknown_pictures/unknown.jpg,Barack Obama
     /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
 
-If you want to see the face distance calculated for each match in order
-to adjust the tolerance setting, you can use ``--show-distance true``:
+| If you want to see the face distance calculated for each match in
+  order
+| to adjust the tolerance setting, you can use ``--show-distance true``:
 
 .. code:: bash
 
@@ -189,8 +197,9 @@ to adjust the tolerance setting, you can use ``--show-distance true``:
 More Examples
 '''''''''''''
 
-If you simply want to know the names of the people in each photograph
-but don't care about file names, you could do this:
+| If you simply want to know the names of the people in each photograph
+  but don't
+| care about file names, you could do this:
 
 .. code:: bash
 
@@ -202,10 +211,12 @@ but don't care about file names, you could do this:
 Speeding up Face Recognition
 ''''''''''''''''''''''''''''
 
-Face recognition can be done in parallel if you have a computer with
-multiple CPU cores. For example if your system has 4 CPU cores, you can
-process about 4 times as many images in the same amount of time by using
-all your CPU cores in parallel.
+| Face recognition can be done in parallel if you have a computer with
+| multiple CPU cores. For example if your system has 4 CPU cores, you
+  can
+| process about 4 times as many images in the same amount of time by
+  using
+| all your CPU cores in parallel.
 
 If you are using Python 3.4 or newer, pass in a
 ``--cpus <number_of_cpu_cores_to_use>`` parameter:
@@ -219,8 +230,9 @@ You can also pass in ``--cpus -1`` to use all CPU cores in your system.
 Python Module
 ^^^^^^^^^^^^^
 
-You can import the ``face_recognition`` module and then easily
-manipulate faces with just a couple of lines of code. It's super easy!
+| You can import the ``face_recognition`` module and then easily
+  manipulate
+| faces with just a couple of lines of code. It's super easy!
 
 API Docs:
 `https://face-recognition.readthedocs.io <https://face-recognition.readthedocs.io/en/latest/face_recognition.html>`__.
@@ -237,16 +249,17 @@ Automatically find all the faces in an image
 
     # face_locations is now an array listing the co-ordinates of each face!
 
-See `this
-example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
-to try it out.
+| See `this
+  example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
+| to try it out.
 
 You can also opt-in to a somewhat more accurate deep-learning-based face
 detection model.
 
-Note: GPU acceleration (via nvidia's CUDA library) is required for good
-performance with this model. You'll also want to enable CUDA support
-when compliling ``dlib``.
+| Note: GPU acceleration (via nvidia's CUDA library) is required for
+  good
+| performance with this model. You'll also want to enable CUDA support
+| when compliling ``dlib``.
 
 .. code:: python
 
@@ -257,9 +270,13 @@ when compliling ``dlib``.
 
     # face_locations is now an array listing the co-ordinates of each face!
 
-See `this
-example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
-to try it out.
+| See `this
+  example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
+| to try it out.
+
+| If you have a lot of images and a GPU, you can also
+| `find faces in
+  batches <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py>`__.
 
 Automatically locate the facial features of a person in an image
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -274,9 +291,9 @@ Automatically locate the facial features of a person in an image
     # face_landmarks_list is now an array with the locations of each facial feature in each face.
     # face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye.
 
-See `this
-example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py>`__
-to try it out.
+| See `this
+  example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py>`__
+| to try it out.
 
 Recognize faces in images and identify who they are
 '''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -302,9 +319,9 @@ Recognize faces in images and identify who they are
     else:
         print("It's not a picture of me!")
 
-See `this
-example <https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py>`__
-to try it out.
+| See `this
+  example <https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py>`__
+| to try it out.
 
 Python Code Examples
 --------------------
@@ -312,55 +329,72 @@ Python Code Examples
 All the examples are available
 `here <https://github.com/ageitgey/face_recognition/tree/master/examples>`__.
 
+Face Detection
+^^^^^^^^^^^^^^
+
 -  `Find faces in a
    photograph <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
 -  `Find faces in a photograph (using deep
    learning) <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
+-  `Find faces in batches of images w/ GPU (using deep
+   learning) <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py>`__
+
+Facial Features
+^^^^^^^^^^^^^^^
+
 -  `Identify specific facial features in a
    photograph <https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py>`__
 -  `Apply (horribly ugly) digital
    make-up <https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py>`__
+
+Facial Recognition
+^^^^^^^^^^^^^^^^^^
+
 -  `Find and recognize unknown faces in a photograph based on
    photographs of known
    people <https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py>`__
+-  `Compare faces by numeric face distance instead of only True/False
+   matches <https://github.com/ageitgey/face_recognition/blob/master/examples/face_distance.py>`__
 -  `Recognize faces in live video using your webcam - Simple / Slower
    Version (Requires OpenCV to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py>`__
 -  `Recognize faces in live video using your webcam - Faster Version
    (Requires OpenCV to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py>`__
+-  `Recognize faces in a video file and write out new video file
+   (Requires OpenCV to be
+   installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_video_file.py>`__
 -  `Recognize faces on a Raspberry Pi w/
    camera <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py>`__
 -  `Run a web service to recognize faces via HTTP (Requires Flask to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py>`__
--  `Compare faces by numeric face distance instead of only True/False
-   matches <https://github.com/ageitgey/face_recognition/blob/master/examples/face_distance.py>`__
 
 How Face Recognition Works
 --------------------------
 
-If you want to learn how face location and recognition work instead of
-depending on a black box library, `read my
-article <https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78>`__.
+| If you want to learn how face location and recognition work instead of
+| depending on a black box library, `read my
+  article <https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78>`__.
 
 Caveats
 -------
 
 -  The face recognition model is trained on adults and does not work
-   very well on children. It tends to mix up children quite easy using
-   the default comparison threshold of 0.6.
+   very well on children. It tends to mix
+   up children quite easy using the default comparison threshold of 0.6.
 
 Deployment to Cloud Hosts (Heroku, AWS, etc)
 --------------------------------------------
 
-Since ``face_recognition`` depends on ``dlib`` which is written in C++,
-it can be tricky to deploy an app using it to a cloud hosting provider
-like Heroku or AWS.
+| Since ``face_recognition`` depends on ``dlib`` which is written in
+  C++, it can be tricky to deploy an app
+| using it to a cloud hosting provider like Heroku or AWS.
 
-To make things easier, there's an example Dockerfile in this repo that
-shows how to run an app built with ``face_recognition`` in a
-`Docker <https://www.docker.com/>`__ container. With that, you should be
-able to deploy to any service that supports Docker images.
+| To make things easier, there's an example Dockerfile in this repo that
+  shows how to run an app built with
+| ``face_recognition`` in a `Docker <https://www.docker.com/>`__
+  container. With that, you should be able to deploy
+| to any service that supports Docker images.
 
 Common Issues
 -------------
@@ -368,10 +402,11 @@ Common Issues
 Issue: ``Illegal instruction (core dumped)`` when using
 face\_recognition or running examples.
 
-Solution: ``dlib`` is compiled with SSE4 or AVX support, but your CPU is
-too old and doesn't support that. You'll need to recompile ``dlib``
-after `making the code change outlined
-here <https://github.com/ageitgey/face_recognition/issues/11#issuecomment-287398611>`__.
+| Solution: ``dlib`` is compiled with SSE4 or AVX support, but your CPU
+  is too old and doesn't support that.
+| You'll need to recompile ``dlib`` after `making the code change
+  outlined
+  here <https://github.com/ageitgey/face_recognition/issues/11#issuecomment-287398611>`__.
 
 Issue:
 ``RuntimeError: Unsupported image type, must be 8bit gray or RGB image.``
@@ -383,9 +418,10 @@ more <https://github.com/ageitgey/face_recognition/issues/21#issuecomment-287779
 
 Issue: ``MemoryError`` when running ``pip2 install face_recognition``
 
-Solution: The face\_recognition\_models file is too big for your
-available pip cache memory. Instead, try
-``pip2 --no-cache-dir install face_recognition`` to avoid the issue.
+| Solution: The face\_recognition\_models file is too big for your
+  available pip cache memory. Instead,
+| try ``pip2 --no-cache-dir install face_recognition`` to avoid the
+  issue.
 
 Issue:
 ``AttributeError: 'module' object has no attribute 'face_recognition_model_v1'``
@@ -402,19 +438,22 @@ Thanks
 ------
 
 -  Many, many thanks to `Davis King <https://github.com/davisking>`__
-   ([@nulhom](https://twitter.com/nulhom)) for creating dlib and for
-   providing the trained facial feature detection and face encoding
-   models used in this library. For more information on the ResNet that
-   powers the face encodings, check out his `blog
+   (`@nulhom <https://twitter.com/nulhom>`__)
+   for creating dlib and for providing the trained facial feature
+   detection and face encoding models
+   used in this library. For more information on the ResNet that powers
+   the face encodings, check out
+   his `blog
    post <http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html>`__.
 -  Thanks to everyone who works on all the awesome Python data science
-   libraries like numpy, scipy, scikit-image, pillow, etc, etc that
-   makes this kind of stuff so easy and fun in Python.
+   libraries like numpy, scipy, scikit-image,
+   pillow, etc, etc that makes this kind of stuff so easy and fun in
+   Python.
 -  Thanks to `Cookiecutter <https://github.com/audreyr/cookiecutter>`__
    and the
    `audreyr/cookiecutter-pypackage <https://github.com/audreyr/cookiecutter-pypackage>`__
-   project template for making Python project packaging way more
-   tolerable.
+   project template
+   for making Python project packaging way more tolerable.
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/face_recognition.svg
    :target: https://pypi.python.org/pypi/face_recognition
@@ -422,3 +461,11 @@ Thanks
    :target: https://travis-ci.org/ageitgey/face_recognition
 .. |Documentation Status| image:: https://readthedocs.org/projects/face-recognition/badge/?version=latest
    :target: http://face-recognition.readthedocs.io/en/latest/?badge=latest
+.. |image3| image:: https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png
+.. |image4| image:: https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png
+.. |image5| image:: https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png
+.. |image6| image:: https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png
+.. |image7| image:: https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif
+.. |known| image:: https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png
+.. |unknown| image:: https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png
+

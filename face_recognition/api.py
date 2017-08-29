@@ -87,11 +87,12 @@ def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
 
     :param img: An image (as a numpy array)
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
-    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
+    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
+                  deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
     :return: A list of dlib 'rect' objects of found face locations
     """
     if model == "cnn":
-        return cnn_face_detector.cnn_face_detector(img, number_of_times_to_upsample)
+        return cnn_face_detector(img, number_of_times_to_upsample)
     else:
         return face_detector(img, number_of_times_to_upsample)
 
@@ -102,10 +103,44 @@ def face_locations(img, number_of_times_to_upsample=1, model="hog"):
 
     :param img: An image (as a numpy array)
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
-    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
+    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
+                  deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
     :return: A list of tuples of found face locations in css (top, right, bottom, left) order
     """
-    return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
+    if model == "cnn":
+        return [_trim_css_to_bounds(_rect_to_css(face.rect), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, "cnn")]
+    else:
+        return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
+
+
+def _raw_face_locations_batched(images, number_of_times_to_upsample=1):
+    """
+    Returns an 2d array of dlib rects of human faces in a image using the cnn face detector
+
+    :param img: A list of images (each as a numpy array)
+    :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
+    :return: A list of dlib 'rect' objects of found face locations
+    """
+    return cnn_face_detector(images, number_of_times_to_upsample)
+
+
+def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
+    """
+    Returns an 2d array of bounding boxes of human faces in a image using the cnn face detector
+    If you are using a GPU, this can give you much faster results since the GPU
+    can process batches of images at once. If you aren't using a GPU, you don't need this function.
+
+    :param img: A list of images (each as a numpy array)
+    :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
+    :param batch_size: How many images to include in each GPU processing batch.
+    :return: A list of tuples of found face locations in css (top, right, bottom, left) order
+    """
+    def convert_cnn_detections_to_css(detections):
+        return [_trim_css_to_bounds(_rect_to_css(face.rect), images[0].shape) for face in detections]
+
+    raw_detections_batched = _raw_face_locations_batched(images, number_of_times_to_upsample)
+
+    return list(map(convert_cnn_detections_to_css, raw_detections_batched))
 
 
 def _raw_face_landmarks(face_image, face_locations=None):
