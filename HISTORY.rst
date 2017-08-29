@@ -1,6 +1,18 @@
 History
 =======
 
+1.0.0 (2017-08-29)
+------------------
+
+* Added support for dlib's CNN face detection model via model="cnn" parameter on face detecion call
+* Added support for GPU batched face detections using dlib's CNN face detector model
+* Added find_faces_in_picture_cnn.py to examples
+* Added find_faces_in_batches.py to examples
+* Added face_rec_from_video_file.py to examples
+* dlib v19.5 is now the minimum required version
+* face_recognition_models v0.2.0 is now the minimum required version
+
+
 0.2.2 (2017-07-07)
 ------------------
 

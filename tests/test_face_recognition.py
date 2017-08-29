@@ -36,6 +36,14 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(detected_faces[0].top(), 142)
         self.assertEqual(detected_faces[0].bottom(), 409)
 
+    def test_cnn_raw_face_locations(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        detected_faces = api._raw_face_locations(img, model="cnn")
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertAlmostEqual(detected_faces[0].rect.top(), 144, delta=25)
+        self.assertAlmostEqual(detected_faces[0].rect.bottom(), 389, delta=25)
+
     def test_raw_face_locations_32bit_image(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', '32bit.png'))
         detected_faces = api._raw_face_locations(img)
@@ -44,12 +52,30 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(detected_faces[0].top(), 290)
         self.assertEqual(detected_faces[0].bottom(), 558)
 
+    def test_cnn_raw_face_locations_32bit_image(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', '32bit.png'))
+        detected_faces = api._raw_face_locations(img, model="cnn")
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertAlmostEqual(detected_faces[0].rect.top(), 259, delta=25)
+        self.assertAlmostEqual(detected_faces[0].rect.bottom(), 552, delta=25)
+
     def test_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         detected_faces = api.face_locations(img)
 
         self.assertEqual(len(detected_faces), 1)
         self.assertEqual(detected_faces[0], (142, 617, 409, 349))
+
+    def test_cnn_face_locations(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        detected_faces = api.face_locations(img, model="cnn")
+
+        self.assertEqual(len(detected_faces), 1)
+        self.assertAlmostEqual(detected_faces[0][0], 144, delta=25)
+        self.assertAlmostEqual(detected_faces[0][1], 608, delta=25)
+        self.assertAlmostEqual(detected_faces[0][2], 389, delta=25)
+        self.assertAlmostEqual(detected_faces[0][3], 363, delta=25)
 
     def test_partial_face_locations(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama_partial_face.jpg'))
@@ -63,6 +89,26 @@ class Test_face_recognition(unittest.TestCase):
 
         self.assertEqual(len(detected_faces), 1)
         self.assertEqual(detected_faces[0], (142, 551, 409, 349))
+
+    def test_raw_face_locations_batched(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        images = [img, img, img]
+        batched_detected_faces = api._raw_face_locations_batched(images, number_of_times_to_upsample=0)
+
+        for detected_faces in batched_detected_faces:
+            self.assertEqual(len(detected_faces), 1)
+            self.assertEqual(detected_faces[0].rect.top(), 154)
+            self.assertEqual(detected_faces[0].rect.bottom(), 390)
+
+    def test_batched_face_locations(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        images = [img, img, img]
+
+        batched_detected_faces = api.batch_face_locations(images, number_of_times_to_upsample=0)
+
+        for detected_faces in batched_detected_faces:
+            self.assertEqual(len(detected_faces), 1)
+            self.assertEqual(detected_faces[0], (154, 611, 390, 375))
 
     def test_raw_face_landmarks(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))

@@ -163,6 +163,40 @@ Next, you need a second folder with the files you want to identify:
   in
 | your folder of known people.
 
+Adjusting Tolerance / Sensitivity
+'''''''''''''''''''''''''''''''''
+
+| If you are getting multiple matches for the same person, it might be
+  that
+| the people in your photos look very similar and a lower tolerance
+  value
+| is needed to make face comparisons more strict.
+
+| You can do that with the ``--tolerance`` parameter. The default
+  tolerance
+| value is 0.6 and lower numbers make face comparisons more strict:
+
+.. code:: bash
+
+    $ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictures/
+
+    /unknown_pictures/unknown.jpg,Barack Obama
+    /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
+
+| If you want to see the face distance calculated for each match in
+  order
+| to adjust the tolerance setting, you can use ``--show-distance true``:
+
+.. code:: bash
+
+    $ face_recognition --show-distance true ./pictures_of_people_i_know/ ./unknown_pictures/
+
+    /unknown_pictures/unknown.jpg,Barack Obama,0.378542298956785
+    /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None
+
+More Examples
+'''''''''''''
+
 | If you simply want to know the names of the people in each photograph
   but don't
 | care about file names, you could do this:
@@ -173,6 +207,25 @@ Next, you need a second folder with the files you want to identify:
 
     Barack Obama
     unknown_person
+
+Speeding up Face Recognition
+''''''''''''''''''''''''''''
+
+| Face recognition can be done in parallel if you have a computer with
+| multiple CPU cores. For example if your system has 4 CPU cores, you
+  can
+| process about 4 times as many images in the same amount of time by
+  using
+| all your CPU cores in parallel.
+
+If you are using Python 3.4 or newer, pass in a
+``--cpus <number_of_cpu_cores_to_use>`` parameter:
+
+.. code:: bash
+
+    $ face_recognition -cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
+
+You can also pass in ``--cpus -1`` to use all CPU cores in your system.
 
 Python Module
 ^^^^^^^^^^^^^
@@ -199,6 +252,31 @@ Automatically find all the faces in an image
 | See `this
   example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
 | to try it out.
+
+You can also opt-in to a somewhat more accurate deep-learning-based face
+detection model.
+
+| Note: GPU acceleration (via nvidia's CUDA library) is required for
+  good
+| performance with this model. You'll also want to enable CUDA support
+| when compliling ``dlib``.
+
+.. code:: python
+
+    import face_recognition
+
+    image = face_recognition.load_image_file("my_picture.jpg")
+    face_locations = face_recognition.face_locations(image, model="cnn")
+
+    # face_locations is now an array listing the co-ordinates of each face!
+
+| See `this
+  example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
+| to try it out.
+
+| If you have a lot of images and a GPU, you can also
+| `find faces in
+  batches <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py>`__.
 
 Automatically locate the facial features of a person in an image
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -251,21 +329,41 @@ Python Code Examples
 All the examples are available
 `here <https://github.com/ageitgey/face_recognition/tree/master/examples>`__.
 
+Face Detection
+^^^^^^^^^^^^^^
+
 -  `Find faces in a
    photograph <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
+-  `Find faces in a photograph (using deep
+   learning) <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
+-  `Find faces in batches of images w/ GPU (using deep
+   learning) <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py>`__
+
+Facial Features
+^^^^^^^^^^^^^^^
+
 -  `Identify specific facial features in a
    photograph <https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py>`__
 -  `Apply (horribly ugly) digital
    make-up <https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py>`__
+
+Facial Recognition
+^^^^^^^^^^^^^^^^^^
+
 -  `Find and recognize unknown faces in a photograph based on
    photographs of known
    people <https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py>`__
+-  `Compare faces by numeric face distance instead of only True/False
+   matches <https://github.com/ageitgey/face_recognition/blob/master/examples/face_distance.py>`__
 -  `Recognize faces in live video using your webcam - Simple / Slower
    Version (Requires OpenCV to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py>`__
 -  `Recognize faces in live video using your webcam - Faster Version
    (Requires OpenCV to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py>`__
+-  `Recognize faces in a video file and write out new video file
+   (Requires OpenCV to be
+   installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_video_file.py>`__
 -  `Recognize faces on a Raspberry Pi w/
    camera <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py>`__
 -  `Run a web service to recognize faces via HTTP (Requires Flask to be
@@ -324,6 +422,17 @@ Issue: ``MemoryError`` when running ``pip2 install face_recognition``
   available pip cache memory. Instead,
 | try ``pip2 --no-cache-dir install face_recognition`` to avoid the
   issue.
+
+Issue:
+``AttributeError: 'module' object has no attribute 'face_recognition_model_v1'``
+
+Solution: The version of ``dlib`` you have installed is too old. You
+need version 19.4 or newer. Upgrade ``dlib``.
+
+Issue: ``TypeError: imread() got an unexpected keyword argument 'mode'``
+
+Solution: The version of ``scipy`` you have installed is too old. You
+need version 0.17 or newer. Upgrade ``scipy``.
 
 Thanks
 ------

@@ -10,9 +10,9 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'face_recognition_models',
+    'face_recognition_models>=0.2.0',
     'Click>=6.0',
-    'dlib>=19.3.0',
+    'dlib>=19.5',
     'numpy',
     'Pillow',
     'scipy>=0.17.0'
@@ -25,7 +25,7 @@ test_requirements = [
 
 setup(
     name='face_recognition',
-    version='0.2.2',
+    version='1.0.0',
     description="Recognize faces from Python or from the command line",
     long_description=readme + '\n\n' + history,
     author="Adam Geitgey",
