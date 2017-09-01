@@ -329,7 +329,11 @@ try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
 
 Issue: `AttributeError: 'module' object has no attribute 'face_recognition_model_v1'`
 
-Solution: The version of `dlib` you have installed is too old. You need version 19.4 or newer. Upgrade `dlib`.
+Solution: The version of `dlib` you have installed is too old. You need version 19.5 or newer. Upgrade `dlib`.
+
+Issue: `Attribute Error: 'Module' object has no attribute 'cnn_face_detection_model_v1'`
+
+Solution: The version of `dlib` you have installed is too old. You need version 19.5 or newer. Upgrade `dlib`.
 
 Issue: `TypeError: imread() got an unexpected keyword argument 'mode'`
 
