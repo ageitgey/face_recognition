@@ -71,30 +71,42 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 ## Installation
 
-Requirements:
-* Python 3+ or Python 2.7
-* macOS or Linux (Windows untested)
-* [Also can run on a Raspberry Pi 2+ (follow these specific instructions)](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
-* A [pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) is also available.
+### Requirements
 
-Install this module from pypi using `pip3` (or `pip2` for Python 2):
+  * Python 3.3+ or Python 2.7
+  * macOS or Linux (Windows not officially supported, but might work)
+
+### Installation Options:
+
+#### Installing on Mac or Linux 
+
+First, make sure you have dlib alreayd installed with Python bindings:
+
+  * [How to install dlib from source on macOS or Ubuntu](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
+
+Then, install this module from pypi using `pip3` (or `pip2` for Python 2):
 
 ```bash
 pip3 install face_recognition
 ```
 
-IMPORTANT NOTE: It's very likely that you will run into problems when pip tries to compile
-the `dlib` dependency. If that happens, check out this guide to installing
-dlib from source (instead of from pip) to fix the error:
-
-[How to install dlib from source](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
-
-After manually installing `dlib`, try running `pip3 install face_recognition`
-again to complete your installation.
-
-If you are still having trouble installing this, you can also try out this
+If you are having trouble with installation, you can also try out a
 [pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
 
+#### Installing on Raspberry Pi 2+
+
+  * [Raspberry Pi 2+ installation instructions](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
+
+#### Installing on Windows
+
+While Windows isn't officially supported, helpful users have posted instuctions on how to install this library:
+
+  * [@masoudr's Windows 10 installation guide (dlib + face_recognition)](https://github.com/ageitgey/face_recognition/issues/175#issue-257710508)
+
+#### Installing a pre-configured Virtual Machine image
+
+  * [Download the pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) (for VMware Player or VirtualBox). 
+  
 ## Usage
 
 #### Command-Line Interface
