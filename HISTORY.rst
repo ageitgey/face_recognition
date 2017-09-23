@@ -1,6 +1,14 @@
 History
 =======
 
+1.1.0 (2017-09-23)
+------------------
+
+* Will use dlib's 5-point face pose estimator when possible for speed (instead of 68-point face pose esimator)
+* dlib v19.7 is now the minimum required version
+* face_recognition_models v0.3.0 is now the minimum required version
+
+
 1.0.0 (2017-08-29)
 ------------------
 
