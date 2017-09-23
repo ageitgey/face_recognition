@@ -78,7 +78,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 ### Installation Options:
 
-#### Installing on Mac or Linux 
+#### Installing on Mac or Linux
 
 First, make sure you have dlib already installed with Python bindings:
 
@@ -105,8 +105,8 @@ While Windows isn't officially supported, helpful users have posted instuctions 
 
 #### Installing a pre-configured Virtual Machine image
 
-  * [Download the pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) (for VMware Player or VirtualBox). 
-  
+  * [Download the pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) (for VMware Player or VirtualBox).
+
 ## Usage
 
 #### Command-Line Interface
@@ -341,11 +341,11 @@ try `pip2 --no-cache-dir install face_recognition` to avoid the issue.
 
 Issue: `AttributeError: 'module' object has no attribute 'face_recognition_model_v1'`
 
-Solution: The version of `dlib` you have installed is too old. You need version 19.5 or newer. Upgrade `dlib`.
+Solution: The version of `dlib` you have installed is too old. You need version 19.7 or newer. Upgrade `dlib`.
 
 Issue: `Attribute Error: 'Module' object has no attribute 'cnn_face_detection_model_v1'`
 
-Solution: The version of `dlib` you have installed is too old. You need version 19.5 or newer. Upgrade `dlib`.
+Solution: The version of `dlib` you have installed is too old. You need version 19.7 or newer. Upgrade `dlib`.
 
 Issue: `TypeError: imread() got an unexpected keyword argument 'mode'`
 

@@ -87,39 +87,55 @@ for the code.
 Installation
 ------------
 
-Requirements:
+Requirements
+~~~~~~~~~~~~
 
--  Python 3+ or Python 2.7
--  macOS or Linux (Windows untested)
--  `Also can run on a Raspberry Pi 2+ (follow these specific
-   instructions) <https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65>`__
--  A `pre-configured VM
-   image <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__
-   is also available.
+-  Python 3.3+ or Python 2.7
+-  macOS or Linux (Windows not officially supported, but might work)
 
-Install this module from pypi using ``pip3`` (or ``pip2`` for Python 2):
+Installation Options:
+~~~~~~~~~~~~~~~~~~~~~
+
+Installing on Mac or Linux
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+First, make sure you have dlib already installed with Python bindings:
+
+-  `How to install dlib from source on macOS or
+   Ubuntu <https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf>`__
+
+Then, install this module from pypi using ``pip3`` (or ``pip2`` for
+Python 2):
 
 .. code:: bash
 
     pip3 install face_recognition
 
-| IMPORTANT NOTE: It's very likely that you will run into problems when
-  pip tries to compile
-| the ``dlib`` dependency. If that happens, check out this guide to
-  installing
-| dlib from source (instead of from pip) to fix the error:
-
-`How to install dlib from
-source <https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf>`__
-
-| After manually installing ``dlib``, try running
-  ``pip3 install face_recognition``
-| again to complete your installation.
-
-| If you are still having trouble installing this, you can also try out
-  this
+| If you are having trouble with installation, you can also try out a
 | `pre-configured
   VM <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__.
+
+Installing on Raspberry Pi 2+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  `Raspberry Pi 2+ installation
+   instructions <https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65>`__
+
+Installing on Windows
+^^^^^^^^^^^^^^^^^^^^^
+
+While Windows isn't officially supported, helpful users have posted
+instuctions on how to install this library:
+
+-  `@masoudr's Windows 10 installation guide (dlib +
+   face\_recognition) <https://github.com/ageitgey/face_recognition/issues/175#issue-257710508>`__
+
+Installing a pre-configured Virtual Machine image
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  `Download the pre-configured VM
+   image <https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b>`__
+   (for VMware Player or VirtualBox).
 
 Usage
 -----
@@ -223,7 +239,7 @@ If you are using Python 3.4 or newer, pass in a
 
 .. code:: bash
 
-    $ face_recognition -cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
+    $ face_recognition --cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
 
 You can also pass in ``--cpus -1`` to use all CPU cores in your system.
 
@@ -427,7 +443,13 @@ Issue:
 ``AttributeError: 'module' object has no attribute 'face_recognition_model_v1'``
 
 Solution: The version of ``dlib`` you have installed is too old. You
-need version 19.4 or newer. Upgrade ``dlib``.
+need version 19.7 or newer. Upgrade ``dlib``.
+
+Issue:
+``Attribute Error: 'Module' object has no attribute 'cnn_face_detection_model_v1'``
+
+Solution: The version of ``dlib`` you have installed is too old. You
+need version 19.7 or newer. Upgrade ``dlib``.
 
 Issue: ``TypeError: imread() got an unexpected keyword argument 'mode'``
 
