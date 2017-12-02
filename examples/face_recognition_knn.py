@@ -126,9 +126,3 @@ if __name__ == "__main__":
         print(preds)
         draw_preds(join("knn_examples/test", img_path), preds)
 
-"""
-TODO:
-- update requirements.txt for users & devs (add sklearn)
-- run the mandatory tests
-- issue a pull request
-"""
