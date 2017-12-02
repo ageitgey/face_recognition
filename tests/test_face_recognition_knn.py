@@ -11,7 +11,7 @@ from examples import face_recognition_knn
 
 class Test_face_recognition(unittest.TestCase):
     def test_knn1(self):
-        knn_clf = face_recognition_knn.train("test_images_knn/train")
+        knn_clf = face_recognition_knn.train(join(os.path.dirname(__file__), "test_images_knn/train"))
 
         assert("obama" in face_recognition_knn.predict(join(os.path.dirname(__file__), "test_images_knn/test", "obama1.jpg"), knn_clf=knn_clf)[0])
 
@@ -31,7 +31,7 @@ class Test_face_recognition(unittest.TestCase):
 
     def test_knn_pickle(self):
         pickle_path = join(os.path.dirname(__file__), "test_images_knn/knn_clf.p")
-        face_recognition_knn.train("test_images_knn/train", model_save_path=pickle_path)
+        face_recognition_knn.train(join(os.path.dirname(__file__), "test_images_knn/train"), model_save_path=pickle_path)
 
         try:
             assert("obama" in face_recognition_knn.predict(join(os.path.dirname(__file__), "test_images_knn/test", "obama1.jpg"), model_save_path=pickle_path)[0])
