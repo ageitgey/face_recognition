@@ -16,6 +16,7 @@ requirements = [
     'numpy',
     'Pillow',
     'scipy>=0.17.0'
+    'scikit-learn>=0.19.1'
 ]
 
 test_requirements = [
