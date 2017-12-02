@@ -1,5 +1,4 @@
 from math import sqrt
-
 from sklearn import neighbors
 from os import listdir
 from os.path import isdir, join, isfile, splitext
