@@ -116,7 +116,7 @@ def face_locations(img, number_of_times_to_upsample=1, model="hog"):
         return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
 
 
-def _raw_face_locations_batched(images, number_of_times_to_upsample=1):
+def _raw_face_locations_batched(images, number_of_times_to_upsample=1, batch_size=128):
     """
     Returns an 2d array of dlib rects of human faces in a image using the cnn face detector
 
@@ -124,7 +124,7 @@ def _raw_face_locations_batched(images, number_of_times_to_upsample=1):
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
     :return: A list of dlib 'rect' objects of found face locations
     """
-    return cnn_face_detector(images, number_of_times_to_upsample)
+    return cnn_face_detector(images, number_of_times_to_upsample, batch_size=batch_size)
 
 
 def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
@@ -141,7 +141,7 @@ def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
     def convert_cnn_detections_to_css(detections):
         return [_trim_css_to_bounds(_rect_to_css(face.rect), images[0].shape) for face in detections]
 
-    raw_detections_batched = _raw_face_locations_batched(images, number_of_times_to_upsample)
+    raw_detections_batched = _raw_face_locations_batched(images, number_of_times_to_upsample, batch_size)
 
     return list(map(convert_cnn_detections_to_css, raw_detections_batched))
 
