@@ -28,6 +28,9 @@ while video_capture.isOpened():
     if not ret:
         break
 
+    # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
+    frame = frame[:, :, ::-1]
+
     # Save each frame of the video to a list
     frame_count += 1
     frames.append(frame)
