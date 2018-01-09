@@ -28,7 +28,7 @@ known_face_encoding=[]
 for file in os.listdir("Imagefolder"):
     try:
         #Extracting person name from the image filename eg:Abhilash.jpg
-        known_person.append(str(file).replace(".jpg", ""))
+        known_person.append(file.replace(".jpg", ""))
         file=os.path.join("Imagefolder", file)
         known_image = face_recognition.load_image_file(file)
         known_face_encoding.append(face_recognition.face_encodings(known_image)[0])
@@ -41,8 +41,8 @@ for file in os.listdir("Imagefolder"):
 face_locations = []
 face_encodings = []
 face_names = []
-#process_this_frame = 0
-process_this_frame = True
+process_this_frame = 0
+#process_this_frame = True
 
 while True:
     # Grab a single frame of video
@@ -61,19 +61,21 @@ while True:
         face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
 
         face_names = []
-        Length=len(known_face_encoding)
         for face_encoding in face_encodings:
             match = face_recognition.compare_faces(known_face_encoding, face_encoding)
-            Matches=np.where(match)[0] #Checking which image is matched
-            if len(Matches)>0:
-                name = str(known_person[Matches[0]])
+            matches=np.where(match)[0] #Checking which image is matched
+            if len(matches)>0:
+                name = str(known_person[matches[0]])
                 face_names.append(name)
             else:
                 face_names.append("Alien")
 
 
-    process_this_frame =  not process_this_frame
-    
+    #process_this_frame =  not process_this_frame
+    process_this_frame =  process_this_frame+1
+    if process_this_frame>5:
+        process_this_frame=0
+
 
     # Display the results
     for (top, right, bottom, left), name in zip(face_locations, face_names):
