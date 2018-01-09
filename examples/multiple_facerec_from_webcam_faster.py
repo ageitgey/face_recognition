@@ -42,7 +42,6 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = 0
-#process_this_frame = True
 
 while True:
     # Grab a single frame of video
@@ -71,7 +70,6 @@ while True:
                 face_names.append("Alien")
 
 
-    #process_this_frame =  not process_this_frame
     process_this_frame =  process_this_frame+1
     if process_this_frame>5:
         process_this_frame=0
