@@ -33,7 +33,6 @@ for file in os.listdir("Imagefolder"):
         known_image = face_recognition.load_image_file(file)
         known_face_encoding.append(face_recognition.face_encodings(known_image)[0])
     except Exception as e:
-        print "Not loaded"+str(e)
         pass
 
 
@@ -67,7 +66,7 @@ while True:
                 name = str(known_person[matches[0]])
                 face_names.append(name)
             else:
-                face_names.append("Alien")
+                face_names.append("Unknown")
 
 
     process_this_frame =  process_this_frame+1
