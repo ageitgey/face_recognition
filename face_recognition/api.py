@@ -3,6 +3,7 @@
 import scipy.misc
 import dlib
 import numpy as np
+import warnings
 
 try:
     import face_recognition_models
@@ -21,7 +22,16 @@ predictor_5_point_model = face_recognition_models.pose_predictor_five_point_mode
 pose_predictor_5_point = dlib.shape_predictor(predictor_5_point_model)
 
 cnn_face_detection_model = face_recognition_models.cnn_face_detector_model_location()
-cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
+
+class NoDlibCNNFaceDetection(Exception):
+    pass
+
+try:
+    cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
+except AttributeError:
+    warnings.warn("Warning: your dlib doesn't support cnn_face_detection_model_v1", ImportWarning)
+    def cnn_face_detector(*args, **kwargs):
+        raise(NoDlibCNNFaceDetection)
 
 face_recognition_model = face_recognition_models.face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
