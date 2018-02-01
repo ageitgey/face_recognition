@@ -88,13 +88,10 @@ Installation
 ------------
 
 Requirements
-~~~~~~~~~~~~
+^^^^^^^^^^^^
 
 -  Python 3.3+ or Python 2.7
 -  macOS or Linux (Windows not officially supported, but might work)
-
-Installation Options:
-~~~~~~~~~~~~~~~~~~~~~
 
 Installing on Mac or Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -125,7 +122,7 @@ Installing on Windows
 ^^^^^^^^^^^^^^^^^^^^^
 
 While Windows isn't officially supported, helpful users have posted
-instuctions on how to install this library:
+instructions on how to install this library:
 
 -  `@masoudr's Windows 10 installation guide (dlib +
    face\_recognition) <https://github.com/ageitgey/face_recognition/issues/175#issue-257710508>`__
@@ -384,9 +381,11 @@ Facial Recognition
    camera <https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py>`__
 -  `Run a web service to recognize faces via HTTP (Requires Flask to be
    installed) <https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py>`__
+-  `Recognize faces with a K-nearest neighbors
+   classifier <https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py>`__
 
-How Face Recognition Works
---------------------------
+   .. rubric:: How Face Recognition Works
+      :name: how-face-recognition-works
 
 | If you want to learn how face location and recognition work instead of
 | depending on a black box library, `read my
