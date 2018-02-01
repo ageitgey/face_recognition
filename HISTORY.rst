@@ -1,6 +1,17 @@
 History
 =======
 
+1.2.0 (2018-02-01)
+------------------
+
+* Fixed a bug where batch size parameter didn't work correctly when doing batch face detections on GPU.
+* Updated OpenCV examples to do proper BGR -> RGB conversion
+* Updated webcam examples to avoid common mistakes and reduce support questions
+* Added a KNN classification example
+* Added an example of automatically blurring faces in images or videos
+* Updated Dockerfile example to use dlib v19.9 which removes the boost dependency.
+
+
 1.1.0 (2017-09-23)
 ------------------
 
