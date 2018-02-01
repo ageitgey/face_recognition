@@ -99,7 +99,7 @@ If you are having trouble with installation, you can also try out a
 
 #### Installing on Windows
 
-While Windows isn't officially supported, helpful users have posted instuctions on how to install this library:
+While Windows isn't officially supported, helpful users have posted instructions on how to install this library:
 
   * [@masoudr's Windows 10 installation guide (dlib + face_recognition)](https://github.com/ageitgey/face_recognition/issues/175#issue-257710508)
 
