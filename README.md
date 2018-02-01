@@ -103,6 +103,15 @@ While Windows isn't officially supported, helpful users have posted instuctions 
 
   * [@masoudr's Windows 10 installation guide (dlib + face_recognition)](https://github.com/ageitgey/face_recognition/issues/175#issue-257710508)
 
+Here's an easier way to install on Windows using Anaconda and Python 3.6 if you don't mind not having access to Dlib's CNN Face Detection Model:
+
+- Download the Python 3.6 version of [Anaconda](https://www.anaconda.com/download/)
+- (Optional) If you encounter errors, you may need to install in a new environment:
+  - `conda create -n newenv python=3.6`
+  - `activate newenv`
+  - replace newenv with the name of your environment
+- Then run the script `setup_windows.bat` from a command line (not powershell)
+
 #### Installing a pre-configured Virtual Machine image
 
   * [Download the pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) (for VMware Player or VirtualBox).
