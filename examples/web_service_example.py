@@ -2,7 +2,7 @@
 # Upload an image file and it will check if the image contains a picture of Barack Obama.
 # The result is returned as json. For example:
 #
-# $ curl -F "file=@obama2.jpg" http://127.0.0.1:5001
+# $ curl -XPOST -F "file=@obama2.jpg" http://127.0.0.1:5001
 #
 # Returns:
 #
