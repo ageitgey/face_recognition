@@ -60,7 +60,7 @@ while True:
             matches =list(face_distances<= 0.6) # Using a appropriate tolerance value .Lower is more strict. 0.6 is typical best performance.
             name = "Unknown"
 
-            # If a match was found in known_face_encodings, just use the first one.
+            # Selecting the best match from a given list of possible matches.
             if True in matches:
                 match_index = face_distances.index(max(face_distances))
                 name = known_face_names[match_index]
