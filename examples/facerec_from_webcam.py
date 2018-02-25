@@ -49,7 +49,7 @@ while True:
 
         # Selecting the best match from a given list of possible matches.
         if True in matches:
-            match_index = face_distances.index(min(face_distances))
+            match_index = np.argmin(face_distances)
             name = known_face_names[match_index]
 
         # Draw a box around the face
