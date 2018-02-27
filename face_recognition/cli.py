@@ -3,12 +3,12 @@ from __future__ import print_function
 import click
 import os
 import re
-import scipy.misc
-import warnings
 import face_recognition.api as face_recognition
 import multiprocessing
 import itertools
 import sys
+import PIL.Image
+import numpy as np
 
 
 def scan_known_people(known_people_folder):
@@ -43,11 +43,10 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
     unknown_image = face_recognition.load_image_file(image_to_check)
 
     # Scale down image if it's giant so things run a little faster
-    if unknown_image.shape[1] > 1600:
-        scale_factor = 1600.0 / unknown_image.shape[1]
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            unknown_image = scipy.misc.imresize(unknown_image, scale_factor)
+    if max(unknown_image.shape) > 1600:
+        pil_img = PIL.Image.fromarray(unknown_image)
+        pil_img.thumbnail((1600, 1600), PIL.Image.LANCZOS)
+        unknown_image = np.array(pil_img)
 
     unknown_encodings = face_recognition.face_encodings(unknown_image)
 
