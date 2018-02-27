@@ -246,6 +246,17 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(result.exit_code, 0)
         self.assertTrue(target_string in result.output)
 
+    def test_command_line_interface_big_image(self):
+        target_string = 'obama3.jpg,obama'
+        runner = CliRunner()
+        image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
+        image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama3.jpg')
+
+        result = runner.invoke(cli.main, args=[image_folder, image_file])
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue(target_string in result.output)
+
     def test_command_line_interface_tolerance(self):
         target_string = 'obama.jpg,obama'
         runner = CliRunner()

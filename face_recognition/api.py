@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import scipy.misc
+import PIL.Image
 import dlib
 import numpy as np
 
@@ -81,7 +81,10 @@ def load_image_file(file, mode='RGB'):
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
-    return scipy.misc.imread(file, mode=mode)
+    im = PIL.Image.open(file)
+    if mode:
+        im = im.convert(mode)
+    return np.array(im)
 
 
 def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
@@ -195,7 +198,6 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=1):
     :return: A list of 128-dimensional face encodings (one for each face in the image)
     """
     raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model="small")
-
     return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
 
 
