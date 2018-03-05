@@ -1,6 +1,19 @@
 History
 =======
 
+1.2.2 (2018-??-??)
+------------------
+
+* Removed dependencies on scipy to make installation easier
+* Cleaned up KNN example and fixed a bug with drawing fonts to label detected faces in the demo
+
+
+1.2.1 (2018-02-01)
+------------------
+
+* Fixed version numbering inside of module code.
+
+
 1.2.0 (2018-02-01)
 ------------------
 
