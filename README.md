@@ -152,7 +152,7 @@ your folder of known people.
 
 #### `face_detection` command line tool
 
-The `face_detection` lets you find the location (pixel coordinatates) 
+The `face_detection` command lets you find the location (pixel coordinatates) 
 of any faces in an image.
 
 Just run the command `face_detection`, passing in a folder of images 
