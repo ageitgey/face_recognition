@@ -38,7 +38,7 @@ import os.path
 import pickle
 from PIL import Image, ImageDraw
 import face_recognition
-from face_recognition.cli import image_files_in_folder
+from face_recognition.face_recognition_cli import image_files_in_folder
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
