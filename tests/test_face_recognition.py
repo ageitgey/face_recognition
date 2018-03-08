@@ -15,7 +15,8 @@ import numpy as np
 from click.testing import CliRunner
 
 from face_recognition import api
-from face_recognition import cli
+from face_recognition import face_recognition_cli
+from face_recognition import face_detection_cli
 
 
 class Test_face_recognition(unittest.TestCase):
@@ -231,7 +232,7 @@ class Test_face_recognition(unittest.TestCase):
     def test_command_line_interface_options(self):
         target_string = 'Show this message and exit.'
         runner = CliRunner()
-        help_result = runner.invoke(cli.main, ['--help'])
+        help_result = runner.invoke(face_recognition_cli.main, ['--help'])
         self.assertEqual(help_result.exit_code, 0)
         self.assertTrue(target_string in help_result.output)
 
@@ -241,7 +242,7 @@ class Test_face_recognition(unittest.TestCase):
         image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
         image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
 
-        result = runner.invoke(cli.main, args=[image_folder, image_file])
+        result = runner.invoke(face_recognition_cli.main, args=[image_folder, image_file])
 
         self.assertEqual(result.exit_code, 0)
         self.assertTrue(target_string in result.output)
@@ -252,7 +253,7 @@ class Test_face_recognition(unittest.TestCase):
         image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
         image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama3.jpg')
 
-        result = runner.invoke(cli.main, args=[image_folder, image_file])
+        result = runner.invoke(face_recognition_cli.main, args=[image_folder, image_file])
 
         self.assertEqual(result.exit_code, 0)
         self.assertTrue(target_string in result.output)
@@ -263,7 +264,7 @@ class Test_face_recognition(unittest.TestCase):
         image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
         image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
 
-        result = runner.invoke(cli.main, args=[image_folder, image_file, "--tolerance", "0.55"])
+        result = runner.invoke(face_recognition_cli.main, args=[image_folder, image_file, "--tolerance", "0.55"])
 
         self.assertEqual(result.exit_code, 0)
         self.assertTrue(target_string in result.output)
@@ -274,7 +275,54 @@ class Test_face_recognition(unittest.TestCase):
         image_folder = os.path.join(os.path.dirname(__file__), 'test_images')
         image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
 
-        result = runner.invoke(cli.main, args=[image_folder, image_file, "--show-distance", "1"])
+        result = runner.invoke(face_recognition_cli.main, args=[image_folder, image_file, "--show-distance", "1"])
 
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue(target_string in result.output)
+
+    def test_fd_command_line_interface_options(self):
+        target_string = 'Show this message and exit.'
+        runner = CliRunner()
+        help_result = runner.invoke(face_detection_cli.main, ['--help'])
+        self.assertEqual(help_result.exit_code, 0)
+        self.assertTrue(target_string in help_result.output)
+
+    def test_fd_command_line_interface(self):
+        runner = CliRunner()
+        image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
+
+        result = runner.invoke(face_detection_cli.main, args=[image_file])
+        self.assertEqual(result.exit_code, 0)
+        parts = result.output.split(",")
+        self.assertTrue("obama.jpg" in parts[0])
+        self.assertEqual(len(parts), 5)
+
+    def test_fd_command_line_interface_folder(self):
+        runner = CliRunner()
+        image_file = os.path.join(os.path.dirname(__file__), 'test_images')
+
+        result = runner.invoke(face_detection_cli.main, args=[image_file])
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue("obama_partial_face2.jpg" in result.output)
+        self.assertTrue("obama.jpg" in result.output)
+        self.assertTrue("obama2.jpg" in result.output)
+        self.assertTrue("obama3.jpg" in result.output)
+        self.assertTrue("biden.jpg" in result.output)
+
+    def test_fd_command_line_interface_hog_model(self):
+        target_string = 'obama.jpg'
+        runner = CliRunner()
+        image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
+
+        result = runner.invoke(face_detection_cli.main, args=[image_file, "--model", "hog"])
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue(target_string in result.output)
+
+    def test_fd_command_line_interface_cnn_model(self):
+        target_string = 'obama.jpg'
+        runner = CliRunner()
+        image_file = os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg')
+
+        result = runner.invoke(face_detection_cli.main, args=[image_file, "--model", "cnn"])
         self.assertEqual(result.exit_code, 0)
         self.assertTrue(target_string in result.output)
