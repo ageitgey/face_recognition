@@ -6,9 +6,7 @@ import re
 import face_recognition.api as face_recognition
 import multiprocessing
 import sys
-import PIL.Image
 import itertools
-import numpy as np
 
 
 def print_result(filename, location):
@@ -53,7 +51,6 @@ def process_images_in_process_pool(images_to_check, number_of_cpus, model):
 @click.argument('image_to_check')
 @click.option('--cpus', default=1, help='number of CPU cores to use in parallel. -1 means "use all in system"')
 @click.option('--model', default="hog", help='Which face detection model to use. Options are "hog" or "cnn".')
-
 def main(image_to_check, cpus, model):
     # Multi-core processing only supported on Python 3.4 or greater
     if (sys.version_info < (3, 4)) and cpus != 1:
