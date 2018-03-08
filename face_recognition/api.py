@@ -6,9 +6,8 @@ import numpy as np
 
 try:
     import face_recognition_models
-except ModuleNotFoundError:
-    print("Please install `face_recognition_models` with this command before using `face_recognition`:")
-    print()
+except Exception:
+    print("Please install `face_recognition_models` with this command before using `face_recognition`:\n")
     print("pip install git+https://github.com/ageitgey/face_recognition_models")
     quit()
 
