@@ -4,6 +4,7 @@ History
 1.2.2 (2018-??-??)
 ------------------
 
+* Added the face_detection CLI command
 * Removed dependencies on scipy to make installation easier
 * Cleaned up KNN example and fixed a bug with drawing fonts to label detected faces in the demo
 
