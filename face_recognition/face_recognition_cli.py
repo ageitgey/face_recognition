@@ -59,6 +59,10 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
         else:
             print_result(image_to_check, "unknown_person", None, show_distance)
 
+    if not unknown_encodings:
+        # print out fact that no faces were found in image
+        print_result(image_to_check, "no_persons_found", None, show_distance)
+
 
 def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
