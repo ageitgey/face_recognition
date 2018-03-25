@@ -17,6 +17,44 @@ you do face recognition on a folder of images from the command line!
 
 ## Features
 
+#### Face Database
+
+/face_database
+includes example code and instructions for setting up a facial recognition database
+(similar to a policing face database)
+- Uses Postgresql to store face encodings in a "cube" data type.
+- Threshold is set to 0.6
+- Scalable for many faces in a database.
+
+includes:
+* FaceRecognition.py (for searching face database)
+* LoadDatabase.py (for inserting faces into the database)
+* /Demo/ (loaded with images for testing)
+* wanted.csv (example of database table) 
+
+Requires: import
+* dlib
+* face_recognition
+* PIL
+* psycopg2
+* tkinter
+* os 
+* numpy 
+* scipy
+
+Description:<br>
+Stores face_encoding (128 floating points of distances between mapped facial features)
+into cube data type in postgresql (spatial database). New picture is taken for one
+to one face comparison. face_encoding is taken of new image and closest match of
+128 floating points is returned. Threshold is used to compare if the face is a close
+enough match or if the face is unknown in the database. 
+
+Installation:<br>
+cube data type in Postgresql is hard coded set to 100 dimensions. Documentation 
+states that this can easily be increased to 128 dimensions for the facial encoding.
+To make this change cubedata.h must be changed to use 128 dimensions. Postgresql must
+then be compiled from source. Instructions to do this are found within /face_database
+
 #### Find faces in pictures
 
 Find all the faces that appear in a picture:
