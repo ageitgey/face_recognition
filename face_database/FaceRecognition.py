@@ -7,7 +7,9 @@ import psycopg2
 import tkinter
 from tkinter import filedialog
 from tkinter import Tk, Label, Button
-#####################################
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class FaceRecognition:
 
@@ -15,6 +17,7 @@ class FaceRecognition:
         self.master = master
         master.title("Face Recognition")
 
+        # Set up tkinter app interface
         self.leftframe = tkinter.Frame(root)
         self.rightframe = tkinter.Frame(root, width=400)
         root.minsize(800,400)
@@ -44,7 +47,8 @@ class FaceRecognition:
         button1.grid(row=0,column=0)
 
     def FirstTimeSetDefault(self):
-        image = Image.open("/Users/melatti/Documents/Work/FaceRec/images/batman.jpeg")
+        # load default image into app interface
+        image = Image.open(dir_path+"/images/batman.jpeg")
         image = image.resize((400, 400), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(image)
 
@@ -55,43 +59,15 @@ class FaceRecognition:
         self.canvas.create_image(203, 203, image=img, anchor=tkinter.CENTER)
         self.canvas.image = img
 
-
     def SubmitImage(self):
-        # Get image file location that we want to check
-        self.filename = filedialog.askopenfilename(initialdir = "/Users/melatti/Documents/Work/FaceRec/Obama",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+        # Get image file location that we want to complete face recognition on
+        self.filename = filedialog.askopenfilename(initialdir = dir_path+"/Demo",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
 
-        # get face encoding for 1 face in image (must modify for more than 1 face in image)
-        image = face_recognition.load_image_file(self.filename)
-        face_encoding = face_recognition.face_encodings(image)[0] #only 1 face expected when entering 'mugshot'
-
-
-
-        face_encoding_string = ""
-
-        for distance in face_encoding:
-            face_encoding_string+=str(distance)
-            face_encoding_string+=str(",")
-
-        face_encoding_string = face_encoding_string[:-1]
-        face_encoding_string += str("")
-
-        #query database and get identies (with encodings)
-        # example: SELECT c FROM test ORDER BY c <-> cube(array[0.5,0.5,0.5]) LIMIT 1;
+        #connect db
         conn = psycopg2.connect(host="localhost",database="postgres", user="postgres", password="password")
         cur = conn.cursor()
-        tempstring = "SELECT first_name, last_name FROM wanted ORDER BY face_encoding <-> cube(array["+face_encoding_string+"]) LIMIT 1"
-        cur.execute(tempstring)
-        response = cur.fetchall()
-        print(cur.fetchall())
-        #conn.commit()
-        conn.close()
 
-        #update labels
-        self.label_4.configure(text = response[0][0]) # first name
-        self.label_5.configure(text = response[0][1]) # last name
-        name = response[0][0] + " " +response[0][1]
-
-        #edit photo / display photo selected
+        # display photo selected in app with drawings on the photo
         image = Image.open(self.filename)
         width, height = image.size
         ratio = 0
@@ -103,11 +79,33 @@ class FaceRecognition:
         image = face_recognition.load_image_file(self.filename)
         face_locations = face_recognition.face_locations(image)
         face_encodings = face_recognition.face_encodings(image, face_locations)
-
         pil_image = Image.fromarray(image)
         draw = ImageDraw.Draw(pil_image)
 
+        #all responses stored in list
+        response_list = []
+
+        # loops through all detected faces and query db for closest match face encoding
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
+
+            # build face encoding query
+            face_encoding_string = ""
+            for float_distance in face_encoding:
+                face_encoding_string += str(float_distance)
+                face_encoding_string += str(",")
+            face_encoding_string = face_encoding_string[:-1]
+            # finished building face encoding query
+            # now query the database search for closest match face encoding (spatial geometry database query)
+            query = "SELECT first_name, last_name, face_encoding FROM wanted ORDER BY face_encoding <-> cube(array["+face_encoding_string+"]) LIMIT 1"
+            cur.execute(query) #execute query
+            response = cur.fetchone()
+
+            # need to check a threshold here to see if its even close enough...
+            # need to compare face_ending with response[2] (face_ending from db)
+
+            name = response[0] + " " + response[1]
+            response_list.append(response)
+
             draw.rectangle(((left, top), (right, bottom)), outline=(0, 0, 255))
             #draw name onto photo
             text_width, text_height = draw.textsize(name)
@@ -115,7 +113,18 @@ class FaceRecognition:
             draw.text((left + 6, bottom - text_height - 5), name, fill=(255, 255, 255, 255))
 
         del draw #clean up
+        conn.close() #close database connection
 
+        # print all discovered names to app labels
+        firstname = ""
+        lastname = ""
+        for response in response_list:
+            firstname += response[0] + "\n"
+            lastname += response[1] + "\n"
+        self.label_4.configure(text = firstname) # first name
+        self.label_5.configure(text = lastname) # last name
+
+        # put photo with drawings on the canvas in the app view
         pil_image = pil_image.resize((int(width*ratio), int(height*ratio)), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(pil_image)
         self.canvas.create_image(203, 203, image=img, anchor=tkinter.CENTER)

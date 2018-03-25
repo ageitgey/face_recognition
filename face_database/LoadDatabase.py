@@ -7,7 +7,9 @@ import psycopg2
 import tkinter
 from tkinter import filedialog
 from tkinter import Tk, Label, Button
-#####################################
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class LoadDatabase:
 
@@ -34,7 +36,7 @@ class LoadDatabase:
         button2 = tkinter.Button(self.bottomframe, text="Submit Database", fg="red", command=self.SubmitDataBase).grid(row=3, column=0)
 
     def FirstTimeSetDefault(self):
-        image = Image.open("/Users/melatti/Documents/Work/FaceRec/images/batman.jpeg")
+        image = Image.open(dir_path+"/images/batman.jpeg")
         image = image.resize((400, 400), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(image)
 
@@ -47,7 +49,7 @@ class LoadDatabase:
 
     def SetDefault(self):
         self.filename = ""
-        image = Image.open("/Users/melatti/Documents/Work/FaceRec/images/batman.jpeg")
+        image = Image.open(dir_path+"/images/batman.jpeg")
         width, height = image.size
         ratio = 0
         if width > height:
@@ -62,7 +64,7 @@ class LoadDatabase:
         self.entry_2.delete(0, tkinter.END)
 
     def ChooseImage(self):
-        self.filename = filedialog.askopenfilename(initialdir = "/Users/melatti/Documents/Work/FaceRec/Obama",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+        self.filename = filedialog.askopenfilename(initialdir = dir_path+"/Demo/Database",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
         image = Image.open(self.filename)
         width, height = image.size
         ratio = 0
