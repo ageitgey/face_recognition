@@ -8,8 +8,11 @@ import tkinter
 from tkinter import filedialog
 from tkinter import Tk, Label, Button
 import os
+import numpy, scipy
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
+
+THRESHOLD = 0.6 # threshold, declare that 2 faces are not a close enough match
 
 class FaceRecognition:
 
@@ -99,9 +102,23 @@ class FaceRecognition:
             query = "SELECT first_name, last_name, face_encoding FROM wanted ORDER BY face_encoding <-> cube(array["+face_encoding_string+"]) LIMIT 1"
             cur.execute(query) #execute query
             response = cur.fetchone()
+            response = [response[0], response[1],response[2]]
 
             # need to check a threshold here to see if its even close enough...
             # need to compare face_ending with response[2] (face_ending from db)
+            returned_face_encoding = response[2] # array of returned face encodings
+            returned_face_encoding = returned_face_encoding.replace("(","")
+            returned_face_encoding = returned_face_encoding.replace(")","")
+            returned_face_encoding = [float(x) for x in returned_face_encoding.split(",")]
+
+            A = numpy.array(face_encoding)
+            B = numpy.array(returned_face_encoding)
+            distance = scipy.spatial.distance.euclidean(A, B)
+            print(distance)
+
+            if distance > THRESHOLD:
+                response[0] = "Unknown"
+                response[1] = "Unknown"
 
             name = response[0] + " " + response[1]
             response_list.append(response)
