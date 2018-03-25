@@ -1,14 +1,8 @@
-import dlib
-#import cv2
-import face_recognition
 from PIL import Image, ImageDraw
 from PIL import ImageTk, Image
-import psycopg2
-import tkinter
 from tkinter import filedialog
 from tkinter import Tk, Label, Button
-import os
-import numpy, scipy
+import os, numpy, scipy, dlib, face_recognition, psycopg2, tkinter
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
