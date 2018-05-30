@@ -168,6 +168,7 @@ def face_landmarks(face_image, face_locations=None, model="large"):
 
     :param face_image: image to search
     :param face_locations: Optionally provide a list of face locations to check.
+    :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
     :return: A list of dicts of face feature locations (eyes, nose, etc)
     """
     landmarks = _raw_face_landmarks(face_image, face_locations, model)
