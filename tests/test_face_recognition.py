@@ -136,6 +136,15 @@ class Test_face_recognition(unittest.TestCase):
              (552, 399), (576, 372), (594, 344), (604, 314), (610, 282),
              (613, 250), (615, 219)])
 
+    def test_face_landmarks_small_model(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        face_landmarks = api.face_landmarks(img, model="small")
+
+        self.assertEqual(
+            set(face_landmarks[0].keys()),
+            set(['nose_tip', 'left_eye', 'right_eye']))
+        self.assertEqual(face_landmarks[0]['nose_tip'], [(496, 295)])
+
     def test_face_encodings(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         encodings = api.face_encodings(img)
