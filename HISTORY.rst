@@ -1,6 +1,11 @@
 History
 =======
 
+1.2.X (2018-??-??)
+------------------
+
+* You can now pass model="small" to face_landmarks() to use the 5-point face model instead of the 68-point model.
+
 1.2.2 (2018-04-02)
 ------------------
 
