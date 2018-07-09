@@ -334,6 +334,17 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
 * [Recognize faces with a K-nearest neighbors classifier](https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py)
 
+## Articles and Guides that cover `face_recognition`
+
+- My article on how Face Recognition works: [Modern Face Recognition with Deep Learning](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78)
+  - Covers the algorithms and how they generally work
+- [Face recognition with OpenCV, Python, and deep learning](https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/) by Adrian Rosebrock
+  - Covers how to use face recognition in practice
+- [Raspberry Pi Face Recognition](https://www.pyimagesearch.com/2018/06/25/raspberry-pi-face-recognition/) by Adrian Rosebrock
+  - Covers how to use this on a Raspberry Pi
+- [Face clustering with Python](https://www.pyimagesearch.com/2018/07/09/face-clustering-with-python/) by Adrian Rosebrock
+  - Covers how to automatically cluster photos based on who appears in each photo using unsupervised learning
+
 ## How Face Recognition Works
 
 If you want to learn how face location and recognition work instead of
