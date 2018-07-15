@@ -1,14 +1,14 @@
 # Face Recognition
 
-Recognize and manipulate faces from Python or from the command line with
+Recognize and manipulate faces using Python or the command line with
 the world's simplest face recognition library.
 
 Built using [dlib](http://dlib.net/)'s state-of-the-art face recognition
 built with deep learning. The model has an accuracy of 99.38% on the
 [Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) benchmark.
 
-This also provides a simple `face_recognition` command line tool that lets
-you do face recognition on a folder of images from the command line!
+Library also provides a simple `face_recognition` tool that lets
+you perform face recognition on a folder of images from the command line!
 
 
 [![PyPI](https://img.shields.io/pypi/v/face_recognition.svg)](https://pypi.python.org/pypi/face_recognition)
@@ -41,14 +41,14 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 ```
 
-Finding facial features is super useful for lots of important stuff. But you can also use for really stupid stuff
+Finding facial features is useful for many tasks, but you can also use for really stupid stuff
 like applying [digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (think 'Meitu'):
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png)
 
 #### Identify faces in pictures
 
-Recognize who appears in each photo.
+Recognize people in each photo.
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png)
 
@@ -63,7 +63,7 @@ unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
 results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 ```
 
-You can even use this library with other Python libraries to do real-time face recognition:
+You can use this library with other Python libraries to do real-time face recognition:
 
 ![](https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif)
 
@@ -71,7 +71,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 ## Installation
 
-### Requirements
+### Requirements:
 
   * Python 3.3+ or Python 2.7
   * macOS or Linux (Windows not officially supported, but might work)
@@ -129,7 +129,7 @@ files named according to who is in the picture:
 
 ![known](https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png)
 
-Next, you need a second folder with the files you want to identify:
+Next, you need a second folder with files you want to identify:
 
 ![unknown](https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png)
 
@@ -171,8 +171,8 @@ reported are the top, right, bottom and left coordinates of the face (in pixels)
  
 ##### Adjusting Tolerance / Sensitivity
 
-If you are getting multiple matches for the same person, it might be that
-the people in your photos look very similar and a lower tolerance value
+If you are getting multiple matches for the same person, maybe
+people in your photos look very similar and a lower tolerance value
 is needed to make face comparisons more strict.
 
 You can do that with the `--tolerance` parameter. The default tolerance
