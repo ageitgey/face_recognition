@@ -56,13 +56,14 @@ while True:
         face_names = []
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
-            matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+            face_distances=face_recognition.face_distance(known_face_encodings, face_encoding)
+            matches =list(face_distances<= 0.6) # Using a appropriate tolerance value .Lower is more strict. 0.6 is typical best performance.
             name = "Unknown"
 
-            # If a match was found in known_face_encodings, just use the first one.
+            # Selecting the best match from a given list of possible matches.
             if True in matches:
-                first_match_index = matches.index(True)
-                name = known_face_names[first_match_index]
+                match_index = np.argmin(face_distances)
+                name = known_face_names[match_index]
 
             face_names.append(name)
 
