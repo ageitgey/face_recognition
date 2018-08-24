@@ -166,7 +166,8 @@ if __name__ == '__main__':
             delay = time.time() - tmp_time
             tmp_time = time.time()
             fps_list.append(delay)
-            if len(fps_list) > 5 * worker_num: fps_list.pop(0)
+            if len(fps_list) > 5 * worker_num:
+                fps_list.pop(0)
             fps = len(fps_list) / numpy.sum(fps_list)
             print("fps: %.2f" % fps)
 
