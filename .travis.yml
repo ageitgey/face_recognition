@@ -17,3 +17,10 @@ install:
   - pip install tox-travis
 
 script: tox
+
+# Temporary for Python 3.7
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
