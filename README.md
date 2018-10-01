@@ -1,5 +1,7 @@
 # Face Recognition
 
+[README.md in Chinese简体中文版](https://github.com/TommyZihao/face_recognition/blob/master/README_Simplified_Chinese.md)
+
 Recognize and manipulate faces from Python or from the command line with
 the world's simplest face recognition library.
 
