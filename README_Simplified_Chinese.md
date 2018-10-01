@@ -12,7 +12,7 @@
 >
 > Translator's note:
 >
-> Face_recognition is a powerful, simple and easy-to-use face recognition open source project with complete development documents and application cases, especially it is compatible with Raspberry Pi.
+> [face_recognition](https://github.com/ageitgey/face_recognition) is a powerful, simple and easy-to-use face recognition open source project with complete development documents and application cases, especially it is compatible with Raspberry Pi.
 >
 > In order to facilitate Chinese software developers to learn, make progress in face recognition development and source code contributions, I translated README file into simplified Chinese.
 >
