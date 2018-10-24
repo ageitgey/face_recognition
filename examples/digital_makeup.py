@@ -7,8 +7,8 @@ image = face_recognition.load_image_file("biden.jpg")
 # Find all facial features in all the faces in the image
 face_landmarks_list = face_recognition.face_landmarks(image)
 
+pil_image = Image.fromarray(image)
 for face_landmarks in face_landmarks_list:
-    pil_image = Image.fromarray(image)
     d = ImageDraw.Draw(pil_image, 'RGBA')
 
     # Make the eyebrows into a nightmare
