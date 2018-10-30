@@ -184,7 +184,6 @@ $ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictu
 /unknown_pictures/unknown.jpg,Barack Obama
 /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
 ```
-
 If you want to see the face distance calculated for each match in order
 to adjust the tolerance setting, you can use `--show-distance true`:
 
@@ -194,7 +193,6 @@ $ face_recognition --show-distance true ./pictures_of_people_i_know/ ./unknown_p
 /unknown_pictures/unknown.jpg,Barack Obama,0.378542298956785
 /face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None
 ```
-
 ##### More Examples
 
 If you simply want to know the names of the people in each photograph but don't
@@ -206,7 +204,6 @@ $ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/ | cut -d ','
 Barack Obama
 unknown_person
 ```
-
 ##### Speeding up Face Recognition
 
 Face recognition can be done in parallel if you have a computer with
