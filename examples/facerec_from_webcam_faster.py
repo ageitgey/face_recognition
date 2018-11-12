@@ -1,5 +1,6 @@
 import face_recognition
 import cv2
+import os
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -13,23 +14,29 @@ import cv2
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
 
-# Load a sample picture and learn how to recognize it.
-obama_image = face_recognition.load_image_file("obama.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+# Initialize some variables
+known_face_encodings = []
+known_face_names = []
 
-# Load a second sample picture and learn how to recognize it.
-biden_image = face_recognition.load_image_file("biden.jpg")
-biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
+# Set your images directory
+img_dir = "img/"
 
-# Create arrays of known face encodings and their names
-known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
-]
-known_face_names = [
-    "Barack Obama",
-    "Joe Biden"
-]
+for file in os.listdir(img_dir):
+    
+    # This variable itterates each image in your images directory
+    file_name = os.fsdecode(file)
+
+    # Check the file. Is it image or not
+    if file_name.endswith(".jpg") or file_name.endswith(".jpeg") or file_name.endswith(".png"): 
+
+        # Add file name without extension to your known_face_names list
+        known_face_names.append(os.path.splitext(file_name)[0])
+
+        current_image = face_recognition.load_image_file(img_dir + file_name)
+
+        # Add encoded image to your list
+        known_face_encodings.append(face_recognition.face_encodings(current_image)[0])
+        
 
 # Initialize some variables
 face_locations = []
