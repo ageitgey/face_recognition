@@ -43,7 +43,7 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 ```
 
-Finding facial features is super useful for lots of important stuff. But you can also use for really stupid stuff
+Finding facial features is super useful for lots of important stuff. But you can also use it for really stupid stuff
 like applying [digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (think 'Meitu'):
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png)
@@ -113,7 +113,7 @@ While Windows isn't officially supported, helpful users have posted instructions
 
 ### Command-Line Interface
 
-When you install `face_recognition`, you get a two simple command-line 
+When you install `face_recognition`, you get two simple command-line 
 programs:
 
 * `face_recognition` - Recognize faces in a photograph or folder full for 
@@ -212,7 +212,7 @@ unknown_person
 ##### Speeding up Face Recognition
 
 Face recognition can be done in parallel if you have a computer with
-multiple CPU cores. For example if your system has 4 CPU cores, you can
+multiple CPU cores. For example, if your system has 4 CPU cores, you can
 process about 4 times as many images in the same amount of time by using
 all your CPU cores in parallel.
 
@@ -247,7 +247,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 You can also opt-in to a somewhat more accurate deep-learning-based face detection model.
 
-Note: GPU acceleration (via nvidia's CUDA library) is required for good
+Note: GPU acceleration (via NVidia's CUDA library) is required for good
 performance with this model. You'll also want to enable CUDA support
 when compliling `dlib`.
 
