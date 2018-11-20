@@ -65,7 +65,7 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
 
 
 def image_files_in_folder(folder):
-    return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
+    return [os.path.join(folder,f) for folder,dirs,files in os.walk(folder) for f in files if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
 
 
 def process_images_in_process_pool(images_to_check, known_names, known_face_encodings, number_of_cpus, tolerance, show_distance):
