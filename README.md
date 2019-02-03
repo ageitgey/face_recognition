@@ -92,6 +92,8 @@ Then, install this module from pypi using `pip3` (or `pip2` for Python 2):
 pip3 install face_recognition
 ```
 
+Alternatively, you can try this library with [Docker](https://www.docker.com/), see [this section](##Deployment to Cloud Hosts (Heroku, AWS, etc))
+
 If you are having trouble with installation, you can also try out a
 [pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
 
@@ -366,6 +368,10 @@ using it to a cloud hosting provider like Heroku or AWS.
 To make things easier, there's an example Dockerfile in this repo that shows how to run an app built with
 `face_recognition` in a [Docker](https://www.docker.com/) container. With that, you should be able to deploy
 to any service that supports Docker images.
+
+You can try the Docker image locally by running: `docker-compose up -d`
+
+If you don't have nvidia-docker installed or a GPU, remove the last line in the [docker-compose.yml](docker-compose.yml) file (`runtime: nvidia`).
 
 ## Having problems?
 
