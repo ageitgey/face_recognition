@@ -1,7 +1,7 @@
 # This is a sample Dockerfile you can modify to deploy your own app based on face_recognition
-# In order to run Docker in the GPU you will need to install [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
+# In order to run Docker in the GPU you will need to install nvidia-docker: https://github.com/NVIDIA/nvidia-docker
 
-FROM nvidia/cuda:8.0-cudnn5-devel
+FROM nvidia/cuda:9.0-cudnn7-devel
 
 # Install face recognition dependencies
 
@@ -11,8 +11,6 @@ cmake \
 libsm6 \
 libxext6 \
 libxrender-dev \
-gcc-4.8 \
-g++-4.8 \
 python3 \
 python3-pip
 
@@ -20,8 +18,12 @@ RUN pip3 install scikit-build
 
 # Install compilers
 
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
+RUN apt install -y software-properties-common
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt update -y; apt install -y gcc-6 g++-6
+
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 50
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 50
 
 #Install dlib 
 
