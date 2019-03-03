@@ -371,7 +371,7 @@ to any service that supports Docker images.
 
 You can try the Docker image locally by running: `docker-compose up`
 
-If you don't have nvidia-docker installed or a GPU, remove the last line in the [docker-compose.yml](docker-compose.yml) file (`runtime: nvidia`).
+Linux users with a GPU and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
 
 ## Having problems?
 
