@@ -369,9 +369,9 @@ To make things easier, there's an example Dockerfile in this repo that shows how
 `face_recognition` in a [Docker](https://www.docker.com/) container. With that, you should be able to deploy
 to any service that supports Docker images.
 
-You can try the Docker image locally by running: `docker-compose up`
+You can try the Docker image locally by running: `docker-compose up --build`
 
-Linux users with a GPU and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
+Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
 
 ## Having problems?
 
