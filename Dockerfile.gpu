@@ -27,7 +27,7 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 50
 
 #Install dlib 
 
-RUN git clone https://github.com/davisking/dlib.git
+RUN git clone -b 'v19.16' --single-branch https://github.com/davisking/dlib.git
 RUN mkdir -p /dlib/build
 
 RUN cmake -H/dlib -B/dlib/build -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1
