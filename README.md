@@ -92,6 +92,8 @@ Then, install this module from pypi using `pip3` (or `pip2` for Python 2):
 pip3 install face_recognition
 ```
 
+Alternatively, you can try this library with [Docker](https://www.docker.com/), see [this section](#deployment).
+
 If you are having trouble with installation, you can also try out a
 [pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
 
@@ -358,7 +360,7 @@ depending on a black box library, [read my article](https://medium.com/@ageitgey
   up children quite easy using the default comparison threshold of 0.6.
 * Accuracy may vary between ethnic groups. Please see [this wiki page](https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals) for more details.
 
-## Deployment to Cloud Hosts (Heroku, AWS, etc)
+## <a name="deployment">Deployment to Cloud Hosts (Heroku, AWS, etc)</a>
 
 Since `face_recognition` depends on `dlib` which is written in C++, it can be tricky to deploy an app
 using it to a cloud hosting provider like Heroku or AWS.
@@ -366,6 +368,10 @@ using it to a cloud hosting provider like Heroku or AWS.
 To make things easier, there's an example Dockerfile in this repo that shows how to run an app built with
 `face_recognition` in a [Docker](https://www.docker.com/) container. With that, you should be able to deploy
 to any service that supports Docker images.
+
+You can try the Docker image locally by running: `docker-compose up --build`
+
+Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
 
 ## Having problems?
 
