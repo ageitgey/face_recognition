@@ -1,5 +1,6 @@
 import face_recognition
 import cv2
+import numpy as np
 
 # This is a super simple (but slow) example of running face recognition on live video from your webcam.
 # There's a second example that's a little more complicated but runs faster.
@@ -48,9 +49,15 @@ while True:
         name = "Unknown"
 
         # If a match was found in known_face_encodings, just use the first one.
-        if True in matches:
-            first_match_index = matches.index(True)
-            name = known_face_names[first_match_index]
+        # if True in matches:
+        #     first_match_index = matches.index(True)
+        #     name = known_face_names[first_match_index]
+
+        # Or instead, use the known face with the smallest distance to the new face
+        face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
+        best_match_index = np.argmin(face_distances)
+        if matches[best_match_index]:
+            name = known_face_names[best_match_index]
 
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
