@@ -112,6 +112,15 @@ pip3 install face_recognition
 如果你遇到了幺蛾子，可以用Ubuntu虚拟机安装本项目，看下面这个教程。
 [如何使用Adam Geitgey大神提供的Ubuntu虚拟机镜像文件安装配置虚拟机，本项目已经包含在镜像中](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
 
+#### 在 Mac 或者 Linux上安装本项目 2  
+
+修改你的pip镜像源为清华镜像，然后使用`pip install face_recognition`,可以自动帮你安装各种依赖，包括dlib。只是在安装dlib的时候可能会出问题，因为dlib需要编译，出现的问题一般是`gcc`或者`g++`版本的问题，所以在`pip install face_recognition`之前，可以通过在命令行键入  
+
+    export CC=/usr/local/bin/gcc
+    export CXX=/usr/local/bin/g++  
+    
+来指定你gcc和g++对应的位置，（这两句话会临时修改当前终端的环境变量/usr/local/bin/gcc对应你自己gcc或者g++所在目录）。
+
 #### 在树莓派上安装
 
 - [树莓派安装指南](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
