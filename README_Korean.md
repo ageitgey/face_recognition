@@ -1,8 +1,8 @@
 ﻿# Face Recognition
 
-_You can also read a translated version of this file [in Chinese 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md)._
+_[중국어 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md) 로 번역된 이 파일을 읽으실 수 있습니다._
 
-세계에서 가장 간단한 얼굴 인식 라이브러리로, Python 또는 명령 줄에서 얼굴을 인식하고 조작 해보세요.
+세계에서 가장 간단한 얼굴 인식 라이브러리로, Python 또는 명령 줄에서 얼굴을 인식하고 조작 해보십시오.
 
 딥 러닝으로 구축된 [dlib](http://dlib.net/)의 최첨단 얼굴 인식 기능을 사용하여 구축되었습니다. 이 모델은 [Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) 기준으로 99.38%의 정확도를 가집니다.
 
@@ -39,8 +39,7 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 ```
 
-얼굴의 특징을 찾는 기능은 여러 중요한 일들에 유용하게 쓰입니다. 하지만 [디지털 메이크업]
-(https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (Meitu 등)을 적용하는 것과 같은 정말 멍청한 것들에도 쓰일 수 있습니다:
+얼굴의 특징을 찾는 기능은 여러 중요한 일들에 유용하게 쓰입니다. 하지만 [디지털 메이크업](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (Meitu 같은 것)을 적용하는 것과 같은 정말 멍청한 것들에도 쓰일 수 있습니다:
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png)
 
@@ -65,12 +64,11 @@ results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 
 ![](https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif)
 
-코드에 대해서는 [이 예제]
-(https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) 를 참조하십시오.
+코드에 대해서는 [이 예제]https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) 를 참조하십시오.
 
 ## 온라인 데모
 
-Jupyter notebook demo로 공유된 사용자 기여  (공식 지원 아님): [![Deepnote](https://beta.deepnote.org/buttons/try-in-a-jupyter-notebook.svg)](https://beta.deepnote.org/launch?template=face_recognition)
+Jupyter notebook demo로 공유된 사용자 기여  (공식적인 지원이 아님): [![Deepnote](https://beta.deepnote.org/buttons/try-in-a-jupyter-notebook.svg)](https://beta.deepnote.org/launch?template=face_recognition)
 
 ## 설치
 
@@ -223,8 +221,7 @@ face_locations = face_recognition.face_locations(image)
 # face_locations is now an array listing the co-ordinates of each face!
 ```
 
-[이 예제]
-(https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py) 를 사용하여 테스트 해 보십시오.
+[이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py) 를 사용하여 테스트 해 보십시오.
 
 좀 더 정확한 딥 러닝 기반의 얼굴 탐지 모델을 채택할 수도 있습니다.
 
@@ -239,10 +236,9 @@ face_locations = face_recognition.face_locations(image, model="cnn")
 # face_locations is now an array listing the co-ordinates of each face!
 ```
 
-[이 예제]
-(https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py) 를 사용하여 테스트 해 보십시오.
+[이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py) 를 사용하여 테스트 해 보십시오.
 
-이미지와 GPU가 둘 다 많은 경우, [얼굴을 일괄적으로 찾을] (https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py) 수도 있습니다.
+이미지와 GPU가 둘 다 많은 경우, [얼굴을 일괄적으로 찾을](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py) 수도 있습니다.
 
 ##### 이미지에서 사람의 얼굴 특징으로 자동으로 찾기
 
@@ -256,8 +252,7 @@ face_landmarks_list = face_recognition.face_landmarks(image)
 # face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye.
 ```
 
-[이 예제]
-(https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py) 를 사용하여 테스트 해 보십시오.
+[이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py) 를 사용하여 테스트 해 보십시오.
 
 ##### 이미지에서 얼굴을 인식하고 누구인지 식별하기
 
@@ -282,13 +277,11 @@ else:
     print("It's not a picture of me!")
 ```
 
-[이 예제]
-(https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py) 를 사용하여 테스트 해 보십시오.
+[이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py) 를 사용하여 테스트 해 보십시오.
 
 ## Python 코드 예제
 
-모든 예제는 [여기]
-(https://github.com/ageitgey/face_recognition/tree/master/examples) 에 있습니다.
+모든 예제는 [여기](https://github.com/ageitgey/face_recognition/tree/master/examples) 에 있습니다.
 
 
 #### 얼굴 탐지
@@ -316,13 +309,11 @@ else:
 * [K-nearest neighbors classifier를 통한 얼굴 인식하기](https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py)
 
 ## 독립적인 실행 파일 만들기
-`Python`이나 `face_recognition`을 설치할 필요 없이 실행할 수 있는 독립적인 실행형 실행 파일을 만들려면 [PyInstaller]
-(https://github.com/pyinstaller/pyinstaller) 를 사용하면 됩니다. 그러나, 이 라이브러리로 작업하려면 어느 정도의 설정 커스텀이 필요합니다. 방법에 대해서는 [이 이슈]
-(https://github.com/ageitgey/face_recognition/issues/357) 를 참조하십시오.
+`Python`이나 `face_recognition`을 설치할 필요 없이 실행할 수 있는 독립적인 실행형 실행 파일을 만들려면 [PyInstaller](https://github.com/pyinstaller/pyinstaller) 를 사용하면 됩니다. 그러나, 이 라이브러리로 작업하려면 어느 정도의 설정 커스텀이 필요합니다. 방법에 대해서는 [이 이슈](https://github.com/ageitgey/face_recognition/issues/357) 를 참조하십시오.
 
 ## `face_recognition`을 다루는 글 및 가이드
 
-- 얼굴 인식이 어떻게 작동하는지에 관한 글: [딥 러닝을 통한 현대적 얼굴 인식] (https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78)
+- 얼굴 인식이 어떻게 작동하는지에 관한 글: [딥 러닝을 통한 현대적 얼굴 인식](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78)
   - 알고리즘과 알고리즘이 일반적으로 어떻게 작동하는지
 - Adrian Rosebrock의 [OpenCV, Python 및 딥 러닝을 통한 얼굴 인식](https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/)
   - 실제로 얼굴 인식을 사용하는 법
@@ -333,14 +324,12 @@ else:
 
 ## 얼굴 인식이 작동하는지
 
-black box 라이브러리에 의존하는 대신 얼굴 위치와 인식이 어떻게 작동하는지 알고 싶으시다면 [저의 글]
-(https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78) 을 읽으십시오.
+black box 라이브러리에 의존하는 대신 얼굴 위치와 인식이 어떻게 작동하는지 알고 싶으시다면 [저의 글](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78) 을 읽으십시오.
 
 ## 주의 사항
 
 * 얼굴 인식의 모델은 성인에 대한 교육을 받았으며 어린이는 잘 적용이 되지 않습니다. 이는 0.6의 임계 값을 사용하여 어린이들을 아주 쉽게 뒤죽박죽으로 만드는 경향이 있습니다.
-* 소수 민족마다 정확성이 다를 수 있습니다. 자세한 내용은 [이 위키 페이지]
-(https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals) 를 참조하십시오.
+* 소수 민족마다 정확성이 다를 수 있습니다. 자세한 내용은 [이 위키 페이지](https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals) 를 참조하십시오.
 
 ## <a name="deployment">클라우드 호스트에 배포 (Heroku, AWS, 기타 등)</a>
 
@@ -355,13 +344,11 @@ GPU (드라이버 >= 384.81) 및 [Nvidia-Docker]
 
 ## 문제가 있으십니까?
 
-문제가 발생하면 github 문제를 제기하기 전에 위키의 [일반적인 오류]
-(https://github.com/ageitgey/face_recognition/wiki/Common-Errors) 섹션을 읽어보십시오.
+문제가 발생하면 github 문제를 제기하기 전에 위키의 [일반적인 오류](https://github.com/ageitgey/face_recognition/wiki/Common-Errors) 섹션을 읽어보십시오.
 
 ## 감사의 말
 
-* `dlib`를 만들고 이 라이브러리에 사용된 얼굴 인식 기능과 얼굴 인코딩 모델을 제공 한 [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom)) 에게 많은 감사를 드립니다. 얼굴 인코딩을 지원하는 ResNet에 대한 자세한 내용은 [블로그 게시물]
-(http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html) 을 확인하십시오.
+* `dlib`를 만들고 이 라이브러리에 사용된 얼굴 인식 기능과 얼굴 인코딩 모델을 제공 한 [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom)) 에게 많은 감사를 드립니다. 얼굴 인코딩을 지원하는 ResNet에 대한 자세한 내용은 [블로그 게시물](http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html) 을 확인하십시오.
 * numpy, scipy, scikit-image, pillow 등의 모든 멋진 파이썬 데이터 과학 라이브러리에서 일하는 모든 사람들에게 감사합니다. 이런 종류의 것들을 파이썬에서 쉽고 재미있게 만듭니다.
 * [Cookiecutter](https://github.com/audreyr/cookiecutter)
 와 [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage)
