@@ -2,7 +2,7 @@
 
 _[중국어 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md) 로 번역된 이 파일을 읽으실 수 있습니다._
 
-세계에서 가장 간단한 얼굴 인식 라이브러리로, Python 또는 명령 줄에서 얼굴을 인식하고 조작 해보십시오.
+세계에서 가장 간단한 얼굴 인식 라이브러리로, Python 또는 명령 줄에서 얼굴을 인식하고 조작 해 보십시오.
 
 딥 러닝으로 구축된 [dlib](http://dlib.net/)의 최첨단 얼굴 인식 기능을 사용하여 구축되었습니다. 이 모델은 [Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) 기준으로 99.38%의 정확도를 가집니다.
 
@@ -27,7 +27,7 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_locations = face_recognition.face_locations(image)
 ```
 
-#### 사진에 있는 얼굴의 특징들을 찾기&조작하기
+#### 사진에 있는 얼굴의 특징을 찾기&조작하기
 
 각각의 사람의 눈, 코, 입, 턱의 위치와 윤곽을 잡아냅니다.
 
@@ -64,7 +64,7 @@ results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
 
 ![](https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif)
 
-코드에 대해서는 [이 예제]https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) 를 참조하십시오.
+코드에 대해서는 [이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) 를 참조하십시오.
 
 ## 온라인 데모
 
@@ -91,7 +91,7 @@ Jupyter notebook demo로 공유된 사용자 기여  (공식적인 지원이 아
 pip3 install face_recognition
 ```
 
-또는, [이 부분](#deployment)을 참조하며, [Docker](https://www.docker.com/)로 이 라이브러리를 시도해보십시오.
+또는, [이 부분](#deployment)을 참조하여, [Docker](https://www.docker.com/)로 이 라이브러리를 시도해보십시오.
 
 설치에 대해 문제가 발생하였으면, [미리 구성된 VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b)을 사용해 볼 수도 있습니다.
 
@@ -324,7 +324,7 @@ else:
 
 ## 얼굴 인식이 작동하는지
 
-black box 라이브러리에 의존하는 대신 얼굴 위치와 인식이 어떻게 작동하는지 알고 싶으시다면 [저의 글](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78) 을 읽으십시오.
+black box 라이브러리에 의존하는 대신 얼굴 위치와 인식이 어떻게 작동하는지 알고 싶으시다면 [이 글](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78) 을 읽으십시오.
 
 ## 주의 사항
 
@@ -339,8 +339,7 @@ black box 라이브러리에 의존하는 대신 얼굴 위치와 인식이 어�
 
 다음을 실행하여 Docker 이미지를 로컬로 시도 할 수 있습니다: `docker-compose up --build`
 
-GPU (드라이버 >= 384.81) 및 [Nvidia-Docker]
-(https://github.com/NVIDIA/nvidia-docker) 가 설치된 Linux 사용자는 GPU에서 예제를 실행할 수 있습니다: [docker-compose.yml](docker-compose.yml) 파일을 열고 `dockerfile : Dockerfile.gpu` 및 `runtime : nvidia` 행의 주석 처리를 제거합니다.
+GPU (드라이버 >= 384.81) 및 [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) 가 설치된 Linux 사용자는 GPU에서 예제를 실행할 수 있습니다: [docker-compose.yml](docker-compose.yml) 파일을 열고 `dockerfile : Dockerfile.gpu` 및 `runtime : nvidia` 행의 주석 처리를 제거합니다.
 
 ## 문제가 있으십니까?
 
