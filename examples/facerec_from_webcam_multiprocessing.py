@@ -3,6 +3,7 @@ import cv2
 from multiprocessing import Process, Manager, cpu_count
 import time
 import numpy
+import threading
 
 
 # This is a little bit complicated (but fast) example of running face recognition on live video from your webcam.
@@ -30,7 +31,7 @@ def prev_id(current_id):
 
 
 # A subprocess use to capture frames.
-def capture(read_frame_list):
+def capture(read_frame_list, Global):
     # Get a reference to webcam #0 (the default one)
     video_capture = cv2.VideoCapture(0)
     # video_capture.set(3, 640)  # Width of the frames in the video stream.
@@ -53,7 +54,7 @@ def capture(read_frame_list):
 
 
 # Many subprocess use to process frames.
-def process(worker_id, read_frame_list, write_frame_list):
+def process(worker_id, read_frame_list, write_frame_list, Global):
     known_face_encodings = Global.known_face_encodings
     known_face_names = Global.known_face_names
     while not Global.is_exit:
@@ -122,13 +123,16 @@ if __name__ == '__main__':
     write_frame_list = Manager().dict()
 
     # Number of workers (subprocess use to process frames)
-    worker_num = cpu_count()
+    if cpu_count() > 2:
+        worker_num = cpu_count() - 1  # 1 for capturing frames
+    else:
+        worker_num = 2
 
     # Subprocess list
     p = []
 
-    # Create a subprocess to capture frames
-    p.append(Process(target=capture, args=(read_frame_list,)))
+    # Create a thread to capture frames (if uses subprocess, it will crash on Mac)
+    p.append(threading.Thread(target=capture, args=(read_frame_list, Global,)))
     p[0].start()
 
     # Load a sample picture and learn how to recognize it.
@@ -149,9 +153,9 @@ if __name__ == '__main__':
         "Joe Biden"
     ]
 
-    # Create workers
+    # Create workers (Known bugs: on Mac, when a face was detected, python will crash)
     for worker_id in range(1, worker_num + 1):
-        p.append(Process(target=process, args=(worker_id, read_frame_list, write_frame_list)))
+        p.append(Process(target=process, args=(worker_id, read_frame_list, write_frame_list, Global,)))
         p[worker_id].start()
 
     # Start to show video
