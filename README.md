@@ -1,5 +1,7 @@
 # Face Recognition
 
+_You can also read a translated version of this file [in Chinese 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md) or [in Korean 한국어](https://github.com/ageitgey/face_recognition/blob/master/README_Korean.md)._
+
 Recognize and manipulate faces from Python or from the command line with
 the world's simplest face recognition library.
 
@@ -41,7 +43,7 @@ image = face_recognition.load_image_file("your_file.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 ```
 
-Finding facial features is super useful for lots of important stuff. But you can also use for really stupid stuff
+Finding facial features is super useful for lots of important stuff. But you can also use it for really stupid stuff
 like applying [digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (think 'Meitu'):
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png)
@@ -69,6 +71,10 @@ You can even use this library with other Python libraries to do real-time face r
 
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) for the code.
 
+## Online Demos
+
+User-contributed shared Jupyter notebook demo (not officially supported): [![Deepnote](https://beta.deepnote.org/buttons/try-in-a-jupyter-notebook.svg)](https://beta.deepnote.org/launch?template=face_recognition)
+
 ## Installation
 
 ### Requirements
@@ -89,6 +95,8 @@ Then, install this module from pypi using `pip3` (or `pip2` for Python 2):
 ```bash
 pip3 install face_recognition
 ```
+
+Alternatively, you can try this library with [Docker](https://www.docker.com/), see [this section](#deployment).
 
 If you are having trouble with installation, you can also try out a
 [pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
@@ -111,7 +119,7 @@ While Windows isn't officially supported, helpful users have posted instructions
 
 ### Command-Line Interface
 
-When you install `face_recognition`, you get a two simple command-line 
+When you install `face_recognition`, you get two simple command-line 
 programs:
 
 * `face_recognition` - Recognize faces in a photograph or folder full for 
@@ -210,7 +218,7 @@ unknown_person
 ##### Speeding up Face Recognition
 
 Face recognition can be done in parallel if you have a computer with
-multiple CPU cores. For example if your system has 4 CPU cores, you can
+multiple CPU cores. For example, if your system has 4 CPU cores, you can
 process about 4 times as many images in the same amount of time by using
 all your CPU cores in parallel.
 
@@ -245,7 +253,7 @@ See [this example](https://github.com/ageitgey/face_recognition/blob/master/exam
 
 You can also opt-in to a somewhat more accurate deep-learning-based face detection model.
 
-Note: GPU acceleration (via nvidia's CUDA library) is required for good
+Note: GPU acceleration (via NVidia's CUDA library) is required for good
 performance with this model. You'll also want to enable CUDA support
 when compliling `dlib`.
 
@@ -334,6 +342,9 @@ All the examples are available [here](https://github.com/ageitgey/face_recogniti
 * [Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
 * [Recognize faces with a K-nearest neighbors classifier](https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py)
 
+## Creating a Standalone Executable
+If you want to create a standalone executable that can run without the need to install `python` or `face_recognition`, you can use [PyInstaller](https://github.com/pyinstaller/pyinstaller). However, it requires some custom configuration to work with this library. See [this issue](https://github.com/ageitgey/face_recognition/issues/357) for how to do it.
+
 ## Articles and Guides that cover `face_recognition`
 
 - My article on how Face Recognition works: [Modern Face Recognition with Deep Learning](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78)
@@ -356,7 +367,7 @@ depending on a black box library, [read my article](https://medium.com/@ageitgey
   up children quite easy using the default comparison threshold of 0.6.
 * Accuracy may vary between ethnic groups. Please see [this wiki page](https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals) for more details.
 
-## Deployment to Cloud Hosts (Heroku, AWS, etc)
+## <a name="deployment">Deployment to Cloud Hosts (Heroku, AWS, etc)</a>
 
 Since `face_recognition` depends on `dlib` which is written in C++, it can be tricky to deploy an app
 using it to a cloud hosting provider like Heroku or AWS.
@@ -364,6 +375,10 @@ using it to a cloud hosting provider like Heroku or AWS.
 To make things easier, there's an example Dockerfile in this repo that shows how to run an app built with
 `face_recognition` in a [Docker](https://www.docker.com/) container. With that, you should be able to deploy
 to any service that supports Docker images.
+
+You can try the Docker image locally by running: `docker-compose up --build`
+
+Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
 
 ## Having problems?
 
