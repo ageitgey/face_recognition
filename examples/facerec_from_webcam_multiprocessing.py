@@ -112,7 +112,7 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
 
 
 if __name__ == '__main__':
-    worker_num=2
+
     # Fix Bug on MacOS
     if platform.system() == 'Darwin':
         set_start_method('forkserver')
