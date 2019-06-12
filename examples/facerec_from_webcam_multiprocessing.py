@@ -158,7 +158,7 @@ if __name__ == '__main__':
         "Joe Biden"
     ]
 
-    # Create workers (Known bugs: on Mac, when a face was detected, python will crash)
+    # Create workers
     for worker_id in range(1, worker_num + 1):
         p.append(Process(target=process, args=(worker_id, read_frame_list, write_frame_list, Global, worker_num,)))
         p[worker_id].start()
