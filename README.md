@@ -401,3 +401,30 @@ If you run into problems, please read the [Common Errors](https://github.com/age
 * Thanks to [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
   [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage) project template
   for making Python project packaging way more tolerable.
+
+
+
+
+### Docker for API
+
+You can build and run the docker using the following process:
+
+Cloning
+```console
+git clone https://github.com/jqueguiner/face-detection.git face-detection
+```
+
+Building Docker
+```console
+cd face-detection && docker build -t face-detection -f Dockerfile .
+```
+
+Running Docker
+```console
+echo "http://$(curl ifconfig.io):5000" && docker run -p 5000:5000 -d face-detection
+```
+
+Calling the API for face detection
+```console
+curl -X POST "http://MY_SUPER_API_IP:5000/detect" -H "accept: image/png" -H "Content-Type: application/json" -d '{"url":"https://i.ibb.co/FqDSQF8/input.jpg"}'
+```
