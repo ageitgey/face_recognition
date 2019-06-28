@@ -7,12 +7,6 @@ import random
 import string
 import json
 
-from werkzeug.utils import secure_filename
-from uuid import uuid4
-
-import numpy as np
-
-import cv2
 import face_recognition
 
 from flask import jsonify
@@ -53,7 +47,7 @@ def detect():
        
         results = []
 
-        image = face_recognition.load_image_file(filename)
+        image = face_recognition.load_image_file(input_path)
         locations = face_recognition.face_locations(image)
 
         for location in locations:
@@ -64,8 +58,7 @@ def detect():
                 'x-bottom': location[3]
                 })
 
-
-    return json.dumps(results), 200
+        return json.dumps(results), 200
 
 
     except:
