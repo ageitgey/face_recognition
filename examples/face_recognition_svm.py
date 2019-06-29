@@ -51,7 +51,7 @@ for person in train_dir:
     for person_img in pix:
         # Get the face encodings for the face in each image file
         face = face_recognition.load_image_file("/train_dir/" + person + "/" + person_img)
-        face_enc = face_recognition.face_encodings(pic)[0]
+        face_enc = face_recognition.face_encodings(face)[0]
         
         # Add face encoding for current image with corresponding label (name) to the training data
         encodings.append(face_enc)
