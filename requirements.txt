@@ -1,5 +1,6 @@
 face_recognition_models
 Click>=6.0
+cmake>=3.14.4
 dlib>=19.3.0
 numpy
 Pillow
