@@ -1,6 +1,7 @@
 import face_recognition
 import cv2
 import numpy as np
+import os
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -14,23 +15,36 @@ import numpy as np
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
 
-# Load a sample picture and learn how to recognize it.
-obama_image = face_recognition.load_image_file("obama.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+# Known face pictures directory
+known_face_dir = '../tests/test_images/'
+files = os.listdir(known_face_dir)
 
-# Load a second sample picture and learn how to recognize it.
-biden_image = face_recognition.load_image_file("biden.jpg")
-biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
+# Loading all the known face pictures
+known_face_encodings = []
+known_face_names = []
+face_encodings_handle = locals()
+for file_name in files:
+    face_encodings_handle[file_name] = face_recognition.face_encodings(face_recognition.load_image_file(known_face_dir + file_name))[0]
+    known_face_encodings.append(face_encodings_handle[file_name])
+    known_face_names.append(file_name.rsplit('.', 1)[0])
 
-# Create arrays of known face encodings and their names
-known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
-]
-known_face_names = [
-    "Barack Obama",
-    "Joe Biden"
-]
+## Load a sample picture and learn how to recognize it.
+#obama_image = face_recognition.load_image_file("obama.jpg")
+#obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+#
+## Load a second sample picture and learn how to recognize it.
+#biden_image = face_recognition.load_image_file("biden.jpg")
+#biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
+#
+## Create arrays of known face encodings and their names
+#known_face_encodings = [
+#    obama_face_encoding,
+#    biden_face_encoding
+#]
+#known_face_names = [
+#    "Barack Obama",
+#    "Joe Biden"
+#]
 
 # Initialize some variables
 face_locations = []
