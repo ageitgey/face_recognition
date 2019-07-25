@@ -1,5 +1,5 @@
-# Find all the faces in an image then recognize them using a SVM with scikit-learn
-# This allows you to train multiple images per person
+# Train multiple images per person
+# Find and recognize faces in an image using a SVC with scikit-learn
 
 """
 Structure:
@@ -27,9 +27,6 @@ Structure:
                 <person_n_face-n>.jpg
 """
 
-# Install scikit-learn if you haven't already with pip
-# $ pip3 install scikit-learn
-
 import face_recognition
 from sklearn import svm
 import os
@@ -46,17 +43,23 @@ train_dir = os.listdir('/train_dir/')
 # Loop through each person in the training directory
 for person in train_dir:
     pix = os.listdir("/train_dir/" + person)
-    
+
     # Loop through each training image for the current person
     for person_img in pix:
         # Get the face encodings for the face in each image file
         face = face_recognition.load_image_file("/train_dir/" + person + "/" + person_img)
-        face_enc = face_recognition.face_encodings(face)[0]
-        
-        # Add face encoding for current image with corresponding label (name) to the training data
-        encodings.append(face_enc)
-        names.append(person)
-        
+        face_bounding_boxes = face_recognition.face_locations(face)
+
+        #If training image contains none or more than faces, print an error message and exit
+        if len(face_bounding_boxes) != 1:
+            print(person + "/" + person_img + " contains none or more than one faces and can't be used for training.")
+            exit()
+        else:
+            face_enc = face_recognition.face_encodings(face)[0]
+            # Add face encoding for current image with corresponding label (name) to the training data
+            encodings.append(face_enc)
+            names.append(person)
+
 # Create and train the SVC classifier
 clf = svm.SVC(gamma='scale')
 clf.fit(encodings,names)
@@ -70,7 +73,7 @@ no = len(face_locations)
 print("Number of faces detected: ", no)
 
 # Predict all the faces in the test image using the trained classifier
-print("Found: \n")
+print("Found:")
 for i in range(no):
     test_image_enc = face_recognition.face_encodings(test_image)[i]
     name = clf.predict([test_image_enc])
