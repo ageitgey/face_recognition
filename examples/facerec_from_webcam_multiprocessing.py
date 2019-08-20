@@ -1,8 +1,10 @@
 import face_recognition
 import cv2
-from multiprocessing import Process, Manager, cpu_count
+from multiprocessing import Process, Manager, cpu_count, set_start_method
 import time
 import numpy
+import threading
+import platform
 
 
 # This is a little bit complicated (but fast) example of running face recognition on live video from your webcam.
@@ -14,7 +16,7 @@ import numpy
 
 
 # Get next worker's id
-def next_id(current_id):
+def next_id(current_id, worker_num):
     if current_id == worker_num:
         return 1
     else:
@@ -22,7 +24,7 @@ def next_id(current_id):
 
 
 # Get previous worker's id
-def prev_id(current_id):
+def prev_id(current_id, worker_num):
     if current_id == 1:
         return worker_num
     else:
@@ -30,7 +32,7 @@ def prev_id(current_id):
 
 
 # A subprocess use to capture frames.
-def capture(read_frame_list):
+def capture(read_frame_list, Global, worker_num):
     # Get a reference to webcam #0 (the default one)
     video_capture = cv2.VideoCapture(0)
     # video_capture.set(3, 640)  # Width of the frames in the video stream.
@@ -40,11 +42,11 @@ def capture(read_frame_list):
 
     while not Global.is_exit:
         # If it's time to read a frame
-        if Global.buff_num != next_id(Global.read_num):
+        if Global.buff_num != next_id(Global.read_num, worker_num):
             # Grab a single frame of video
             ret, frame = video_capture.read()
             read_frame_list[Global.buff_num] = frame
-            Global.buff_num = next_id(Global.buff_num)
+            Global.buff_num = next_id(Global.buff_num, worker_num)
         else:
             time.sleep(0.01)
 
@@ -53,13 +55,13 @@ def capture(read_frame_list):
 
 
 # Many subprocess use to process frames.
-def process(worker_id, read_frame_list, write_frame_list):
+def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
     known_face_encodings = Global.known_face_encodings
     known_face_names = Global.known_face_names
     while not Global.is_exit:
 
         # Wait to read
-        while Global.read_num != worker_id or Global.read_num != prev_id(Global.buff_num):
+        while Global.read_num != worker_id or Global.read_num != prev_id(Global.buff_num, worker_num):
             time.sleep(0.01)
 
         # Delay to make the video look smoother
@@ -69,7 +71,7 @@ def process(worker_id, read_frame_list, write_frame_list):
         frame_process = read_frame_list[worker_id]
 
         # Expect next worker to read frame
-        Global.read_num = next_id(Global.read_num)
+        Global.read_num = next_id(Global.read_num, worker_num)
 
         # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
         rgb_frame = frame_process[:, :, ::-1]
@@ -106,10 +108,14 @@ def process(worker_id, read_frame_list, write_frame_list):
         write_frame_list[worker_id] = frame_process
 
         # Expect next worker to write frame
-        Global.write_num = next_id(Global.write_num)
+        Global.write_num = next_id(Global.write_num, worker_num)
 
 
 if __name__ == '__main__':
+
+    # Fix Bug on MacOS
+    if platform.system() == 'Darwin':
+        set_start_method('forkserver')
 
     # Global variables
     Global = Manager().Namespace()
@@ -122,13 +128,16 @@ if __name__ == '__main__':
     write_frame_list = Manager().dict()
 
     # Number of workers (subprocess use to process frames)
-    worker_num = cpu_count()
+    if cpu_count() > 2:
+        worker_num = cpu_count() - 1  # 1 for capturing frames
+    else:
+        worker_num = 2
 
     # Subprocess list
     p = []
 
-    # Create a subprocess to capture frames
-    p.append(Process(target=capture, args=(read_frame_list,)))
+    # Create a thread to capture frames (if uses subprocess, it will crash on Mac)
+    p.append(threading.Thread(target=capture, args=(read_frame_list, Global, worker_num,)))
     p[0].start()
 
     # Load a sample picture and learn how to recognize it.
@@ -151,7 +160,7 @@ if __name__ == '__main__':
 
     # Create workers
     for worker_id in range(1, worker_num + 1):
-        p.append(Process(target=process, args=(worker_id, read_frame_list, write_frame_list)))
+        p.append(Process(target=process, args=(worker_id, read_frame_list, write_frame_list, Global, worker_num,)))
         p[worker_id].start()
 
     # Start to show video
@@ -186,7 +195,7 @@ if __name__ == '__main__':
                 Global.frame_delay = 0
 
             # Display the resulting image
-            cv2.imshow('Video', write_frame_list[prev_id(Global.write_num)])
+            cv2.imshow('Video', write_frame_list[prev_id(Global.write_num, worker_num)])
 
         # Hit 'q' on the keyboard to quit!
         if cv2.waitKey(1) & 0xFF == ord('q'):
