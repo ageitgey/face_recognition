@@ -62,6 +62,10 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
 
         # Wait to read
         while Global.read_num != worker_id or Global.read_num != prev_id(Global.buff_num, worker_num):
+            # If the user has requested to end the app, then stop waiting for webcam frames
+            if Global.is_exit:
+                break
+
             time.sleep(0.01)
 
         # Delay to make the video look smoother
