@@ -52,12 +52,24 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
 
     for unknown_encoding in unknown_encodings:
         distances = face_recognition.face_distance(known_face_encodings, unknown_encoding)
+        
+        '''
         result = list(distances <= tolerance)
 
         if True in result:
             [print_result(image_to_check, name, distance, show_distance) for is_match, name, distance in zip(result, known_names, distances) if is_match]
         else:
             print_result(image_to_check, "unknown_person", None, show_distance)
+        '''
+        
+        distances=list(distances)
+        if(min(distances)<=tolerance):
+            final_match = distances.index(min(distances))
+            print_result(image_to_check,known_names[final_match],min(distances),show_distance)
+        else:
+            print_result(image_to_check, "unknown_person", None, show_distance)
+            
+        
 
     if not unknown_encodings:
         # print out fact that no faces were found in image
