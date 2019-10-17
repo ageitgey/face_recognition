@@ -17,7 +17,7 @@ you do face recognition on a folder of images from the command line!
 [![Build Status](https://travis-ci.org/ageitgey/face_recognition.svg?branch=master)](https://travis-ci.org/ageitgey/face_recognition)
 [![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
 
-## Features
+## 🔥 Features
 
 #### Find faces in pictures
 
@@ -390,7 +390,7 @@ Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.co
 
 If you run into problems, please read the [Common Errors](https://github.com/ageitgey/face_recognition/wiki/Common-Errors) section of the wiki before filing a github issue.
 
-## Thanks
+## Thanks 👋
 
 * Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
   for creating dlib and for providing the trained facial feature detection and face encoding models
