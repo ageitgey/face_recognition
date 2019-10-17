@@ -6,6 +6,7 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7"
 
 before_install:
 - sudo apt-get -qq update
@@ -21,6 +22,6 @@ script: tox
 # Temporary for Python 3.7
 matrix:
   include:
-    - python: 3.7
+    - python: 3.8
       dist: xenial
       sudo: true
