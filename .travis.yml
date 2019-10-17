@@ -24,8 +24,6 @@ matrix:
     - python: 3.7
       dist: xenial
       sudo: true
-      allow_failures: true
     - python: 3.8
       dist: xenial
       sudo: true
-      allow_failures: true
