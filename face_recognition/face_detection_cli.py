@@ -11,7 +11,7 @@ import itertools
 
 def print_result(filename, location):
     top, right, bottom, left = location
-    print("{},{},{},{},{}".format(filename, top, right, bottom, left))
+    print(f"{filename},{top},{right},{bottom},{left}")
 
 
 def test_image(image_to_check, model):
