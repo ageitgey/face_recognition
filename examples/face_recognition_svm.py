@@ -56,6 +56,8 @@ for person in train_dir:
             # Add face encoding for current image with corresponding label (name) to the training data
             encodings.append(face_enc)
             names.append(person)
+        else:
+            print(person + "/" + person_img + " was skipped and can't be used for training")
 
 # Create and train the SVC classifier
 clf = svm.SVC(gamma='scale')
