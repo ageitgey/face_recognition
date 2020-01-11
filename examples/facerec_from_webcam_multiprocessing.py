@@ -138,10 +138,9 @@ if __name__ == '__main__':
         worker_num = 2
 
     # Subprocess list
-    p = []
+    p = [threading.Thread(target=capture, args=(read_frame_list, Global, worker_num,))]
 
     # Create a thread to capture frames (if uses subprocess, it will crash on Mac)
-    p.append(threading.Thread(target=capture, args=(read_frame_list, Global, worker_num,)))
     p[0].start()
 
     # Load a sample picture and learn how to recognize it.
