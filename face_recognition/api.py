@@ -200,7 +200,7 @@ def face_landmarks(face_image, face_locations=None, model="large"):
         raise ValueError("Invalid landmarks model type. Supported models are ['small', 'large'].")
 
 
-def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="small"):
+def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="large"):
     """
     Given an image, return the 128-dimension face encoding for each face in the image.
 
