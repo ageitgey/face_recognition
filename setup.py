@@ -19,7 +19,7 @@ requirements = [
 
 test_requirements = [
     'tox',
-    'flake8==2.6.0'
+    'flake8'
 ]
 
 setup(
