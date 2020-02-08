@@ -151,18 +151,18 @@ def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
     return list(map(convert_cnn_detections_to_css, raw_detections_batched))
 
 
-def _raw_face_landmarks(face_image, face_locations=None, model="large"):
-    if face_locations is None:
-        face_locations = _raw_face_locations(face_image)
-    else:
-        face_locations = [_css_to_rect(face_location) for face_location in face_locations]
+def _raw_face_landmarks(face_image, known_face_locations=None, model="large"):
+    if known_face_locations is None:
+        known_face_locations = face_locations(face_image)
+
+    known_face_locations = [_css_to_rect(face_location) for face_location in known_face_locations]
 
     pose_predictor = pose_predictor_68_point
 
     if model == "small":
         pose_predictor = pose_predictor_5_point
 
-    return [pose_predictor(face_image, face_location) for face_location in face_locations]
+    return [pose_predictor(face_image, face_location) for face_location in known_face_locations]
 
 
 def face_landmarks(face_image, face_locations=None, model="large"):
