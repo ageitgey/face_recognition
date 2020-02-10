@@ -110,6 +110,12 @@ If you are having trouble with installation, you can also try out a
 
   * [Raspberry Pi 2+ installation instructions](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
 
+#### Installing on FreeBSD
+
+```bash
+pkg install graphics/py-face_recognition
+```
+
 #### Installing on Windows
 
 While Windows isn't officially supported, helpful users have posted instructions on how to install this library:
