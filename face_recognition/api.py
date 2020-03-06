@@ -60,6 +60,11 @@ def _trim_css_to_bounds(css, image_shape):
     return max(css[0], 0), min(css[1], image_shape[1]), min(css[2], image_shape[0]), max(css[3], 0)
 
 
+def _create_full_object_detection(css, landmark_points):
+    points = [dlib.point(*point) for point in landmark_points]
+    return dlib.full_object_detection(_css_to_rect(css), points)
+
+
 def face_distance(face_encodings, face_to_compare):
     """
     Given a list of face encodings, compare them to a known face encoding and get a euclidean distance
@@ -165,17 +170,21 @@ def _raw_face_landmarks(face_image, face_locations=None, model="large"):
     return [pose_predictor(face_image, face_location) for face_location in face_locations]
 
 
-def face_landmarks(face_image, face_locations=None, model="large"):
+def face_landmarks(face_image=None, face_locations=None, model="large", landmark_points=None):
     """
     Given an image, returns a dict of face feature locations (eyes, nose, etc) for each face in the image
 
     :param face_image: image to search
     :param face_locations: Optionally provide a list of face locations to check.
     :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
+    :param landmark_points: Optionaly provided already calculated list of landmark points.
     :return: A list of dicts of face feature locations (eyes, nose, etc)
     """
-    landmarks = _raw_face_landmarks(face_image, face_locations, model)
-    landmarks_as_tuples = [[(p.x, p.y) for p in landmark.parts()] for landmark in landmarks]
+    if landmark_points is None:
+        landmarks = _raw_face_landmarks(face_image, face_locations, model)
+        landmarks_as_tuples = [[(p.x, p.y) for p in landmark.parts()] for landmark in raw_landmarks]
+    else:
+        landmarks_as_tuples = landmark_points
 
     # For a definition of each point index, see https://cdn-images-1.medium.com/max/1600/1*AbEg31EgkbXSQehuNJBlWg.png
     if model == 'large':
@@ -200,7 +209,7 @@ def face_landmarks(face_image, face_locations=None, model="large"):
         raise ValueError("Invalid landmarks model type. Supported models are ['small', 'large'].")
 
 
-def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="small"):
+def face_encodings(face_image=None, known_face_locations=None, num_jitters=1, model="small", landmark_points=None):
     """
     Given an image, return the 128-dimension face encoding for each face in the image.
 
@@ -208,9 +217,15 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="
     :param known_face_locations: Optional - the bounding boxes of each face if you already know them.
     :param num_jitters: How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
     :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
+    :param landmark_points: Optionaly provided already calculated list of landmark points.
     :return: A list of 128-dimensional face encodings (one for each face in the image)
     """
-    raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
+    if landmark_points is None:
+        raw_landmarks = _raw_face_landmarks(
+            face_image, known_face_locations, model)
+    else:
+        raw_landmarks = [_create_full_object_detection(css, points) for css, points in zip(known_face_locations, landmark_points)]
+
     return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
 
 
