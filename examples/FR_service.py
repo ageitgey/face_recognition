@@ -5,10 +5,8 @@ from flask import Flask, jsonify, request, redirect, make_response
 from flask_restplus import Api, Namespace, Resource, reqparse
 from werkzeug.utils import cached_property
 from werkzeug.datastructures import FileStorage
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
 import logging, sys, time
-from prometheus_client import start_http_server, Summary, make_wsgi_app
-import functools
+
 
 
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
@@ -34,7 +32,6 @@ class upload(Resource):
     def post(self):
         args =  image_parser.parse_args()
         if args['image'] and args['image'].mimetype in ALLOWED_EXTENSIONS:
-            # Could start checking if it's really an image based of the file header. See any security issues?
             found = detect_faces(args['image'].stream)
             if found:
                 return make_response(jsonify("Msg: Person Found"),200)
