@@ -15,7 +15,6 @@ import face_recognition
 import cv2
 import time
 from scipy.spatial import distance as dist
-import keyboard as kb
 
 EYES_CLOSED_SECONDS = 5
 
@@ -74,8 +73,9 @@ def main():
                     while (asleep): #continue this loop until they wake up and acknowledge music
                         print("EYES CLOSED")
 
-                        if (kb.is_pressed('space')):
+                        if cv2.waitKey(1) == 32: #Wait for space key  
                             asleep = False
+                            print("EYES OPENED")
                     closed_count = 0
 
         process = not process
