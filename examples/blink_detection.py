@@ -57,7 +57,6 @@ def main():
                 cv2.rectangle(small_frame, left_eye[0], right_eye[-1], color, thickness)
 
                 cv2.imshow('Video', small_frame)
-                cv2.waitKey(1)
 
                 ear_left = get_ear(left_eye)
                 ear_right = get_ear(right_eye)
@@ -80,6 +79,9 @@ def main():
                     closed_count = 0
 
         process = not process
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord("q"):
+            break
 
 def get_ear(eye):
 
