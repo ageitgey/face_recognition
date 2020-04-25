@@ -1,6 +1,7 @@
 import face_recognition
 import cv2
 import numpy as np
+import os
 
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
@@ -14,23 +15,31 @@ import numpy as np
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
 
-# Load a sample picture and learn how to recognize it.
-obama_image = face_recognition.load_image_file("obama.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+# Get the directory 'images' where pictures are stored
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+image_dir = os.path.join(BASE_DIR, "images")
 
-# Load a second sample picture and learn how to recognize it.
-biden_image = face_recognition.load_image_file("biden.jpg")
-biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
+# Initialize arrays of known face encodings and their names
+known_face_encodings = []
+known_face_names = []
 
-# Create arrays of known face encodings and their names
-known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
-]
-known_face_names = [
-    "Barack Obama",
-    "Joe Biden"
-]
+# Get items inside the directory
+for root, dirs, files in os.walk(image_dir):
+	# Check each image file
+	for file in files:
+		if file.endswith("png") or file.endswith("jpg") or file.endswith("jpeg"):
+			
+			# Get image path and extract the label as the name of the image file
+			path = os.path.join(root, file)
+			label = os.path.splitext(file)[0].lower()
+
+			# Load a sample picture and learn how to recognize it.
+			image = face_recognition.load_image_file(path)
+			face_encoding = face_recognition.face_encodings(image)[0]
+
+			# Store the encodings and the names
+			known_face_encodings.append(face_encoding)
+			known_face_names.append(label)
 
 # Initialize some variables
 face_locations = []
