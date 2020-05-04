@@ -71,16 +71,13 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
 def getListOfFiles(dirName):
     allFiles = list()
     for (dirpath, dirnames, filenames) in os.walk(dirName):
-        for dir in dirnames:
-            path = os.path.join(dirpath, dir)
-            if not os.access(path, os.R_OK):
-                continue
+        if not os.access(dirpath, os.R_OK):
+            continue
                 
-            listOfFile = os.listdir(path)            
-            for entry in listOfFile:
-                fullPath = os.path.join(path, entry)
-                allFiles.append(fullPath)   
-                
+        for entry in filenames:
+            fullPath = os.path.join(dirpath, entry)
+            allFiles.append(fullPath) 
+            
     return allFiles    
 
 def image_files_in_folder(folder):
