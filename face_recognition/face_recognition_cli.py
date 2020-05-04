@@ -69,7 +69,6 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
         print_result(image_to_check, "no_persons_found", None, show_distance)
 
 def getListOfFiles(dirName):
-    print(dirName)
     allFiles = list()
     for (dirpath, dirnames, filenames) in os.walk(dirName):
         for dir in dirnames:
