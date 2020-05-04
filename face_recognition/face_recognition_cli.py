@@ -69,14 +69,19 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
         print_result(image_to_check, "no_persons_found", None, show_distance)
 
 def getListOfFiles(dirName):
-    listOfFile = os.listdir(dirName)
+    print(dirName)
     allFiles = list()
-    for entry in listOfFile:
-        fullPath = os.path.join(dirName, entry)
-        if os.path.isdir(fullPath):
-            allFiles = allFiles + getListOfFiles(fullPath)
-        else:
-            allFiles.append(fullPath)                
+    for (dirpath, dirnames, filenames) in os.walk(dirName):
+        for dir in dirnames:
+            path = os.path.join(dirpath, dir)
+            if not os.access(path, os.R_OK):
+                continue
+                
+            listOfFile = os.listdir(path)            
+            for entry in listOfFile:
+                fullPath = os.path.join(path, entry)
+                allFiles.append(fullPath)   
+                
     return allFiles    
 
 def image_files_in_folder(folder):
