@@ -9,26 +9,36 @@ import itertools
 import sys
 import PIL.Image
 import numpy as np
+import pickle   
 
 
-def scan_known_people(known_people_folder):
+def scan_known_people(known_people_folder, force_reload):
     known_names = []
-    known_face_encodings = []
+    known_face_encodings = []    
+    filename = os.path.join(known_people_folder, 'saved_known_encodings.p')
+        
+    if os.path.exists(filename) and not force_reload:
+        with open(filename, 'rb') as fh:
+            reloaded_tuple = pickle.load(fh)
+            known_names = reloaded_tuple[0]
+            known_face_encodings = reloaded_tuple[1]            
+    else:
+        for file in image_files_in_folder(known_people_folder):
+            basename = os.path.normpath(file).split(os.path.sep)[-2]
+            img = face_recognition.load_image_file(file)
+            encodings = face_recognition.face_encodings(img)
 
-    for file in image_files_in_folder(known_people_folder):
-        basename = os.path.normpath(file).split(os.path.sep)[-2]
-        img = face_recognition.load_image_file(file)
-        encodings = face_recognition.face_encodings(img)
+            if len(encodings) > 1:
+                click.echo("WARNING: More than one face found in {}. Only considering the first face.".format(file))
 
-        if len(encodings) > 1:
-            click.echo("WARNING: More than one face found in {}. Only considering the first face.".format(file))
-
-        if len(encodings) == 0:
-            click.echo("WARNING: No faces found in {}. Ignoring file.".format(file))
-        else:
-            known_names.append(basename)
-            known_face_encodings.append(encodings[0])
-
+            if len(encodings) == 0:
+                click.echo("WARNING: No faces found in {}. Ignoring file.".format(file))
+            else:
+                known_names.append(basename)
+                known_face_encodings.append(encodings[0])        
+        with open(filename, 'wb') as fh:
+            pickle.dump((known_names,known_face_encodings), fh)
+          
     return known_names, known_face_encodings
 
 
@@ -82,7 +92,6 @@ def getListOfFiles(dirName):
 
 def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in getListOfFiles(os.path.abspath(folder)) if re.match(r'.*\.(jpg|jpeg|png|tiff)', f, flags=re.I)]
-    # return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
 
 def process_images_in_process_pool(images_to_check, known_names, known_face_encodings, number_of_cpus, tolerance, distinct, show_distance):
     if number_of_cpus == -1:
@@ -112,12 +121,13 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
 @click.command()
 @click.argument('known_people_folder')
 @click.argument('image_to_check')
+@click.option('--force-reload', default=False, type=bool, help='Force rescanning of known images.')
 @click.option('--cpus', default=1, help='number of CPU cores to use in parallel (can speed up processing lots of images). -1 means "use all in system"')
 @click.option('--tolerance', default=0.6, help='Tolerance for face comparisons. Default is 0.6. Lower this if you get multiple matches for the same person.')
 @click.option('--distinct', default=True, type=bool, help='Apply only best match in case multiple matches are found.')
 @click.option('--show-distance', default=False, type=bool, help='Output face distance. Useful for tweaking tolerance setting.')
-def main(known_people_folder, image_to_check, cpus, tolerance, distinct, show_distance):
-    known_names, known_face_encodings = scan_known_people(known_people_folder)
+def main(known_people_folder, image_to_check, force_reload, cpus, tolerance, distinct, show_distance):
+    known_names, known_face_encodings = scan_known_people(known_people_folder, force_reload)
 
     # Multi-core processing only supported on Python 3.4 or greater
     if (sys.version_info < (3, 4)) and cpus != 1:
