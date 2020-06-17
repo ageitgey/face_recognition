@@ -26,7 +26,7 @@ Structure:
                 .
                 <person_n_face-n>.jpg
 """
-
+#Imports
 import face_recognition
 from sklearn import svm
 import os
