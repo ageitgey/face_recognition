@@ -151,15 +151,14 @@ def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
     return list(map(convert_cnn_detections_to_css, raw_detections_batched))
 
 
-def _raw_face_landmarks(face_image, face_locations=None, model="large"):
+def _raw_face_landmarks(face_image, face_locations=None, model="small"):
     if face_locations is None:
         face_locations = _raw_face_locations(face_image)
     else:
         face_locations = [_css_to_rect(face_location) for face_location in face_locations]
-
-    pose_predictor = pose_predictor_68_point
-
-    if model == "small":
+    if model == "large":
+        pose_predictor = pose_predictor_68_point
+    else:
         pose_predictor = pose_predictor_5_point
 
     return [pose_predictor(face_image, face_location) for face_location in face_locations]
@@ -207,7 +206,7 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="
     :param face_image: The image that contains one or more faces
     :param known_face_locations: Optional - the bounding boxes of each face if you already know them.
     :param num_jitters: How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
-    :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
+    :param model: Optional - which model to use. "large" or "small" (default) which only returns 5 points but is faster.
     :return: A list of 128-dimensional face encodings (one for each face in the image)
     """
     raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
