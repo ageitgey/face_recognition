@@ -1,6 +1,19 @@
 History
 =======
 
+1.4.0 (2020-09-26)
+------------------
+
+* Dropping support for Python 2.x
+* --upsample a parameter for command line face_recognition
+
+1.3.0 (2020-02-20)
+------------------
+
+* Drop support for Python 3.4 and add 3.8
+* Blink detection example
+
+
 1.2.3 (2018-08-21)
 ------------------
 
