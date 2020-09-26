@@ -125,7 +125,7 @@ def _raw_face_locations_batched(images, number_of_times_to_upsample=1, batch_siz
     """
     Returns an 2d array of dlib rects of human faces in a image using the cnn face detector
 
-    :param img: A list of images (each as a numpy array)
+    :param images: A list of images (each as a numpy array)
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
     :return: A list of dlib 'rect' objects of found face locations
     """
