@@ -377,6 +377,10 @@ If you want to create a standalone executable that can run without the need to i
 If you want to learn how face location and recognition work instead of
 depending on a black box library, [read my article](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78).
 
+## Purpose
+
+Facial recognition is mostly used for security purposes, though there is increasing interest in other areas of use.
+
 ## Caveats
 
 * The face recognition model is trained on adults and does not work very well on children. It tends to mix
@@ -411,3 +415,4 @@ If you run into problems, please read the [Common Errors](https://github.com/age
 * Thanks to [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
   [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage) project template
   for making Python project packaging way more tolerable.
+* 
