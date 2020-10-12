@@ -4,6 +4,7 @@ import PIL.Image
 import dlib
 import numpy as np
 from PIL import ImageFile
+import requests
 
 try:
     import face_recognition_models
@@ -75,14 +76,18 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
-def load_image_file(file, mode='RGB'):
+def load_image_file(file, mode='RGB', url=False):
     """
     Loads an image file (.jpg, .png, etc) into a numpy array
 
     :param file: image file name or file object to load
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
+    :param url: If file path is an http URL set url=True. This parameter is set to False by default.
     :return: image contents as numpy array
     """
+    if url:
+        file = requests.get(url, stream=True).raw
+
     im = PIL.Image.open(file)
     if mode:
         im = im.convert(mode)
