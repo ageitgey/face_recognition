@@ -41,6 +41,9 @@ Get the locations and outlines of each person's eyes, nose, mouth and chin.
 import face_recognition
 image = face_recognition.load_image_file("your_file.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
+
+# **Note:** Use the below format if loading the image from a remote location.
+# image = face_recognition.load_image_file("https://example.com/image.jpg", url=True)
 ```
 
 Finding facial features is super useful for lots of important stuff. But you can also use it for really stupid stuff
