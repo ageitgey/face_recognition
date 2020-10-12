@@ -86,7 +86,7 @@ def load_image_file(file, mode='RGB', url=False):
     :return: image contents as numpy array
     """
     if url:
-        file = requests.get(url, stream=True).raw
+        file = requests.get(file, stream=True).raw
 
     im = PIL.Image.open(file)
     if mode:
