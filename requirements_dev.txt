@@ -6,7 +6,7 @@ flake8
 tox==2.3.1
 coverage==4.1
 Sphinx==1.4.8
-cryptography==1.7
+cryptography==3.2
 pyyaml>=4.2b1
 face_recognition_models
 Click>=6.0
