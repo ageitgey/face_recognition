@@ -70,7 +70,7 @@ def face_distance(face_encodings, face_to_compare):
     Given a list of face encodings, compare them to a known face encoding and get a euclidean distance
     for each comparison face. The distance tells you how similar the faces are.
 
-    :param faces: List of face encodings to compare
+    :param face_encodings: List of face encodings to compare
     :param face_to_compare: A face encoding to compare against
     :return: A numpy ndarray with the distance for each face in the same order as the 'faces' array
     """
@@ -130,7 +130,7 @@ def _raw_face_locations_batched(images, number_of_times_to_upsample=1, batch_siz
     """
     Returns an 2d array of dlib rects of human faces in a image using the cnn face detector
 
-    :param img: A list of images (each as a numpy array)
+    :param images: A list of images (each as a numpy array)
     :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
     :return: A list of dlib 'rect' objects of found face locations
     """
@@ -216,7 +216,7 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="
     :param face_image: The image that contains one or more faces
     :param known_face_locations: Optional - the bounding boxes of each face if you already know them.
     :param num_jitters: How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
-    :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
+    :param model: Optional - which model to use. "large" or "small" (default) which only returns 5 points but is faster.
     :param landmark_points: Optionaly provided already calculated list of landmark points.
     :return: A list of 128-dimensional face encodings (one for each face in the image)
     """

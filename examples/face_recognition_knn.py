@@ -7,7 +7,7 @@ and make a prediction for an unknown person in a feasible computation time.
 
 Algorithm Description:
 The knn classifier is first trained on a set of labeled (known) faces and can then predict the person
-in an unknown image by finding the k most similar faces (images with closet face-features under eucledian distance)
+in an unknown image by finding the k most similar faces (images with closet face-features under euclidean distance)
 in its training set, and performing a majority vote (possibly weighted) on their label.
 
 For example, if k=3, and the three closest face images to the given image in the training set are one image of Biden
