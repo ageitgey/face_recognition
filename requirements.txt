@@ -2,5 +2,5 @@ face_recognition_models
 Click>=6.0
 dlib>=19.3.0
 numpy
-Pillow
+Pillow>=6.0.0
 scipy>=0.17.0

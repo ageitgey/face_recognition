@@ -3,7 +3,7 @@
 import PIL.Image
 import dlib
 import numpy as np
-from PIL import ImageFile
+from PIL import ImageFile, ImageOps
 
 try:
     import face_recognition_models
@@ -84,6 +84,7 @@ def load_image_file(file, mode='RGB'):
     :return: image contents as numpy array
     """
     im = PIL.Image.open(file)
+    im = ImageOps.exif_transpose(im)
     if mode:
         im = im.convert(mode)
     return np.array(im)
