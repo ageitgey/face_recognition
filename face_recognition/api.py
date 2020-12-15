@@ -5,8 +5,7 @@ import dlib
 import numpy as np
 from PIL import ImageFile
 from skimage import io
-from sklearn.metrics.pairwise import cosine_similarity as sk
-from numpy import dot
+
 try:
     import face_recognition_models
 except Exception:
