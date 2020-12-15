@@ -143,8 +143,8 @@ programs:
 
 #### `face_recognition` command line tool
 
-The `face_recognition` command lets you recognize faces in a photograph or 
-folder full  for photographs.
+The `face_recognition` command lets you recognize faces in a photograph or a
+folder full of photographs.
 
 First, you need to provide a folder with one picture of each person you
 already know. There should be one image file for each person with the
@@ -266,7 +266,7 @@ face_locations = face_recognition.face_locations(image)
 See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
  to try it out.
 
-You can also opt-in to a somewhat more accurate deep-learning-based face detection model.
+You can also opt-in for a somewhat more accurate deep-learning-based face detection model.
 
 Note: GPU acceleration (via NVidia's CUDA library) is required for good
 performance with this model. You'll also want to enable CUDA support
