@@ -4,7 +4,9 @@ import PIL.Image
 import dlib
 import numpy as np
 from PIL import ImageFile
-
+from skimage import io
+from sklearn.metrics.pairwise import cosine_similarity as sk
+from numpy import dot
 try:
     import face_recognition_models
 except Exception:
@@ -75,10 +77,20 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
-def load_image_file(file, mode='RGB'):
+def face_distant(face_encodings, face_to_compare):
     """
-    Loads an image file (.jpg, .png, etc) into a numpy array
+    Given a list of face encodings, compare them to a known face encoding and get a euclidean distance
+    for each comparison face. The distance tells you how similar the faces are.
+    :param face_encodings: List of face encodings to compare
+    :param face_to_compare: A face encoding to compare against
+    :return: A numpy ndarray with the distance for each face in the same order as the 'faces' array
+    """
+    if len(face_encodings) == 0:
+        return np.empty((0))
+    return (np.dot(face_encodings, face_to_compare)/(np.linalg.norm(face_encodings)* np.linalg.norm(face_to_compare)))
 
+def load_image_file(file, mode='RGB'):
+    """Loads an image file (.jpg, .png, etc) into a numpy array
     :param file: image file name or file object to load
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
@@ -87,6 +99,16 @@ def load_image_file(file, mode='RGB'):
     if mode:
         im = im.convert(mode)
     return np.array(im)
+
+
+def load_image_url(url):
+    """"Load an image from a url or urls (.jpg, .png, etc) into a numpy array
+    :param url: image url or urls to load
+    :return: image contents as numpy array
+    """
+    print("downloading %s" % (url))
+    img= io.imread(url)
+    return img
 
 
 def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
