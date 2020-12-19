@@ -181,7 +181,7 @@ def face_landmarks(face_image=None, face_locations=None, model="large", landmark
     :return: A list of dicts of face feature locations (eyes, nose, etc)
     """
     if landmark_points is None:
-        landmarks = _raw_face_landmarks(face_image, face_locations, model)
+        raw_landmarks = _raw_face_landmarks(face_image, face_locations, model)
         landmarks_as_tuples = [[(p.x, p.y) for p in landmark.parts()] for landmark in raw_landmarks]
     else:
         landmarks_as_tuples = landmark_points
