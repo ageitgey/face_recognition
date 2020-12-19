@@ -89,8 +89,12 @@ User-contributed shared Jupyter notebook demo (not officially supported): [![Dee
 First, make sure you have dlib already installed with Python bindings:
 
   * [How to install dlib from source on macOS or Ubuntu](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
+  
+Then, make sure you have cmake installed:  
+ 
+```brew install cmake```
 
-Then, install this module from pypi using `pip3` (or `pip2` for Python 2):
+Finally, install this module from pypi using `pip3` (or `pip2` for Python 2):
 
 ```bash
 pip3 install face_recognition
