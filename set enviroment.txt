@@ -1,0 +1,16 @@
+set enviroment
+conda create -n py36 python=3.6
+activate py36
+conda config --add channels conda-forge
+conda install numpy
+conda install scipy
+conda install dlib
+conda install cmake
+Here I install face_recognition once to make sure all the dependencies is included.
+
+pip install face_recognition
+
+Note that here the installation will fail because pip fail to detect the dlib conda installed earlier
+Therefor I run
+
+pip install --no-dependencies face_recognition
