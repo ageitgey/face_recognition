@@ -20,6 +20,9 @@ person3_face_encoding = face_recognition.face_encodings(person3_image)[0]
 person4_image = face_recognition.load_image_file("img/PIMPRAPA.jpg")
 person4_face_encoding = face_recognition.face_encodings(person4_image)[0]
 
+# โหลดภาพ .jpg และให้ระบบจดจำใบหน้า
+person5_image = face_recognition.load_image_file("img/PARN.jpg")
+person5_face_encoding = face_recognition.face_encodings(person5_image)[0]
 
 
 # สร้าง arrays ของคนที่จดจำและกำหนดชื่อ ตามลำดับ
@@ -28,13 +31,15 @@ known_face_encodings = [
     person2_face_encoding,
     person3_face_encoding,
     person4_face_encoding,
+    person5_face_encoding
 ]
 
 known_face_names = [
     "PIN",
     "SANYA",
     "KHEMMIKA",
-    "PIMPRAPA"
+    "PIMPRAPA",
+    "PARN"
 ]
 
 # ตัวแปรเริ่มต้น
