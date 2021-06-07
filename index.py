@@ -1,6 +1,9 @@
 import face_recognition
 import cv2
-
+import os
+import numpy as np
+import sys
+import time
 # เปิดการใช้ webcam
 video_capture = cv2.VideoCapture(0)
 
@@ -76,6 +79,8 @@ while True:
                 name = known_face_names[first_match_index]
 
             face_names.append(name)
+
+        os.system('insert.py',name)
 
     process_this_frame = not process_this_frame
 
