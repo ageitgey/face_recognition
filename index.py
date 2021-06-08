@@ -74,7 +74,7 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = True
-
+i=0
 while True:
     # ดึงเฟรมภาพมาจากวีดีโอ
     ret, frame = video_capture.read()
@@ -104,12 +104,29 @@ while True:
             
             if name != "Unknown":
                 if name != p:
+                    
+
                     sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
                     val = (name,"36",d)
                     mycursor.execute(sql,val)
                     mydb.commit()
                     print(mycursor.rowcount, "was inserted.")
-                    p = name
+
+                    sql1 = "SELECT p_id FROM check_temp "
+                    mycursor.execute(sql1)
+                    myresult = mycursor.fetchall()
+                    
+                    for x in myresult:
+                        print(myresult)
+                        if name != x[i]:
+                            sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
+                            val = (name,"36",d)
+                            mycursor.execute(sql,val)
+                            mydb.commit()
+                            print(mycursor.rowcount, "was inserted.")
+                            p = name
+                        i+1
+                
                 if d.day != t:
                     print("test time")
                     os.system('python backup_db.py')
