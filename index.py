@@ -4,6 +4,30 @@ import os
 import numpy as np
 import sys
 import time
+import mysql.connector
+import datetime
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="db_face"
+)
+
+print(mydb)
+mycursor = mydb.cursor()
+
+mycursor.execute("SHOW DATABASES")
+
+for x in mycursor:
+  print(x)
+
+p=""
+
+d = datetime.datetime.now()
+print(d.day)
+
+t = 7   #วันก่อน
+
 # เปิดการใช้ webcam
 video_capture = cv2.VideoCapture(0)
 
@@ -77,10 +101,26 @@ while True:
             if True in matches:
                 first_match_index = matches.index(True)
                 name = known_face_names[first_match_index]
+            
+            if name != "Unknown":
+                if name != p:
+                    sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
+                    val = (name,"36",d)
+                    mycursor.execute(sql,val)
+                    mydb.commit()
+                    print(mycursor.rowcount, "was inserted.")
+                    p = name
+                if d.day != t:
+                    print("test time")
+                    os.system('python backup_db.py')
+                    t = d.day
+                
+
+
 
             face_names.append(name)
 
-        os.system('insert.py',name)
+        
 
     process_this_frame = not process_this_frame
 
