@@ -6,6 +6,13 @@ conda install numpy
 conda install scipy
 conda install dlib
 conda install cmake
+conda install pandas
+conda install xlwt
+conda install pymysql
+conda install opencv-python
+python -m pip install mysql-connector-python
+
+
 Here I install face_recognition once to make sure all the dependencies is included.
 
 pip install face_recognition
