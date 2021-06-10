@@ -28,6 +28,7 @@ print(d.day)
 
 t = 7   #วันก่อน
 
+
 # เปิดการใช้ webcam
 video_capture = cv2.VideoCapture(0)
 
@@ -104,13 +105,20 @@ while True:
                     name = known_face_names[first_match_index]
                 
                 if name != "Unknown":
-                    
-                    sql1 = "SELECT p_id FROM check_temp"
-                    mycursor.execute(sql1,name)
+                    """
+                    sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
+                    val = (name,"36",d)
+                    mycursor.execute(sql,val)
+                    mydb.commit()
+                    print(mycursor.rowcount, "was inserted.")
+                    """
+                    sql1 = "SELECT p_id FROM check_temp "
+                    mycursor.execute(sql1)
                     myresult = mycursor.fetchall()
 
                     for x in myresult:
                         print(myresult)
+
                         if name != x[i]:
                             
                             sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
@@ -118,18 +126,12 @@ while True:
                             mycursor.execute(sql,val)
                             mydb.commit()
                             print(mycursor.rowcount, "was inserted.")
+                            
                         else:
                             print("repeat register !!")                
                             
                         i+1
                     
-                if d.day != t:
-                    print("test time")
-                    os.system('python backup_db.py')
-                    t = d.day
-                    
-
-
 
                 face_names.append(name)
 
@@ -152,7 +154,12 @@ while True:
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-
+            """
+            if d.day != t:
+                print("test time")
+                os.system('python backup_db.py')
+                t = d.day
+            """
         # แสดงรูปภาพผลลัพธ์
         cv2.imshow('Video', frame)
 
