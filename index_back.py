@@ -117,7 +117,7 @@ while True:
                     myresult = mycursor.fetchall()
 
                     for x in myresult:
-                        print(myresult)
+                        print(x)
 
                         if name != x[i]:
                             
