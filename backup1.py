@@ -104,16 +104,16 @@ while True:
             mycursor.execute(sql1,[name])
             myresult = mycursor.fetchall()
             print(myresult)
-            
-            if myresult == []:       
-                sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
-                val = (name,"36",d)
-                mycursor.execute(sql,val)
-                mydb.commit()
-                print(mycursor.rowcount, "was inserted.")
-                                    
-            else:
-                print("repeat register !!")                
+            if name != "Unknown":
+                if myresult == []:       
+                    sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
+                    val = (name,"36",d)
+                    mycursor.execute(sql,val)
+                    mydb.commit()
+                    print(mycursor.rowcount, "was inserted.")
+                                        
+                else:
+                    print("repeated register !!")                
 
 
     process_this_frame = not process_this_frame
