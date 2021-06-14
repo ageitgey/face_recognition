@@ -105,32 +105,23 @@ while True:
                     name = known_face_names[first_match_index]
                 
                 if name != "Unknown":
-                    """
-                    sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
-                    val = (name,"36",d)
-                    mycursor.execute(sql,val)
-                    mydb.commit()
-                    print(mycursor.rowcount, "was inserted.")
-                    """
-                    sql1 = "SELECT p_id FROM check_temp "
-                    mycursor.execute(sql1)
+                    
+                    sql1 = 'SELECT p_id FROM check_temp WHERE p_id = (%s) '
+                    mycursor.execute(sql1,name)
                     myresult = mycursor.fetchall()
-
-                    for x in myresult:
-                        print(x)
-
-                        if name != x[i]:
-                            
-                            sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
-                            val = (name,"36",d)
-                            mycursor.execute(sql,val)
-                            mydb.commit()
-                            print(mycursor.rowcount, "was inserted.")
-                            
-                        else:
-                            print("repeat register !!")                
-                            
-                        i+1
+                    """
+                    if myresult == "[]":
+                                
+                        sql = "INSERT INTO check_temp (p_id,temp,check_in) VALUES (%s,%s,%s)"
+                        val = (name,"36",d)
+                        mycursor.execute(sql,val)
+                        mydb.commit()
+                        print(mycursor.rowcount, "was inserted.")
+                                
+                    else:
+                        print("repeat register !!")                
+                    """
+                    
                     
 
                 face_names.append(name)
