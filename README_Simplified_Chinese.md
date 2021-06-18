@@ -372,6 +372,6 @@ else:
 
 ## 鸣谢
 
-- 非常感谢 [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))创建了`dlib`库，提供了响应的人脸关键点检测和人脸编码相关的模型，你可以查看 [blog post](http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html)这个网页获取更多有关ResNet的信息。
+- 非常感谢 [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))创建了`dlib`库，提供了相应的人脸关键点检测和人脸编码相关的模型，你可以查看 [blog post](http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html)这个网页获取更多有关ResNet的信息。
 - 感谢每一个相关Python模块（包括numpy,scipy,scikit-image,pillow等）的贡献者。
 - 感谢 [Cookiecutter](https://github.com/audreyr/cookiecutter) 和[audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage) 项目模板，使得Python的打包方式更容易接受。
