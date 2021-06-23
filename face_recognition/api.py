@@ -101,7 +101,6 @@ def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
     """
     if model == "cnn":
         return cnn_face_detector(img, number_of_times_to_upsample)
-    else:
         return face_detector(img, number_of_times_to_upsample)
 
 
@@ -117,7 +116,6 @@ def face_locations(img, number_of_times_to_upsample=1, model="hog"):
     """
     if model == "cnn":
         return [_trim_css_to_bounds(_rect_to_css(face.rect), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, "cnn")]
-    else:
         return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
 
 
@@ -196,7 +194,6 @@ def face_landmarks(face_image, face_locations=None, model="large"):
             "left_eye": points[2:4],
             "right_eye": points[0:2],
         } for points in landmarks_as_tuples]
-    else:
         raise ValueError("Invalid landmarks model type. Supported models are ['small', 'large'].")
 
 
