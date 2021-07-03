@@ -75,6 +75,27 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
+def face_cosine_similarity(face_encodings, face_to_compare):
+    """
+    Given a list of face encodings, compare them to a known encoding and get the cosine similarity
+    for each comparison face. The cosine similarity tells you the angle ratio of two faces as vectors
+    in multi-dimensional space, in terms of cosine(theta).
+
+    :param face_encodings: List of face encodings to compare
+    :param face_to_compare: A face encoding to compare against
+    :return: A numpy ndarray with the corresponding cosine similarity for each face
+    """
+
+    if len(face_encodings) == 0:
+        return np.empty((0))
+
+    cosine_sims = []
+    for face_encoding in face_encodings:
+        cosine_sims.append(np.dot(face_encoding, face_to_compare) / (np.linalg.norm(face_encoding) * np.linalg.norm(face_to_compare)))
+
+    return np.array(cosine_sims)
+
+
 def load_image_file(file, mode='RGB'):
     """
     Loads an image file (.jpg, .png, etc) into a numpy array
@@ -224,3 +245,19 @@ def compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.6):
     :return: A list of True/False values indicating which known_face_encodings match the face encoding to check
     """
     return list(face_distance(known_face_encodings, face_encoding_to_check) <= tolerance)
+
+
+def compare_faces_cosine(known_face_encodings, face_encoding_to_check, tolerance=0.85):
+    """
+    Compare a list of face encodings against a candidate encoding to see if they match
+    (using cosine similarity formula).
+
+    :param known_face_encodings: A list of known face encodings
+    :param face_encoding_to_check: A single face encoding to compare against the list
+    :param tolerance: How much distance between faces to consider it a match.
+                      Higher is more strict. 0.8-0.9 is typical best performance.
+                      Since it's cosine(theta), 0.8 => 80% match
+    :return: A list of True/False values indicating which known_face_encodings match the face encoding to check
+    """
+    return list(face_cosine_similarity(known_face_encodings, face_encoding_to_check) >= tolerance)
+
