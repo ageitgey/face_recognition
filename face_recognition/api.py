@@ -152,8 +152,9 @@ def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
 
 
 def _raw_face_landmarks(face_image, face_locations=None, model="large"):
+    detector_model = "cnn" if model == "large" else "hog"
     if face_locations is None:
-        face_locations = _raw_face_locations(face_image)
+        face_locations = _raw_face_locations(face_image, model=detector_model)
     else:
         face_locations = [_css_to_rect(face_location) for face_location in face_locations]
 
@@ -162,7 +163,10 @@ def _raw_face_landmarks(face_image, face_locations=None, model="large"):
     if model == "small":
         pose_predictor = pose_predictor_5_point
 
-    return [pose_predictor(face_image, face_location) for face_location in face_locations]
+    if detector_model == "cnn":
+        return [pose_predictor(face_image, face_location.rect) for face_location in face_locations]
+    else:
+        return [pose_predictor(face_image, face_location) for face_location in face_locations]
 
 
 def face_landmarks(face_image, face_locations=None, model="large"):
