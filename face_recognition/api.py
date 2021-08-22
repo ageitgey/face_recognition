@@ -4,7 +4,7 @@ import PIL.Image
 import dlib
 import numpy as np
 from PIL import ImageFile
-from io import BytesIO, StringIO
+from io import BytesIO
 import base64
 import requests
 
@@ -91,6 +91,7 @@ def load_image_file(file, mode='RGB'):
         im = im.convert(mode)
     return np.array(im)
 
+
 def load_online_image(image_url, mode='RGB'):
     """
     Loads image from an online link or decodes base64 string into a numpy array.
@@ -103,10 +104,10 @@ def load_online_image(image_url, mode='RGB'):
         response = requests.get(image_url, stream=True)
         response.raw.decode_content = True
         image_data = response.raw
-    else:    
+    else:
         base64_string = image_url
         image_data = BytesIO(base64.b64decode(base64_string))
-    
+
     im = PIL.Image.open(image_data)
     if mode:
         im = im.convert(mode)
