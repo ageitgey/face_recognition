@@ -13,6 +13,4 @@ Click>=6.0
 dlib>=19.3.0
 numpy
 scipy
-io
-base64
 requests
