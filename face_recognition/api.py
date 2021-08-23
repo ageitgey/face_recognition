@@ -78,14 +78,19 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
-def load_image_file(file, mode='RGB'):
+def load_image_file(file, base64_image = False, mode='RGB'):
     """
     Loads an image file (.jpg, .png, etc) into a numpy array
 
     :param file: image file name or file object to load
+    :param base64_image: flag for base64 image as an input
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
+    if base64_image:
+        base64_string = file
+        file = BytesIO(base64.b64decode(base64_string))
+
     im = PIL.Image.open(file)
     if mode:
         im = im.convert(mode)
@@ -100,13 +105,9 @@ def load_online_image(image_url, mode='RGB'):
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
-    if image_url.startswith("http"):
-        response = requests.get(image_url, stream=True)
-        response.raw.decode_content = True
-        image_data = response.raw
-    else:
-        base64_string = image_url
-        image_data = BytesIO(base64.b64decode(base64_string))
+    response = requests.get(image_url, stream=True)
+    response.raw.decode_content = True
+    image_data = response.raw
 
     im = PIL.Image.open(image_data)
     if mode:
