@@ -78,7 +78,7 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
-def load_image_file(file, base64_image = False, mode='RGB'):
+def load_image_file(file, base64_image=False, mode='RGB'):
     """
     Loads an image file (.jpg, .png, etc) into a numpy array
 
