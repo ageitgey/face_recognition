@@ -83,7 +83,7 @@ def load_image_file(file, base64_image=False, mode='RGB'):
     Loads an image file (.jpg, .png, etc) into a numpy array
 
     :param file: image file name or file object to load
-    :param base64_image: flag for base64 image as an input
+    :param base64_image: flag for base64 image as an input. Set True if input is string representing a base64 image
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
@@ -97,7 +97,7 @@ def load_image_file(file, base64_image=False, mode='RGB'):
     return np.array(im)
 
 
-def load_online_image(image_url, mode='RGB'):
+def load_image_online(image_url, mode='RGB'):
     """
     Loads image from an online link or decodes base64 string into a numpy array.
 

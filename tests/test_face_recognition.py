@@ -35,12 +35,12 @@ class Test_face_recognition(unittest.TestCase):
         img = api.load_image_file(base64_image_file, base64_image=True)
         self.assertEqual(img.shape, (1137, 910, 3))
 
-    def test_load_online_image(self):
-        img = api.load_online_image(r'https://github.com/ageitgey/face_recognition/blob/master/tests/test_images/obama.jpg?raw=true')
+    def test_load_image_online(self):
+        img = api.load_image_online(r'https://github.com/ageitgey/face_recognition/blob/master/tests/test_images/obama.jpg?raw=true')
         self.assertEqual(img.shape, (1137, 910, 3))
 
-    def test_load_online_image_32bit(self):
-        img = api.load_online_image(r'https://github.com/ageitgey/face_recognition/blob/master/tests/test_images/32bit.png?raw=true')
+    def test_load_image_online_32bit(self):
+        img = api.load_image_online(r'https://github.com/ageitgey/face_recognition/blob/master/tests/test_images/32bit.png?raw=true')
         self.assertEqual(img.shape, (1200, 626, 3))
 
     def test_raw_face_locations(self):
