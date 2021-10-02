@@ -24,6 +24,7 @@ you do face recognition on a folder of images from the command line!
 Find all the faces that appear in a picture:
 
 ![](https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png)
+can also be done by facerecognitiionapi:)
 
 ```python
 import face_recognition
