@@ -137,9 +137,9 @@ While Windows isn't officially supported, helpful users have posted instructions
 When you install `face_recognition`, you get two simple command-line 
 programs:
 
-* `face_recognition` - Recognize faces in a photograph or folder full for 
+* `face_recognition` - Recognizes faces in a photograph or folder full for 
    photographs.
-* `face_detection` - Find faces in a photograph or folder full for photographs.
+* `face_detection` - Finds faces in a photograph or folder full for photographs.
 
 #### `face_recognition` command line tool
 
