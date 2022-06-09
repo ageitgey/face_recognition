@@ -15,16 +15,16 @@ import random as rn
 
 # Get a reference to webcam #0 (the default one)
 print("GO!")
-for a in range(10):
-    print("trying", a)
-    video_capture = cv2.VideoCapture(a, cv2.CAP_DSHOW)
-    ret, frame = video_capture.read()
-    print(ret)
-    if ret == True:
-        break
-    else:
-        video_capture.release()
-
+# for a in range(10):
+#     print("trying", a)
+#     video_capture = cv2.VideoCapture(a, cv2.CAP_DSHOW)
+#     ret, frame = video_capture.read()
+#     print(ret)
+#     if ret == True:
+#         break
+#     else:
+#         video_capture.release()
+video_capture = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 
 
 print("video captured")
@@ -75,14 +75,16 @@ face_encodings = []
 face_names = []
 process_this_frame = True
 print("variables")
-
+loop_noob = 0
 while True:
+    loop_noob = loop_noob + 1
     # Grab a single frame of video
     ret, frame = video_capture.read()
-    # print(ret)
+    print(ret, loop_noob)
 
     # Resize frame of video to 1/4 size for faster face recognition processing
-    small_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+    # small_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+    small_frame = cv2.resize(frame, (0, 0), fx=0.2, fy=0.2)
     # small_frame = frame
 
     # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
@@ -123,10 +125,10 @@ while True:
         # right *= 4
         # bottom *= 4
         # left *= 4
-        top *= 2
-        right *= 2
-        bottom *= 2
-        left *= 2
+        top *= 5
+        right *= 5
+        bottom *= 5
+        left *= 5
 
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)

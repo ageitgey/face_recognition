@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 def img(where):
-    print("picture loaded    ")
+    print("picture loaded    ", where)
     image = face_recognition.load_image_file(where)
     face_encoding = face_recognition.face_encodings(image)[0]
 
