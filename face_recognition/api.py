@@ -4,6 +4,9 @@ import PIL.Image
 import dlib
 import numpy as np
 from PIL import ImageFile
+from io import BytesIO
+import base64
+import requests
 
 try:
     import face_recognition_models
@@ -75,15 +78,38 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(face_encodings - face_to_compare, axis=1)
 
 
-def load_image_file(file, mode='RGB'):
+def load_image_file(file, base64_image=False, mode='RGB'):
     """
     Loads an image file (.jpg, .png, etc) into a numpy array
 
     :param file: image file name or file object to load
+    :param base64_image: flag for base64 image as an input. Set True if input is string representing a base64 image
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
+    if base64_image:
+        base64_string = file
+        file = BytesIO(base64.b64decode(base64_string))
+
     im = PIL.Image.open(file)
+    if mode:
+        im = im.convert(mode)
+    return np.array(im)
+
+
+def load_image_online(image_url, mode='RGB'):
+    """
+    Loads image from an online link or decodes base64 string into a numpy array.
+
+    :param image_url: image file URL or base64 string
+    :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
+    :return: image contents as numpy array
+    """
+    response = requests.get(image_url, stream=True)
+    response.raw.decode_content = True
+    image_data = response.raw
+
+    im = PIL.Image.open(image_data)
     if mode:
         im = im.convert(mode)
     return np.array(im)
