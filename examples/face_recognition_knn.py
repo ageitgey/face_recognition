@@ -36,7 +36,7 @@ from sklearn import neighbors
 import os
 import os.path
 import pickle
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
 
@@ -159,6 +159,7 @@ def show_prediction_labels_on_image(img_path, predictions):
     :return:
     """
     pil_image = Image.open(img_path).convert("RGB")
+    pil_image = ImageOps.exif_transpose(pil_image)
     draw = ImageDraw.Draw(pil_image)
 
     for name, (top, right, bottom, left) in predictions:
