@@ -120,9 +120,9 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(face_landmarks[0].num_parts, 68)
         self.assertEqual((example_landmark.x, example_landmark.y), (552, 399))
 
-    def test_face_landmarks(self):
+    def test_face_landmarks_grouping_features(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
-        face_landmarks = api.face_landmarks(img)
+        face_landmarks = api.face_landmarks(img, grouping_mode="features")
 
         self.assertEqual(
             set(face_landmarks[0].keys()),
@@ -136,14 +136,50 @@ class Test_face_recognition(unittest.TestCase):
              (552, 399), (576, 372), (594, 344), (604, 314), (610, 282),
              (613, 250), (615, 219)])
 
-    def test_face_landmarks_small_model(self):
+    def test_face_landmarks_grouping_all(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
-        face_landmarks = api.face_landmarks(img, model="small")
+        face_landmarks = api.face_landmarks(img, grouping_mode="all")
+
+        self.assertEqual(
+            set(face_landmarks[0].keys()),
+            set(['all']))
+        self.assertEqual(len(face_landmarks[0]['all']), 68)
+        self.assertEqual(
+            face_landmarks[0]['all'][:5],
+            [(369, 220), (372, 254), (378, 289), (384, 322), (395, 353)])
+
+    def test_face_landmarks(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        face_landmarks_default = api.face_landmarks(img)
+        face_landmarks_features = api.face_landmarks(img, grouping_mode="features")
+
+        self.assertEqual(face_landmarks_default, face_landmarks_features)
+
+    def test_face_landmarks_small_model_grouping_features(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        face_landmarks = api.face_landmarks(img, model="small", grouping_mode="features")
 
         self.assertEqual(
             set(face_landmarks[0].keys()),
             set(['nose_tip', 'left_eye', 'right_eye']))
         self.assertEqual(face_landmarks[0]['nose_tip'], [(496, 295)])
+
+    def test_face_landmarks_small_model_grouping_all(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        face_landmarks = api.face_landmarks(img, model="small", grouping_mode="all")
+
+        self.assertEqual(
+            set(face_landmarks[0].keys()),
+            set(['all']))
+        self.assertEqual(len(face_landmarks[0]['all']), 5)
+        self.assertEqual(face_landmarks[0]['all'][4], (496, 295))
+
+    def test_face_landmarks_small_model(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        face_landmarks_default = api.face_landmarks(img, model="small")
+        face_landmarks_features = api.face_landmarks(img, model="small", grouping_mode="features")
+
+        self.assertEqual(face_landmarks_default, face_landmarks_features)
 
     def test_face_encodings(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
