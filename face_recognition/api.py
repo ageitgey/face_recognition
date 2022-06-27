@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from contextlib import closing
+
 import PIL.Image
 import dlib
 import numpy as np
@@ -83,10 +85,10 @@ def load_image_file(file, mode='RGB'):
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
-    im = PIL.Image.open(file)
-    if mode:
-        im = im.convert(mode)
-    return np.array(im)
+    with closing(PIL.Image.open(file)) as im:
+        if mode:
+            im = im.convert(mode)
+        return np.array(im)
 
 
 def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
