@@ -156,7 +156,7 @@ def show_prediction_labels_on_image(frame, predictions):
 
     :param frame: frame to show the predictions on
     :param predictions: results of the predict function
-    :return opencv suited image to be fitting with cv2.imshow fucntion:
+    :return opencv suited image to be fitting with cv2.imshow function:
     """
     pil_image = Image.fromarray(frame)
     draw = ImageDraw.Draw(pil_image)

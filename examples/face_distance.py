@@ -23,7 +23,7 @@ known_encodings = [
     biden_face_encoding
 ]
 
-# Load a test image and get encondings for it
+# Load a test image and get encodings for it
 image_to_test = face_recognition.load_image_file("obama2.jpg")
 image_to_test_encoding = face_recognition.face_encodings(image_to_test)[0]
 
