@@ -12,10 +12,12 @@ built with deep learning. The model has an accuracy of 99.38% on the
 This also provides a simple `face_recognition` command line tool that lets
 you do face recognition on a folder of images from the command line!
 
+This is an online demo based on gradio, enter Huggingface Spaces🤗 and try it!
 
 [![PyPI](https://img.shields.io/pypi/v/face_recognition.svg)](https://pypi.python.org/pypi/face_recognition)
 [![Build Status](https://github.com/ageitgey/face_recognition/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/ageitgey/face_recognition/actions?query=workflow%3ACI)
 [![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/Zengyf-CVer/FaceRecognition)
 
 ## Features
 
