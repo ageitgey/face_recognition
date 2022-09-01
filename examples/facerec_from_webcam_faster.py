@@ -34,7 +34,6 @@ known_face_names = [
 
 # Initialize some variables
 face_locations = []
-face_encodings = []
 face_names = []
 process_this_frame = True
 
