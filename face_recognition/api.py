@@ -4,6 +4,7 @@ import PIL.Image
 import dlib
 import numpy as np
 from PIL import ImageFile
+import mediapipe as mp
 
 try:
     import face_recognition_models
@@ -105,20 +106,50 @@ def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
         return face_detector(img, number_of_times_to_upsample)
 
 
-def face_locations(img, number_of_times_to_upsample=1, model="hog"):
+def face_locations(img: np.ndarray, model: int = 1) -> list[tuple[int]]:
     """
     Returns an array of bounding boxes of human faces in a image
 
     :param img: An image (as a numpy array)
-    :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
-    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
-                  deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
-    :return: A list of tuples of found face locations in css (top, right, bottom, left) order
+    :param model: Use 0 to select a short-range model that works best for faces within 2 meters from the camera,
+                  and 1 for a full-range model best for faces within 5 meters.
+    :return: A list of tuples of found face locations (top, right, bottom, left) order
     """
-    if model == "cnn":
-        return [_trim_css_to_bounds(_rect_to_css(face.rect), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, "cnn")]
-    else:
-        return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
+    # initialise face detection module
+    mp_face_detection = mp.solutions.face_detection
+    face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.5, model_selection=1)
+
+    # initialise  mp_utils to extract normal_to_pixel_coordinates
+    mp_drawing = mp.solutions.drawing_utils
+    # apply face_detection on image
+    result = face_detection.process(img)
+    locations = []
+    if result.detections:
+        for detection in result.detections:
+            # extract bounding box normalised cordinates
+            relative_bounding_box = detection.location_data.relative_bounding_box
+            # convert normalizerd point to (x, y) coordinates
+            start_point = mp_drawing._normalized_to_pixel_coordinates(
+                abs(relative_bounding_box.xmin),
+                abs(relative_bounding_box.ymin),
+                img.shape[1],
+                img.shape[0]
+            )
+            # convert end_point normalised to pixel coordinatesy
+            x = relative_bounding_box.xmin + relative_bounding_box.width
+            y = relative_bounding_box.ymin + relative_bounding_box.height
+
+            x = 1 if x > 1 else x
+            y = 1 if y > 1 else y
+            end_point = mp_drawing._normalized_to_pixel_coordinates(x,
+                                                                    y,
+                                                                    img.shape[1],
+                                                                    img.shape[0])
+            # set the location
+            loc = (start_point[1], end_point[0], end_point[1], start_point[0])
+            locations.append(loc)
+
+    return locations
 
 
 def _raw_face_locations_batched(images, number_of_times_to_upsample=1, batch_size=128):
