@@ -49,7 +49,7 @@ History
 1.1.0 (2017-09-23)
 ------------------
 
-* Will use dlib's 5-point face pose estimator when possible for speed (instead of 68-point face pose esimator)
+* Will use dlib's 5-point face pose estimator when possible for speed (instead of 68-point face pose estimator)
 * dlib v19.7 is now the minimum required version
 * face_recognition_models v0.3.0 is now the minimum required version
 
@@ -57,7 +57,7 @@ History
 1.0.0 (2017-08-29)
 ------------------
 
-* Added support for dlib's CNN face detection model via model="cnn" parameter on face detecion call
+* Added support for dlib's CNN face detection model via model="cnn" parameter on face detection call
 * Added support for GPU batched face detections using dlib's CNN face detector model
 * Added find_faces_in_picture_cnn.py to examples
 * Added find_faces_in_batches.py to examples

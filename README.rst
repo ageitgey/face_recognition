@@ -260,7 +260,7 @@ Automatically find all the faces in an image
     image = face_recognition.load_image_file("my_picture.jpg")
     face_locations = face_recognition.face_locations(image)
 
-    # face_locations is now an array listing the co-ordinates of each face!
+    # face_locations is now an array listing the coordinates of each face!
 
 | See `this
   example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
@@ -272,7 +272,7 @@ detection model.
 | Note: GPU acceleration (via nvidia's CUDA library) is required for
   good
 | performance with this model. You'll also want to enable CUDA support
-| when compliling ``dlib``.
+| when compiling ``dlib``.
 
 .. code:: python
 
@@ -281,7 +281,7 @@ detection model.
     image = face_recognition.load_image_file("my_picture.jpg")
     face_locations = face_recognition.face_locations(image, model="cnn")
 
-    # face_locations is now an array listing the co-ordinates of each face!
+    # face_locations is now an array listing the coordinates of each face!
 
 | See `this
   example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
