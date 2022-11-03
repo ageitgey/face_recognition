@@ -1,5 +1,6 @@
-import face_recognition
 import cv2
+
+import face_recognition
 
 # This is a demo of running face recognition on a video file and saving the results to a new video file.
 #
@@ -12,8 +13,8 @@ input_movie = cv2.VideoCapture("hamilton_clip.mp4")
 length = int(input_movie.get(cv2.CAP_PROP_FRAME_COUNT))
 
 # Create an output movie file (make sure resolution/frame rate matches input video!)
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-output_movie = cv2.VideoWriter('output.avi', fourcc, 29.97, (640, 360))
+fourcc = cv2.VideoWriter_fourcc(*"XVID")
+output_movie = cv2.VideoWriter("output.avi", fourcc, 29.97, (640, 360))
 
 # Load some sample pictures and learn how to recognize them.
 lmm_image = face_recognition.load_image_file("lin-manuel-miranda.png")
@@ -22,10 +23,7 @@ lmm_face_encoding = face_recognition.face_encodings(lmm_image)[0]
 al_image = face_recognition.load_image_file("alex-lacamoire.png")
 al_face_encoding = face_recognition.face_encodings(al_image)[0]
 
-known_faces = [
-    lmm_face_encoding,
-    al_face_encoding
-]
+known_faces = [lmm_face_encoding, al_face_encoding]
 
 # Initialize some variables
 face_locations = []
@@ -52,7 +50,9 @@ while True:
     face_names = []
     for face_encoding in face_encodings:
         # See if the face is a match for the known face(s)
-        match = face_recognition.compare_faces(known_faces, face_encoding, tolerance=0.50)
+        match = face_recognition.compare_faces(
+            known_faces, face_encoding, tolerance=0.50
+        )
 
         # If you had more than 2 faces, you could make this logic a lot prettier
         # but I kept it simple for the demo
@@ -73,7 +73,9 @@ while True:
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
         # Draw a label with a name below the face
-        cv2.rectangle(frame, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED)
+        cv2.rectangle(
+            frame, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED
+        )
         font = cv2.FONT_HERSHEY_DUPLEX
         cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
 

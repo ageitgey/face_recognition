@@ -1,5 +1,6 @@
-import face_recognition
 import cv2
+
+import face_recognition
 
 # This is a demo of blurring faces in video.
 
@@ -41,10 +42,10 @@ while True:
         frame[top:bottom, left:right] = face_image
 
     # Display the resulting image
-    cv2.imshow('Video', frame)
+    cv2.imshow("Video", frame)
 
     # Hit 'q' on the keyboard to quit!
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 # Release handle to the webcam
