@@ -1,6 +1,7 @@
-import face_recognition
-from PIL import Image, ImageDraw
 import numpy as np
+from PIL import Image, ImageDraw
+
+import face_recognition
 
 # This is an example of running face recognition on a single image
 # and drawing a box around each person that was identified.
@@ -14,14 +15,8 @@ biden_image = face_recognition.load_image_file("biden.jpg")
 biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
 # Create arrays of known face encodings and their names
-known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
-]
-known_face_names = [
-    "Barack Obama",
-    "Joe Biden"
-]
+known_face_encodings = [obama_face_encoding, biden_face_encoding]
+known_face_names = ["Barack Obama", "Joe Biden"]
 
 # Load an image with an unknown face
 unknown_image = face_recognition.load_image_file("two_people.jpg")
@@ -59,7 +54,11 @@ for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodi
 
     # Draw a label with a name below the face
     text_width, text_height = draw.textsize(name)
-    draw.rectangle(((left, bottom - text_height - 10), (right, bottom)), fill=(0, 0, 255), outline=(0, 0, 255))
+    draw.rectangle(
+        ((left, bottom - text_height - 10), (right, bottom)),
+        fill=(0, 0, 255),
+        outline=(0, 0, 255),
+    )
     draw.text((left + 6, bottom - text_height - 5), name, fill=(255, 255, 255, 255))
 
 

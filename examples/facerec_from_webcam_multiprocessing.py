@@ -1,11 +1,12 @@
-import face_recognition
-import cv2
-from multiprocessing import Process, Manager, cpu_count, set_start_method
-import time
-import numpy
-import threading
 import platform
+import threading
+import time
+from multiprocessing import Manager, Process, cpu_count, set_start_method
 
+import cv2
+import numpy
+
+import face_recognition
 
 # This is a little bit complicated (but fast) example of running face recognition on live video from your webcam.
 # This example is using multiprocess.
@@ -19,16 +20,14 @@ import platform
 def next_id(current_id, worker_num):
     if current_id == worker_num:
         return 1
-    else:
-        return current_id + 1
+    return current_id + 1
 
 
 # Get previous worker's id
 def prev_id(current_id, worker_num):
     if current_id == 1:
         return worker_num
-    else:
-        return current_id - 1
+    return current_id - 1
 
 
 # A subprocess use to capture frames.
@@ -38,7 +37,10 @@ def capture(read_frame_list, Global, worker_num):
     # video_capture.set(3, 640)  # Width of the frames in the video stream.
     # video_capture.set(4, 480)  # Height of the frames in the video stream.
     # video_capture.set(5, 30) # Frame rate.
-    print("Width: %d, Height: %d, FPS: %d" % (video_capture.get(3), video_capture.get(4), video_capture.get(5)))
+    print(
+        "Width: %d, Height: %d, FPS: %d"
+        % (video_capture.get(3), video_capture.get(4), video_capture.get(5))
+    )
 
     while not Global.is_exit:
         # If it's time to read a frame
@@ -61,7 +63,9 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
     while not Global.is_exit:
 
         # Wait to read
-        while Global.read_num != worker_id or Global.read_num != prev_id(Global.buff_num, worker_num):
+        while Global.read_num != worker_id or Global.read_num != prev_id(
+            Global.buff_num, worker_num
+        ):
             # If the user has requested to end the app, then stop waiting for webcam frames
             if Global.is_exit:
                 break
@@ -85,9 +89,13 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
 
         # Loop through each face in this frame of video
-        for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
+        for (top, right, bottom, left), face_encoding in zip(
+            face_locations, face_encodings
+        ):
             # See if the face is a match for the known face(s)
-            matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+            matches = face_recognition.compare_faces(
+                known_face_encodings, face_encoding
+            )
 
             name = "Unknown"
 
@@ -100,9 +108,23 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
             cv2.rectangle(frame_process, (left, top), (right, bottom), (0, 0, 255), 2)
 
             # Draw a label with a name below the face
-            cv2.rectangle(frame_process, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+            cv2.rectangle(
+                frame_process,
+                (left, bottom - 35),
+                (right, bottom),
+                (0, 0, 255),
+                cv2.FILLED,
+            )
             font = cv2.FONT_HERSHEY_DUPLEX
-            cv2.putText(frame_process, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            cv2.putText(
+                frame_process,
+                name,
+                (left + 6, bottom - 6),
+                font,
+                1.0,
+                (255, 255, 255),
+                1,
+            )
 
         # Wait to write
         while Global.write_num != worker_id:
@@ -115,11 +137,11 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
         Global.write_num = next_id(Global.write_num, worker_num)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     # Fix Bug on MacOS
-    if platform.system() == 'Darwin':
-        set_start_method('forkserver')
+    if platform.system() == "Darwin":
+        set_start_method("forkserver")
 
     # Global variables
     Global = Manager().Namespace()
@@ -141,7 +163,16 @@ if __name__ == '__main__':
     p = []
 
     # Create a thread to capture frames (if uses subprocess, it will crash on Mac)
-    p.append(threading.Thread(target=capture, args=(read_frame_list, Global, worker_num,)))
+    p.append(
+        threading.Thread(
+            target=capture,
+            args=(
+                read_frame_list,
+                Global,
+                worker_num,
+            ),
+        )
+    )
     p[0].start()
 
     # Load a sample picture and learn how to recognize it.
@@ -153,18 +184,23 @@ if __name__ == '__main__':
     biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
     # Create arrays of known face encodings and their names
-    Global.known_face_encodings = [
-        obama_face_encoding,
-        biden_face_encoding
-    ]
-    Global.known_face_names = [
-        "Barack Obama",
-        "Joe Biden"
-    ]
+    Global.known_face_encodings = [obama_face_encoding, biden_face_encoding]
+    Global.known_face_names = ["Barack Obama", "Joe Biden"]
 
     # Create workers
     for worker_id in range(1, worker_num + 1):
-        p.append(Process(target=process, args=(worker_id, read_frame_list, write_frame_list, Global, worker_num,)))
+        p.append(
+            Process(
+                target=process,
+                args=(
+                    worker_id,
+                    read_frame_list,
+                    write_frame_list,
+                    Global,
+                    worker_num,
+                ),
+            )
+        )
         p[worker_id].start()
 
     # Start to show video
@@ -199,10 +235,10 @@ if __name__ == '__main__':
                 Global.frame_delay = 0
 
             # Display the resulting image
-            cv2.imshow('Video', write_frame_list[prev_id(Global.write_num, worker_num)])
+            cv2.imshow("Video", write_frame_list[prev_id(Global.write_num, worker_num)])
 
         # Hit 'q' on the keyboard to quit!
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord("q"):
             Global.is_exit = True
             break
 
