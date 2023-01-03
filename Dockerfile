@@ -2,7 +2,10 @@
 
 FROM python:3.10.3-slim-bullseye
 
+WORKDIR /app
+
 RUN apt-get -y update
+
 RUN apt-get install -y --fix-missing \
     build-essential \
     cmake \
@@ -27,10 +30,9 @@ RUN apt-get install -y --fix-missing \
     && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 RUN cd ~ && \
-    mkdir -p dlib && \
-    git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/ && \
+    git clone  https://github.com/davisking/dlib.git dlib/ && \
     cd  dlib/ && \
-    python3 setup.py install --yes USE_AVX_INSTRUCTIONS
+    python3 setup.py install
 
 
 # The rest of this file just runs an example script.
@@ -41,12 +43,13 @@ RUN cd ~ && \
 #     pip3 install -r requirements.txt
 # RUN whatever_command_you_run_to_start_your_app
 
-COPY . /root/face_recognition
-RUN cd /root/face_recognition && \
+COPY . /app
+
+RUN cd /app && \
     pip3 install -r requirements.txt && \
     python3 setup.py install
 
 # Add pip3 install opencv-python==4.1.2.30 if you want to run the live webcam examples
 
-CMD cd /root/face_recognition/examples && \
+CMD cd /app/examples && \
     python3 recognize_faces_in_pictures.py
