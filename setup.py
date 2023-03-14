@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
+import pathlib
+import os
+
+_here = pathlib.Path(os.path.dirname(os.path.abspath(__file__)))
+
+dlib_whl = _here / "dlib-19.24.99-cp310-cp310-linux_x86_64.whl"
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -12,7 +18,7 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'face_recognition_models>=0.3.0',
     'Click>=6.0',
-    'dlib>=19.7',
+    f'dlib @ file://{dlib_whl}',
     'numpy',
     'Pillow'
 ]
