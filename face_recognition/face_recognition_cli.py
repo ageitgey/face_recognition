@@ -10,7 +10,6 @@ import sys
 import PIL.Image
 import numpy as np
 
-
 def scan_known_people(known_people_folder):
     known_names = []
     known_face_encodings = []
@@ -31,13 +30,11 @@ def scan_known_people(known_people_folder):
 
     return known_names, known_face_encodings
 
-
 def print_result(filename, name, distance, show_distance=False):
     if show_distance:
         print("{},{},{}".format(filename, name, distance))
     else:
         print("{},{}".format(filename, name))
-
 
 def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6, show_distance=False):
     unknown_image = face_recognition.load_image_file(image_to_check)
@@ -63,10 +60,8 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.6,
         # print out fact that no faces were found in image
         print_result(image_to_check, "no_persons_found", None, show_distance)
 
-
 def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
-
 
 def process_images_in_process_pool(images_to_check, known_names, known_face_encodings, number_of_cpus, tolerance, show_distance):
     if number_of_cpus == -1:
@@ -91,7 +86,6 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
 
     pool.starmap(test_image, function_parameters)
 
-
 @click.command()
 @click.argument('known_people_folder')
 @click.argument('image_to_check')
@@ -113,7 +107,6 @@ def main(known_people_folder, image_to_check, cpus, tolerance, show_distance):
             process_images_in_process_pool(image_files_in_folder(image_to_check), known_names, known_face_encodings, cpus, tolerance, show_distance)
     else:
         test_image(image_to_check, known_names, known_face_encodings, tolerance, show_distance)
-
-
+f
 if __name__ == "__main__":
     main()
