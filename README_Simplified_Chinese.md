@@ -357,7 +357,7 @@ else:
 
 ## 警告说明
 
-- 本项目的人脸识别模型是基于成年人的，在孩子身上效果可能一般。如果图片中有孩子的话，建议把临界值设为0.6.
+- 本项目的人脸识别模型是基于成年人的，在孩子身上效果可能一般。使用默认的容错率0.6时，它很容易混淆孩子们.
 - 不同人种的识别结果可能不同， [看wiki百科页面](https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals) 查看更多细节。
 
 ## 把本项目部署在云服务器上 (Heroku, AWS等)
