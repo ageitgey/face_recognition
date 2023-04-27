@@ -24,4 +24,4 @@ for face_landmarks in face_landmarks_list:
         d.line(face_landmarks[facial_feature], width=5)
 
 # Show the picture
-pil_image.show()
+display(pil_image)
