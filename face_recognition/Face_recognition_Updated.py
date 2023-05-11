@@ -20,19 +20,25 @@ encoding_model = MyFaceEncodingModel()
 encodings = np.load('face_encodings.npy')
 names = np.load('face_names.npy')
 
-# Loop through each detected face
+# Encode all faces in the input image using the face encoding model
+encodings_img = []
 for (x, y, w, h) in faces:
-    # Extract the face ROI from the grayscale image
     face_gray = gray[y:y+h, x:x+w]
-    # Resize the face ROI to match the expected input size of the face encoding model
     face_resized = cv2.resize(face_gray, encoding_model.input_shape[:2])
-    # Encode the face ROI using the face encoding model
     encoding = encoding_model.encode(face_resized)
-    # Compute the Euclidean distance between the encoding of the detected face and all stored encodings
-    distances = np.linalg.norm(encodings - encoding, axis=1)
-    min_distance_index = np.argmin(distances)
-    # Check if the closest match is below a certain threshold (e.g., 0.6)
-    if distances[min_distance_index] < 0.6:
-        print(names[min_distance_index])
+    encodings_img.append(encoding)
+encodings_img = np.array(encodings_img)
+
+# Compute the Euclidean distance between the encodings of all detected faces and all stored encodings
+distances = np.linalg.norm(encodings - encodings_img[:, np.newaxis], axis=-1)
+
+# Find the closest matching encoding for each detected face
+min_distance_indices = np.argmin(distances, axis=0)
+min_distances = distances[min_distance_indices, np.arange(len(min_distance_indices))]
+
+# Print the names corresponding to the closest matching encodings
+for i, distance in enumerate(min_distances):
+    if distance < 0.6:
+        print(names[min_distance_indices[i]])
     else:
         print("Unknown")
