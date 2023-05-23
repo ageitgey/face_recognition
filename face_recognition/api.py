@@ -247,7 +247,7 @@ def compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.6):
     return list(face_distance(known_face_encodings, face_encoding_to_check) <= tolerance)
 
 
-def compare_faces_cosine(known_face_encodings, face_encoding_to_check, tolerance=0.85):
+def find_similar_faces_cosine(known_face_encodings, face_encoding_to_check, tolerance=0.85):
     """
     Compare a list of face encodings against a candidate encoding to see if they match
     (using cosine similarity formula).

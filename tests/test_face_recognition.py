@@ -289,7 +289,7 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(type(distance_results), np.ndarray)
         self.assertEqual(len(distance_results), 0)
 
-    def test_compare_faces_cosine(self):
+    def test_find_similar_faces_cosine(self):
         img_a1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
         img_a2 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama2.jpg'))
         img_a3 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama3.jpg'))
@@ -306,28 +306,28 @@ class Test_face_recognition(unittest.TestCase):
             face_encoding_a3,
             face_encoding_b1]
 
-        match_results = api.compare_faces_cosine(faces_to_compare, face_encoding_a1)
+        match_results = api.find_similar_faces_cosine(faces_to_compare, face_encoding_a1)
 
         self.assertEqual(type(match_results), list)
         self.assertTrue(match_results[0])
         self.assertTrue(match_results[1])
         self.assertFalse(match_results[2])
 
-    def test_compare_faces_cosine_empty_lists(self):
+    def test_find_similar_faces_cosine_empty_lists(self):
         img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'biden.jpg'))
         face_encoding = api.face_encodings(img)[0]
 
         # empty python list
         faces_to_compare = []
 
-        match_results = api.compare_faces_cosine(faces_to_compare, face_encoding)
+        match_results = api.find_similar_faces_cosine(faces_to_compare, face_encoding)
         self.assertEqual(type(match_results), list)
         self.assertListEqual(match_results, [])
 
         # empty numpy list
         faces_to_compare = np.array([])
 
-        match_results = api.compare_faces_cosine(faces_to_compare, face_encoding)
+        match_results = api.find_similar_faces_cosine(faces_to_compare, face_encoding)
         self.assertEqual(type(match_results), list)
         self.assertListEqual(match_results, [])
 
