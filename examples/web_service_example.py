@@ -11,7 +11,8 @@
 #  "is_picture_of_obama": true
 # }
 #
-# This example is based on the Flask file upload example: http://flask.pocoo.org/docs/0.12/patterns/fileuploads/
+# This example is based on the Flask file upload example from v0.12. 
+# See latest at: https://flask.palletsprojects.com/en/latest/patterns/fileuploads/
 
 # NOTE: This example requires flask to be installed! You can install it with pip:
 # $ pip3 install flask
