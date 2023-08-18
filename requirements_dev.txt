@@ -1,12 +1,12 @@
-pip==8.1.2
+pip==21.1
 bumpversion==0.5.3
 wheel==0.29.0
 watchdog==0.8.3
-flake8==2.6.0
+flake8
 tox==2.3.1
 coverage==4.1
 Sphinx==1.4.8
-cryptography==1.7
+cryptography==3.3.2
 pyyaml>=4.2b1
 face_recognition_models
 Click>=6.0

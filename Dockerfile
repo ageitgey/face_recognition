@@ -1,6 +1,6 @@
 # This is a sample Dockerfile you can modify to deploy your own app based on face_recognition
 
-FROM python:3.6-slim-stretch
+FROM python:3.10.3-slim-bullseye
 
 RUN apt-get -y update
 RUN apt-get install -y --fix-missing \
@@ -12,7 +12,7 @@ RUN apt-get install -y --fix-missing \
     curl \
     graphicsmagick \
     libgraphicsmagick1-dev \
-    libatlas-dev \
+    libatlas-base-dev \
     libavcodec-dev \
     libavformat-dev \
     libgtk2.0-dev \
@@ -45,6 +45,8 @@ COPY . /root/face_recognition
 RUN cd /root/face_recognition && \
     pip3 install -r requirements.txt && \
     python3 setup.py install
+
+# Add pip3 install opencv-python==4.1.2.30 if you want to run the live webcam examples
 
 CMD cd /root/face_recognition/examples && \
     python3 recognize_faces_in_pictures.py

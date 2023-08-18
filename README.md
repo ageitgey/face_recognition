@@ -1,6 +1,6 @@
 # Face Recognition
 
-_You can also read a translated version of this file [in Chinese 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md) or [in Korean 한국어](https://github.com/ageitgey/face_recognition/blob/master/README_Korean.md)._
+_You can also read a translated version of this file [in Chinese 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md) or [in Korean 한국어](https://github.com/ageitgey/face_recognition/blob/master/README_Korean.md) or [in Japanese 日本語](https://github.com/m-i-k-i/face_recognition/blob/master/README_Japanese.md)._
 
 Recognize and manipulate faces from Python or from the command line with
 the world's simplest face recognition library.
@@ -14,7 +14,7 @@ you do face recognition on a folder of images from the command line!
 
 
 [![PyPI](https://img.shields.io/pypi/v/face_recognition.svg)](https://pypi.python.org/pypi/face_recognition)
-[![Build Status](https://travis-ci.org/ageitgey/face_recognition.svg?branch=master)](https://travis-ci.org/ageitgey/face_recognition)
+[![Build Status](https://github.com/ageitgey/face_recognition/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/ageitgey/face_recognition/actions?query=workflow%3ACI)
 [![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
 
 ## Features
@@ -89,8 +89,12 @@ User-contributed shared Jupyter notebook demo (not officially supported): [![Dee
 First, make sure you have dlib already installed with Python bindings:
 
   * [How to install dlib from source on macOS or Ubuntu](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
+  
+Then, make sure you have cmake installed:  
+ 
+```brew install cmake```
 
-Then, install this module from pypi using `pip3` (or `pip2` for Python 2):
+Finally, install this module from pypi using `pip3` (or `pip2` for Python 2):
 
 ```bash
 pip3 install face_recognition
@@ -109,6 +113,12 @@ If you are having trouble with installation, you can also try out a
 #### Installing on Raspberry Pi 2+
 
   * [Raspberry Pi 2+ installation instructions](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
+
+#### Installing on FreeBSD
+
+```bash
+pkg install graphics/py-face_recognition
+```
 
 #### Installing on Windows
 
@@ -383,6 +393,8 @@ To make things easier, there's an example Dockerfile in this repo that shows how
 to any service that supports Docker images.
 
 You can try the Docker image locally by running: `docker-compose up --build`
+
+There are also [several prebuilt Docker images.](docker/README.md)
 
 Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
 
