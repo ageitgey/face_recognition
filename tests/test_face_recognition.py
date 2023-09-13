@@ -10,7 +10,6 @@ Tests for `face_recognition` module.
 
 
 import unittest
-import os
 import numpy as np
 from click.testing import CliRunner
 
