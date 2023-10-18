@@ -63,3 +63,4 @@ target/
 .python-version
 
 .idea/
+examples/trained_knn_model.clf
