@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import PIL.Image
+import sys
 import dlib
 import numpy as np
 from PIL import ImageFile
@@ -10,7 +11,7 @@ try:
 except Exception:
     print("Please install `face_recognition_models` with this command before using `face_recognition`:\n")
     print("pip install git+https://github.com/ageitgey/face_recognition_models")
-    quit()
+    sys.exit()
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
