@@ -46,7 +46,18 @@ RUN cd /root/face_recognition && \
     pip3 install -r requirements.txt && \
     python3 setup.py install
 
-# Add pip3 install opencv-python==4.1.2.30 if you want to run the live webcam examples
-
 CMD cd /root/face_recognition/examples && \
     python3 recognize_faces_in_pictures.py
+
+# Add pip3 install opencv-python==4.1.2.30 if you want to run the live webcam examples
+
+# jackson Kim: added this line to run the recognize_faces_in_pictures.py example when the container starts
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
