@@ -139,7 +139,7 @@ programs:
 
 * `face_recognition` - Recognize faces in a photograph or folder full for 
    photographs.
-* `face_detection` - Find faces in a photograph or folder full for photographs.
+* `face_detection` - Find faces in a photograph or folder full of photographs.
 
 #### `face_recognition` command line tool
 
