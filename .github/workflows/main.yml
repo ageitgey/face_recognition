@@ -22,3 +22,7 @@ jobs:
       run: python setup.py check
     - name: Test
       run: tox
+    - name: Run Pylint
+      run: |
+        pip install pylint
+        pylint . --exit-zero
