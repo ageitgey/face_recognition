@@ -8,8 +8,9 @@ image = face_recognition.load_image_file("biden.jpg")
 face_landmarks_list = face_recognition.face_landmarks(image)
 
 pil_image = Image.fromarray(image)
+d = ImageDraw.Draw(pil_image, 'RGBA')
+
 for face_landmarks in face_landmarks_list:
-    d = ImageDraw.Draw(pil_image, 'RGBA')
 
     # Make the eyebrows into a nightmare
     d.polygon(face_landmarks['left_eyebrow'], fill=(68, 54, 39, 128))
@@ -31,4 +32,10 @@ for face_landmarks in face_landmarks_list:
     d.line(face_landmarks['left_eye'] + [face_landmarks['left_eye'][0]], fill=(0, 0, 0, 110), width=6)
     d.line(face_landmarks['right_eye'] + [face_landmarks['right_eye'][0]], fill=(0, 0, 0, 110), width=6)
 
-    pil_image.show()
+# Create a side-by-side comparison of the original and the digital makeup
+final_image = Image.new('RGB', (pil_image.width * 2, pil_image.height))
+final_image.paste(Image.fromarray(image), (0, 0))
+final_image.paste(pil_image, (pil_image.width, 0))
+
+# Show the results
+final_image.show()
