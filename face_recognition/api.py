@@ -4,6 +4,8 @@ import PIL.Image
 import dlib
 import numpy as np
 from PIL import ImageFile
+from ultralytics import YOLO
+_yolo_model = YOLO("yolov8n-face.pt")
 
 try:
     import face_recognition_models
@@ -106,19 +108,29 @@ def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
 
 
 def face_locations(img, number_of_times_to_upsample=1, model="hog"):
-    """
-    Returns an array of bounding boxes of human faces in a image
-
-    :param img: An image (as a numpy array)
-    :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
-    :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
-                  deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
-    :return: A list of tuples of found face locations in css (top, right, bottom, left) order
-    """
     if model == "cnn":
-        return [_trim_css_to_bounds(_rect_to_css(face.rect), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, "cnn")]
-    else:
-        return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
+        return [
+            _trim_css_to_bounds(_rect_to_css(face.rect), img.shape)
+            for face in _raw_face_locations(img, number_of_times_to_upsample, "cnn")
+        ]
+
+    elif model == "yolo":   
+        results = _yolo_model(img)
+        face_boxes = []
+        for r in results:
+            for box in r.boxes.xyxy.tolist():
+                x1, y1, x2, y2 = map(int, box)
+                
+                face_boxes.append(
+                    _trim_css_to_bounds((y1, x2, y2, x1), img.shape)
+                )
+        return face_boxes
+
+    else:  
+        return [
+            _trim_css_to_bounds(_rect_to_css(face), img.shape)
+            for face in _raw_face_locations(img, number_of_times_to_upsample, model)
+        ]
 
 
 def _raw_face_locations_batched(images, number_of_times_to_upsample=1, batch_size=128):
