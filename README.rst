@@ -260,7 +260,7 @@ Automatically find all the faces in an image
     image = face_recognition.load_image_file("my_picture.jpg")
     face_locations = face_recognition.face_locations(image)
 
-    # face_locations is now an array listing the co-ordinates of each face!
+    # face_locations is now an array listing the coordinates of each face!
 
 | See `this
   example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py>`__
@@ -272,7 +272,7 @@ detection model.
 | Note: GPU acceleration (via nvidia's CUDA library) is required for
   good
 | performance with this model. You'll also want to enable CUDA support
-| when compliling ``dlib``.
+| when compiling ``dlib``.
 
 .. code:: python
 
@@ -281,7 +281,7 @@ detection model.
     image = face_recognition.load_image_file("my_picture.jpg")
     face_locations = face_recognition.face_locations(image, model="cnn")
 
-    # face_locations is now an array listing the co-ordinates of each face!
+    # face_locations is now an array listing the coordinates of each face!
 
 | See `this
   example <https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py>`__
@@ -489,4 +489,3 @@ Thanks
 .. |image7| image:: https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif
 .. |known| image:: https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png
 .. |unknown| image:: https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png
-
