@@ -410,6 +410,3 @@ If you run into problems, please read the [Common Errors](https://github.com/age
   his [blog post](http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html).
 * Thanks to everyone who works on all the awesome Python data science libraries like numpy, scipy, scikit-image,
   pillow, etc, etc that makes this kind of stuff so easy and fun in Python.
-* Thanks to [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
-  [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage) project template
-  for making Python project packaging way more tolerable.
