@@ -63,3 +63,9 @@ target/
 .python-version
 
 .idea/
+
+# The ayes training model image
+ayes_model/train_files
+ayes_model/test_files
+ayes_model/venv
+ayes_model/encodings.json

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  face_recognition:
+    image: face_recognition
+    container_name: face_recognition
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=1
+      #Uncomment this line to run the example on the GPU (requires Nvidia-Docker)
+      # dockerfile: Dockerfile.gpu 
+    
+    # working_dir: /face_recognition/examples
+    # command: python3 recognize_faces_in_pictures.py
+    
+    # Update the encodings
+    working_dir: /face_recognition/mm_application
+    command: python3 facerec_on_rasp_usb_camera.py
+    # command: python3 create_face_encoding_db.py
+    # Update the encodings 
+
+    # uncomment this if you want to see something via x11 forwarding
+    # environment:
+    #   - DISPLAY= <YOUR_IP_ADDRESS_HERE>:0
+    # Until here for x11 forwarding pt 1 
+    volumes:
+      - ./:/face_recognition
+      # uncomment this if you want to see something via x11 forwarding
+      # - /tmp/.X11-unix:/tmp/.X11-unix 
+    devices:
+      # - /dev/dri:/dev/dri
+      - dev/video0:dev/video0
+    network_mode: host
+    privileged: true
+    # Until here for x11 forwarding
+
+    #Uncomment this line to run the example on the GPU (requires Nvidia-Docker)
+    # runtime: nvidia

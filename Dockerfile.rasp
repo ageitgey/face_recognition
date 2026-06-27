@@ -1,0 +1,79 @@
+# Use the official Python image for ARM
+FROM arm32v7/python:3.10-slim-bullseye
+
+# Install build essentials and tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    gfortran \
+    gcc \
+    python3 \
+    python3-dev \
+    musl-dev \
+    git \
+    wget \
+    curl \
+    software-properties-common \
+    zip \
+    graphicsmagick \
+    libgraphicsmagick1-dev \
+    libatlas-base-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libgtk2.0-dev \
+    libjpeg-dev \
+    liblapack-dev \
+    libswscale-dev \
+    pkg-config \
+    v4l-utils \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install OpenBLAS
+RUN apt-get update && apt-get install -y libopenblas-dev && rm -rf /var/lib/apt/lists/*
+
+# Install OpenSSL development package
+RUN apt-get update && apt-get install -y libssl-dev && rm -rf /var/lib/apt/lists/*
+
+# Set environment variables for OpenBLAS
+ENV LD_LIBRARY_PATH=/usr/lib/openblas:$LD_LIBRARY_PATH
+ENV OPENBLAS_NUM_THREADS=1
+
+# Install numpy and pybind11
+RUN pip install numpy==1.26.4 pybind11==2.12.0
+
+# Clone dlib repository
+RUN cd /root && git clone -b 'v19.22' --single-branch https://github.com/davisking/dlib.git dlib
+
+# Install dlib dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Build and install dlib
+RUN cd /root/dlib && python3 setup.py install
+
+# Set working directory
+WORKDIR /root/face_recognition
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY setup.py .
+COPY setup.cfg .
+COPY pyproject.toml .
+COPY README.rst .
+COPY HISTORY.rst .
+COPY face_recognition/ .
+COPY . .
+RUN pip install --no-cache-dir .
+
+RUN pip install --no-cache-dir opencv-python==4.9.0.80
+
+# Import files
+COPY mm_application/ ./mm_application/
+RUN curl -o /root/face_recognition/mm_application/mqtt_client_ayes.py https://raw.githubusercontent.com/AndreaCalabro-AYES/MQTT_Broker/main/mqtt_client_ayes.py
+
+# Ensure the current directory is in the PYTHONPATH
+ENV PYTHONPATH "${PYTHONPATH}:/root/face_recognition/mm_application"
+

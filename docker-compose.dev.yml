@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  face_recognition_dev:
+    image: face_recognition_dev
+    container_name: face_recognition_dev
+
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    
+    volumes:
+      - ./ayes_model:/face_recognition/ayes_model_volume
+    network_mode: host
+
+    working_dir: /face_recognition/ayes_model_volume
+    # command: python3 create_face_encoding_db.py
+    command: python3 facerec_on_rasp_mock.py
+
+
+    privileged: true
+    # direct logging to terminal, no buffering for logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/face_recognition/ayes_model

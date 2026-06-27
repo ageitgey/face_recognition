@@ -1,16 +1,28 @@
-version: '2.3'
+version: '3'
 
 services:
   face_recognition:
-    image: face_recognition
+    image: face_recognition_on_rasp
     container_name: face_recognition
-    working_dir: /face_recognition/examples
+
     build:
       context: .
-      #Uncomment this line to run the example on the GPU (requires Nvidia-Docker)
-      # dockerfile: Dockerfile.gpu 
-    command: python3 -u find_faces_in_picture_cnn.py
+      dockerfile: Dockerfile.rasp
+
     volumes:
-      - ./:/face_recognition
-    #Uncomment this line to run the example on the GPU (requires Nvidia-Docker)
-    # runtime: nvidia
+      - ./mm_application:/root/face_recognition/mm_application_volume
+    network_mode: host
+
+    working_dir: /root/face_recognition/mm_application_volume
+    command: python3 facerec_on_rasp_usb_camera.py
+
+    devices:
+      - /dev/video0:/dev/video0
+
+    privileged: true
+    # direct logging to terminal, no buffering for logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/root/face_recognition/mm_application
+
+    restart: unless-stopped
