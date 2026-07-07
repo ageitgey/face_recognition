@@ -6,9 +6,10 @@
 # 你可以参考这个教程配制你的树莓派：
 # https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65
 
-import face_recognition
-import picamera
 import numpy as np
+import picamera
+
+import face_recognition
 
 # 你需要在sudo raspi-config中把camera功能打开
 camera = picamera.PiCamera()

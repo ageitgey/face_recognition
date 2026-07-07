@@ -6,9 +6,10 @@
 # You can follow this installation instructions to get your RPi set up:
 # https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65
 
-import face_recognition
-import picamera
 import numpy as np
+import picamera
+
+import face_recognition
 
 # Get a reference to the Raspberry Pi camera.
 # If this fails, make sure you have a camera connected to the RPi and that you
