@@ -218,7 +218,7 @@ import face_recognition
 image = face_recognition.load_image_file("my_picture.jpg")
 face_locations = face_recognition.face_locations(image)
 
-# face_locations is now an array listing the co-ordinates of each face!
+# face_locations is now an array listing the coordinates of each face!
 ```
 
 [이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py) 를 사용하여 테스트 해 보십시오.
@@ -233,7 +233,7 @@ import face_recognition
 image = face_recognition.load_image_file("my_picture.jpg")
 face_locations = face_recognition.face_locations(image, model="cnn")
 
-# face_locations is now an array listing the co-ordinates of each face!
+# face_locations is now an array listing the coordinates of each face!
 ```
 
 [이 예제](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py) 를 사용하여 테스트 해 보십시오.

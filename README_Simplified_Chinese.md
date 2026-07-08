@@ -246,7 +246,7 @@ import face_recognition
 image = face_recognition.load_image_file("my_picture.jpg")
 face_locations = face_recognition.face_locations(image)
 
-# face_locations is now an array listing the co-ordinates of each face!
+# face_locations is now an array listing the coordinates of each face!
 ```
 
 看 [案例：定位拜登的脸](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
@@ -263,7 +263,7 @@ import face_recognition
 image = face_recognition.load_image_file("my_picture.jpg")
 face_locations = face_recognition.face_locations(image, model="cnn")
 
-# face_locations is now an array listing the co-ordinates of each face!
+# face_locations is now an array listing the coordinates of each face!
 ```
 
 看 [案例：使用卷积神经网络深度学习模型定位拜登的脸](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py)

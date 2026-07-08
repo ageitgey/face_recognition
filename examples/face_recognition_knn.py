@@ -124,7 +124,7 @@ def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
         raise Exception("Invalid image path: {}".format(X_img_path))
 
     if knn_clf is None and model_path is None:
-        raise Exception("Must supply knn classifier either thourgh knn_clf or model_path")
+        raise Exception("Must supply knn classifier either through knn_clf or model_path")
 
     # Load a trained KNN model (if one was passed in)
     if knn_clf is None:
@@ -139,7 +139,7 @@ def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
     if len(X_face_locations) == 0:
         return []
 
-    # Find encodings for faces in the test iamge
+    # Find encodings for faces in the test image
     faces_encodings = face_recognition.face_encodings(X_img, known_face_locations=X_face_locations)
 
     # Use the KNN model to find the best matches for the test face

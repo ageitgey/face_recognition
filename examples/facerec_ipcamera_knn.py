@@ -126,7 +126,7 @@ def predict(X_frame, knn_clf=None, model_path=None, distance_threshold=0.5):
         For faces of unrecognized persons, the name 'unknown' will be returned.
     """
     if knn_clf is None and model_path is None:
-        raise Exception("Must supply knn classifier either thourgh knn_clf or model_path")
+        raise Exception("Must supply knn classifier either through knn_clf or model_path")
 
     # Load a trained KNN model (if one was passed in)
     if knn_clf is None:
@@ -156,7 +156,7 @@ def show_prediction_labels_on_image(frame, predictions):
 
     :param frame: frame to show the predictions on
     :param predictions: results of the predict function
-    :return opencv suited image to be fitting with cv2.imshow fucntion:
+    :return opencv suited image to be fitting with cv2.imshow function:
     """
     pil_image = Image.fromarray(frame)
     draw = ImageDraw.Draw(pil_image)
