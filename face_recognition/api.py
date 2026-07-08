@@ -151,9 +151,19 @@ def batch_face_locations(images, number_of_times_to_upsample=1, batch_size=128):
     return list(map(convert_cnn_detections_to_css, raw_detections_batched))
 
 
-def _raw_face_landmarks(face_image, face_locations=None, model="large"):
+def _raw_face_landmarks(face_image, face_locations=None, model="large", detector="hog"):
+    """
+    Given an image, returns a dict of face feature locations (eyes, nose, etc) for each face in the image
+
+    :param face_image: image to search
+    :param face_locations: Optionally provide a list of face locations to check.
+    :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
+    :param detector: Optional - Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
+                  deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
+    :return: A list of dicts of face feature locations (eyes, nose, etc)
+    """
     if face_locations is None:
-        face_locations = _raw_face_locations(face_image)
+        face_locations = _raw_face_locations(face_image, model=detector)
     else:
         face_locations = [_css_to_rect(face_location) for face_location in face_locations]
 
@@ -162,7 +172,10 @@ def _raw_face_landmarks(face_image, face_locations=None, model="large"):
     if model == "small":
         pose_predictor = pose_predictor_5_point
 
-    return [pose_predictor(face_image, face_location) for face_location in face_locations]
+    if detector == "cnn":
+        return [pose_predictor(face_image, face_location.rect) for face_location in face_locations]
+    else:
+        return [pose_predictor(face_image, face_location) for face_location in face_locations]
 
 
 def face_landmarks(face_image, face_locations=None, model="large"):
@@ -200,7 +213,7 @@ def face_landmarks(face_image, face_locations=None, model="large"):
         raise ValueError("Invalid landmarks model type. Supported models are ['small', 'large'].")
 
 
-def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="small"):
+def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="small", detector="hog"):
     """
     Given an image, return the 128-dimension face encoding for each face in the image.
 
@@ -208,9 +221,11 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=1, model="
     :param known_face_locations: Optional - the bounding boxes of each face if you already know them.
     :param num_jitters: How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
     :param model: Optional - which model to use. "large" or "small" (default) which only returns 5 points but is faster.
+    :param detector: Optional - Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
+                  deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
     :return: A list of 128-dimensional face encodings (one for each face in the image)
     """
-    raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
+    raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model, detector)
     return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
 
 
