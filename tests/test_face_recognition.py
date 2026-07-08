@@ -245,6 +245,92 @@ class Test_face_recognition(unittest.TestCase):
         self.assertEqual(type(match_results), list)
         self.assertListEqual(match_results, [])
 
+    def test_face_cosine_similarity(self):
+        img_a1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        img_a2 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama2.jpg'))
+        img_a3 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama3.jpg'))
+
+        img_b1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'biden.jpg'))
+
+        face_encoding_a1 = api.face_encodings(img_a1)[0]
+        face_encoding_a2 = api.face_encodings(img_a2)[0]
+        face_encoding_a3 = api.face_encodings(img_a3)[0]
+        face_encoding_b1 = api.face_encodings(img_b1)[0]
+
+        faces_to_compare = [
+            face_encoding_a2,
+            face_encoding_a3,
+            face_encoding_b1]
+
+        distance_results = api.face_cosine_similarity(faces_to_compare, face_encoding_a1)
+
+        # 0.85 is the default face cosine similarity match threshold. So we'll spot-check that the numbers returned
+        # are above or below that based on if they should match (since the exact numbers could vary).
+        self.assertEqual(type(distance_results), np.ndarray)
+        self.assertGreaterEqual(distance_results[0], 0.85)
+        self.assertGreaterEqual(distance_results[1], 0.85)
+        self.assertLess(distance_results[2], 0.85)
+
+    def test_face_cosine_similarity_empty_lists(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'biden.jpg'))
+        face_encoding = api.face_encodings(img)[0]
+
+        # empty python list
+        faces_to_compare = []
+
+        distance_results = api.face_cosine_similarity(faces_to_compare, face_encoding)
+        self.assertEqual(type(distance_results), np.ndarray)
+        self.assertEqual(len(distance_results), 0)
+
+        # empty numpy list
+        faces_to_compare = np.array([])
+
+        distance_results = api.face_distance(faces_to_compare, face_encoding)
+        self.assertEqual(type(distance_results), np.ndarray)
+        self.assertEqual(len(distance_results), 0)
+
+    def test_find_similar_faces_cosine(self):
+        img_a1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama.jpg'))
+        img_a2 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama2.jpg'))
+        img_a3 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'obama3.jpg'))
+
+        img_b1 = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'biden.jpg'))
+
+        face_encoding_a1 = api.face_encodings(img_a1)[0]
+        face_encoding_a2 = api.face_encodings(img_a2)[0]
+        face_encoding_a3 = api.face_encodings(img_a3)[0]
+        face_encoding_b1 = api.face_encodings(img_b1)[0]
+
+        faces_to_compare = [
+            face_encoding_a2,
+            face_encoding_a3,
+            face_encoding_b1]
+
+        match_results = api.find_similar_faces_cosine(faces_to_compare, face_encoding_a1)
+
+        self.assertEqual(type(match_results), list)
+        self.assertTrue(match_results[0])
+        self.assertTrue(match_results[1])
+        self.assertFalse(match_results[2])
+
+    def test_find_similar_faces_cosine_empty_lists(self):
+        img = api.load_image_file(os.path.join(os.path.dirname(__file__), 'test_images', 'biden.jpg'))
+        face_encoding = api.face_encodings(img)[0]
+
+        # empty python list
+        faces_to_compare = []
+
+        match_results = api.find_similar_faces_cosine(faces_to_compare, face_encoding)
+        self.assertEqual(type(match_results), list)
+        self.assertListEqual(match_results, [])
+
+        # empty numpy list
+        faces_to_compare = np.array([])
+
+        match_results = api.find_similar_faces_cosine(faces_to_compare, face_encoding)
+        self.assertEqual(type(match_results), list)
+        self.assertListEqual(match_results, [])
+
     def test_command_line_interface_options(self):
         target_string = 'Show this message and exit.'
         runner = CliRunner()
