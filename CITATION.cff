@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "face_recognition"
+version: "1.2.2"
+authors:
+  - family-names: Geitgey
+    given-names: Adam
+abstract: "face_recognition is a simple and powerful library in Python for facial recognition, built using dlib's deep learning and machine learning capabilities."
+keywords: ["face recognition", "machine learning", "Python", "dlib"]
+repository-code: "https://github.com/ageitgey/face_recognition"
+license: "MIT"

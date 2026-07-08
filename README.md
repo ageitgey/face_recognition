@@ -402,6 +402,12 @@ Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.co
 
 If you run into problems, please read the [Common Errors](https://github.com/ageitgey/face_recognition/wiki/Common-Errors) section of the wiki before filing a github issue.
 
+## Contributing
+
+We welcome contributions to the `face_recognition` project and appreciate your efforts to improve it! Whether you want to report issues, suggest new features, or submit pull requests, please take a moment to review our [Contribution Guidelines](./CONTRIBUTING.rst) for details on how to get started.
+
+By contributing, you help us make this project even better and more accessible to the community.
+
 ## Thanks
 
 * Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
