@@ -25,7 +25,7 @@ def main():
     ret, frame = video_capture.read(0)
     # cv2.VideoCapture.release()
     small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
-    rgb_small_frame = small_frame[:, :, ::-1]
+    rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
 
     face_landmarks_list = face_recognition.face_landmarks(rgb_small_frame)
     process = True
@@ -35,12 +35,12 @@ def main():
 
         # get it into the correct format
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
-        rgb_small_frame = small_frame[:, :, ::-1]
+        rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
 
 
 
         # get the correct face landmarks
-        
+
         if process:
             face_landmarks_list = face_recognition.face_landmarks(rgb_small_frame)
 
@@ -73,7 +73,7 @@ def main():
                     while (asleep): #continue this loop until they wake up and acknowledge music
                         print("EYES CLOSED")
 
-                        if cv2.waitKey(1) == 32: #Wait for space key  
+                        if cv2.waitKey(1) == 32: #Wait for space key
                             asleep = False
                             print("EYES OPENED")
                     closed_count = 0
@@ -89,14 +89,14 @@ def get_ear(eye):
 	# vertical eye landmarks (x, y)-coordinates
 	A = dist.euclidean(eye[1], eye[5])
 	B = dist.euclidean(eye[2], eye[4])
- 
+
 	# compute the euclidean distance between the horizontal
 	# eye landmark (x, y)-coordinates
 	C = dist.euclidean(eye[0], eye[3])
- 
+
 	# compute the eye aspect ratio
 	ear = (A + B) / (2.0 * C)
- 
+
 	# return the eye aspect ratio
 	return ear
 
