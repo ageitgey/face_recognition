@@ -33,6 +33,9 @@ Find all the faces that appear in a picture:
 
     import face_recognition
     image = face_recognition.load_image_file("your_file.jpg")
+    # If loading image from a URL use the below format
+    image = face_recognition.load_image_file("https://example.com/file.jpg")
+
     face_locations = face_recognition.face_locations(image)
 
 Find and manipulate facial features in pictures
@@ -47,6 +50,9 @@ chin.
 
     import face_recognition
     image = face_recognition.load_image_file("your_file.jpg")
+    # If loading image from a URL use the below format
+    image = face_recognition.load_image_file("https://example.com/file.jpg")
+
     face_landmarks_list = face_recognition.face_landmarks(image)
 
 | Finding facial features is super useful for lots of important stuff.
