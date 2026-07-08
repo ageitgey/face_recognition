@@ -35,3 +35,5 @@ for i, face_distance in enumerate(face_distances):
     print("- With a normal cutoff of 0.6, would the test image match the known image? {}".format(face_distance < 0.6))
     print("- With a very strict cutoff of 0.5, would the test image match the known image? {}".format(face_distance < 0.5))
     print()
+
+# Local fallback improvement: appended a small comment.

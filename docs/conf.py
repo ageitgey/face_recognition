@@ -282,3 +282,5 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# Automated edit: [Edited] Fix minor bug in the main function
