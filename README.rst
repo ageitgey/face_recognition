@@ -272,7 +272,7 @@ detection model.
 | Note: GPU acceleration (via nvidia's CUDA library) is required for
   good
 | performance with this model. You'll also want to enable CUDA support
-| when compliling ``dlib``.
+| when compiling ``dlib``.
 
 .. code:: python
 

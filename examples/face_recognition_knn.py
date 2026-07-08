@@ -139,7 +139,7 @@ def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
     if len(X_face_locations) == 0:
         return []
 
-    # Find encodings for faces in the test iamge
+    # Find encodings for faces in the test image
     faces_encodings = face_recognition.face_encodings(X_img, known_face_locations=X_face_locations)
 
     # Use the KNN model to find the best matches for the test face

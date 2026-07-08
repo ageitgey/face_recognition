@@ -175,7 +175,7 @@ your folder of known people.
 
 #### `face_detection` command line tool
 
-The `face_detection` command lets you find the location (pixel coordinatates) 
+The `face_detection` command lets you find the location (pixel coordinates) 
 of any faces in an image.
 
 Just run the command `face_detection`, passing in a folder of images 
@@ -270,7 +270,7 @@ You can also opt-in to a somewhat more accurate deep-learning-based face detecti
 
 Note: GPU acceleration (via NVidia's CUDA library) is required for good
 performance with this model. You'll also want to enable CUDA support
-when compliling `dlib`.
+when compiling `dlib`.
 
 ```python
 import face_recognition
