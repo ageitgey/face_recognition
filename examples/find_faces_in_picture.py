@@ -4,6 +4,9 @@ import face_recognition
 # Load the jpg file into a numpy array
 image = face_recognition.load_image_file("biden.jpg")
 
+face_images: list = []
+max_width: int = 0
+max_height: int = 0
 # Find all the faces in the image using the default HOG-based model.
 # This method is fairly accurate, but not as accurate as the CNN model and not GPU accelerated.
 # See also: find_faces_in_picture_cnn.py
@@ -20,4 +23,41 @@ for face_location in face_locations:
     # You can access the actual face itself like this:
     face_image = image[top:bottom, left:right]
     pil_image = Image.fromarray(face_image)
-    pil_image.show()
+
+    face_images.append(pil_image)
+    # Update max dimensions
+    max_width = max(max_width, pil_image.width)
+    max_height = max(max_height, pil_image.height)
+
+    # pil_image.show()
+
+# Create a collage
+if face_images:
+    # Determine collage layout
+    num_faces = len(face_images)
+    cols = min(3, num_faces)  # Max 3 columns
+    rows = (num_faces + cols - 1) // cols
+    
+    # Create blank canvas
+    collage_width = cols * max_width
+    collage_height = rows * max_height
+    collage = Image.new('RGB', (collage_width, collage_height), color='white')
+    
+    # Paste faces onto collage
+    for idx, face_img in enumerate(face_images):
+        row = idx // cols
+        col = idx % cols
+        
+        # Resize face to standard size if needed
+        face_img_resized = face_img.resize((max_width, max_height), Image.Resampling.LANCZOS)
+        
+        # Calculate position
+        x = col * max_width
+        y = row * max_height
+        
+        collage.paste(face_img_resized, (x, y))
+    
+    # Show the collage
+    collage.show()
+    # Optionally save it
+    # collage.save("detected_faces.jpg")
