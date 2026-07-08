@@ -14,7 +14,8 @@ requirements = [
     'Click>=6.0',
     'dlib>=19.7',
     'numpy',
-    'Pillow'
+    'Pillow',
+    'requests'
 ]
 
 test_requirements = [
