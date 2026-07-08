@@ -78,7 +78,7 @@ def process(worker_id, read_frame_list, write_frame_list, Global, worker_num):
         Global.read_num = next_id(Global.read_num, worker_num)
 
         # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-        rgb_frame = frame_process[:, :, ::-1]
+        rgb_frame = numpy.ascontiguousarray(frame_process[:, :, ::-1])
 
         # Find all the faces and face encodings in the frame of video, cost most time
         face_locations = face_recognition.face_locations(rgb_frame)
