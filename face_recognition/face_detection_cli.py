@@ -23,7 +23,7 @@ def test_image(image_to_check, model, upsample):
 
 
 def image_files_in_folder(folder):
-    return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
+    return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)$', f, flags=re.I)]
 
 
 def process_images_in_process_pool(images_to_check, number_of_cpus, model, upsample):

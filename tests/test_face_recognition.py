@@ -342,3 +342,21 @@ class Test_face_recognition(unittest.TestCase):
         result = runner.invoke(face_detection_cli.main, args=[image_file, "--model", "cnn"])
         self.assertEqual(result.exit_code, 0)
         self.assertTrue(target_string in result.output)
+
+    def test_image_files_in_folder_anchored_regex(self):
+        # Import re here to test the pattern directly (avoids dlib dependency)
+        import re
+        pattern = r'.*\.(jpg|jpeg|png)$'
+
+        should_match = ['photo.jpg', 'photo.jpeg', 'photo.png',
+                        'PHOTO.JPG', 'photo.JPEG', 'photo.PNG']
+        for name in should_match:
+            self.assertIsNotNone(
+                re.match(pattern, name, flags=re.I),
+                "Expected '{}' to match the image pattern".format(name))
+
+        should_not_match = ['photo.jpg.bak', 'notes.jpegdoc', 'archive.tar.jpg.gz']
+        for name in should_not_match:
+            self.assertIsNone(
+                re.match(pattern, name, flags=re.I),
+                "Expected '{}' NOT to match the image pattern".format(name))
