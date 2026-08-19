@@ -1,0 +1,25 @@
+# Local, free audio providers for the Face2AI voice agent (0 EUR per minute).
+#   docker compose -f docker-compose.local-audio.yml up -d speaches   # STT + TTS (Kokoro / Piper) on :8000
+#   docker compose -f docker-compose.local-audio.yml up -d kokoro     # TTS only (English voices) on :8880
+# Models for speaches are pulled once, e.g.:
+#   uvx speaches-cli model download Systran/faster-whisper-small
+#   uvx speaches-cli registry ls --task text-to-speech      # find a piper de_DE voice for German
+services:
+  speaches:
+    image: ghcr.io/speaches-ai/speaches:latest-cpu
+    container_name: speaches
+    ports:
+      - "8000:8000"
+    volumes:
+      - hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
+    restart: unless-stopped
+
+  kokoro:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:latest
+    container_name: kokoro
+    ports:
+      - "8880:8880"
+    restart: unless-stopped
+
+volumes:
+  hf-hub-cache:

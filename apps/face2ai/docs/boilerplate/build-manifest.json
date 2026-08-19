@@ -1,0 +1,38 @@
+{
+  "schema_version":"1.0",
+  "manifest_id":"BM-001",
+  "generated_at":"2026-08-16T00:00:00Z",
+  "repository":"DYAI2025/face_recognition",
+  "target_branch":"chore/face2ai-boilerplate-v1",
+  "mode":"BUILD_APPLY",
+  "architecture_decision":"AD-001",
+  "adr_reference":"apps/face2ai/docs/architecture/ADR-001-local-modular-monolith.md",
+  "adapter":{"id":"face2ai-fastapi-static-v1","version":"0.1.0","verification_status":"conditional"},
+  "tool_versions":{"python":"3.13.5 validation host; recognition target 3.11","fastapi":"0.128.2","uvicorn":"0.48.0","pydantic":"2.13.4","pytest":"9.0.2","node":"22.16.0","uv":"0.10.0"},
+  "create_files":["apps/face2ai/",".github/workflows/face2ai.yml"],
+  "change_files":[],
+  "protected_files":["face_recognition/","setup.py","README.md","LICENSE"],
+  "commands":[
+    {"id":"CMD-001","argv":["pytest","tests"],"cwd":"apps/face2ai","purpose":"unit/API tests","network_allowed":false},
+    {"id":"CMD-002","argv":["python","-m","compileall","-q","src"],"cwd":"apps/face2ai","purpose":"Python compile gate","network_allowed":false},
+    {"id":"CMD-003","argv":["uvicorn","face2ai_app.main:app","--host","127.0.0.1","--port","8765"],"cwd":"apps/face2ai","purpose":"local app-shell smoke","network_allowed":false}
+  ],
+  "external_downloads":[],
+  "dependency_changes":["Base app: FastAPI/Uvicorn/Pydantic/Pillow/Numpy","Optional recognition extra: repository-local face-recognition plus temporary setuptools<82 compatibility pin"],
+  "database_migrations":[],
+  "ci_changes":["Add path-scoped Face2AI app-shell CI on Python 3.11 and Node 22; real camera recognition remains a separate target-Mac gate."],
+  "infrastructure_changes":[],
+  "expected_artifacts":["apps/face2ai/src/face2ai_app","apps/face2ai/tests","apps/face2ai/docs"],
+  "validation_gates":[
+    {"id":"G-PY-COMPILE","required":true,"argv":["python","-m","compileall","-q","src"],"cwd":"apps/face2ai","timeout_seconds":60,"report_path":"evidence/compile.log"},
+    {"id":"G-UNIT","required":true,"argv":["pytest","tests"],"cwd":"apps/face2ai","timeout_seconds":120,"report_path":"evidence/pytest.log"},
+    {"id":"G-JS-SYNTAX","required":true,"argv":["node","--check","src/face2ai_app/static/js/app.js"],"cwd":"apps/face2ai","timeout_seconds":30,"report_path":"evidence/js-check.log"},
+    {"id":"G-RUNTIME-SHELL","required":true,"argv":["curl","-fsS","http://127.0.0.1:8765/healthz"],"cwd":"apps/face2ai","timeout_seconds":30,"report_path":"evidence/runtime-smoke.log"},
+    {"id":"G-RECOGNITION-MAC","required":true,"argv":["manual-target-mac-smoke"],"cwd":"apps/face2ai","timeout_seconds":600,"report_path":"evidence/target-mac-recognition.md"}
+  ],
+  "cleanup":["Stop local Uvicorn process","Remove temporary test identity directories"],
+  "rollback":["Do not merge the work branch","Delete chore/face2ai-boilerplate-v1 if the foundation is rejected"],
+  "known_risks":["Target-Mac recognition dependency chain is not executable in this validation container","GitHub branch-protection details are unreadable by the connector"],
+  "stop_conditions":["Any write would touch face_recognition core","Required automated app-shell tests fail","Target-Mac recognition compatibility fails without a bounded repair"],
+  "authorization_evidence":"User explicitly requested building the first real boilerplate in the repository on 2026-08-16."
+}

@@ -1,0 +1,90 @@
+name: Face2AI
+
+on:
+  push:
+    paths:
+      - 'apps/face2ai/**'
+      - 'apps/face2ai-agent/**'
+      - 'apps/face2ai-hermes-plugin/**'
+      - '.github/workflows/face2ai.yml'
+  pull_request:
+    paths:
+      - 'apps/face2ai/**'
+      - 'apps/face2ai-agent/**'
+      - 'apps/face2ai-hermes-plugin/**'
+      - '.github/workflows/face2ai.yml'
+
+jobs:
+  app-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Deliberately without the `expression` extra (mediapipe + EmotiEffLib, ≈ 0.75 GB installed, ADR-003):
+      # the adapter imports its models lazily, so the expression/mood/wording tests below run against
+      # the FakeExpressionEngine and the pure helpers. Real models are the target-Mac gate in
+      # apps/face2ai/docs/boilerplate/VALIDATION.md, not CI.
+      - name: Install app-shell test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e apps/face2ai
+          python -m pip install pytest==9.0.2 httpx==0.28.1
+      - name: Python compile
+        run: python -m compileall -q apps/face2ai/src
+      - name: Tests
+        run: pytest apps/face2ai/tests
+      - name: Browser module syntax
+        run: |
+          for file in apps/face2ai/src/face2ai_app/static/js/*.js; do node --check "$file"; done
+      - name: Browser model tests
+        run: node --test 'apps/face2ai/tests/js/**/*.test.mjs'
+
+  # The one job that runs the port contracts against the *real* adapter. Without it the conformance
+  # suite only ever sees a double, which satisfies every obligation by construction — the systemic
+  # artifact would be green exactly where it cannot fail. FACE2AI_CONFORMANCE_REQUIRE_REAL turns the
+  # "recognition extra not installed" skip into a failure, so a broken install cannot pass quietly.
+  recognition-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # `face-recognition` pulls dlib, which is built from source here
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install the real recognition adapter
+        run: uv sync --project apps/face2ai --group dev --extra recognition
+      - name: Port conformance against the real adapter
+        env:
+          FACE2AI_CONFORMANCE_REQUIRE_REAL: '1'
+        run: uv run --project apps/face2ai pytest apps/face2ai/tests/test_port_conformance.py
+
+  voice-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install voice agent
+        run: uv sync --project apps/face2ai-agent --group dev --extra groq
+      - name: Compile
+        run: uv run --project apps/face2ai-agent python -m compileall -q apps/face2ai-agent/src
+      - name: Unit tests
+        run: uv run --project apps/face2ai-agent pytest apps/face2ai-agent/tests
+
+  hermes-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests (no Hermes needed)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest==9.0.2
+          python -m compileall -q apps/face2ai-hermes-plugin/face2ai
+          pytest apps/face2ai-hermes-plugin/tests
+      - name: Desktop half is plain ESM
+        run: node --check apps/face2ai-hermes-plugin/face2ai/desktop/plugin.js

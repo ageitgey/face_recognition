@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "decision_id": "AD-001",
+  "generated_at": "2026-08-16T00:00:00Z",
+  "status": "recommended",
+  "context": "Select the smallest durable architecture for Face2AI inside the existing face_recognition fork.",
+  "hard_constraints": ["local-only MVP", "reuse existing recognition core", "no raw frame persistence", "explicit enrollment", "no default-branch mutation", "no fake product functionality"],
+  "quality_scenarios": ["QS-001", "QS-002", "QS-003"],
+  "candidates": [
+    {"id":"CAND-001","name":"FastAPI + dependency-free browser modules","kind":"minimum_viable_architecture","summary":"One local Python process serves API and static ES modules.","feasibility":"feasible","hard_constraint_results":[{"constraint_id":"HC-local","status":"satisfied","evidence_refs":["EV-001"]},{"constraint_id":"HC-reuse","status":"satisfied","evidence_refs":["EV-003"]}],"scores":{"simplicity":5,"modifiability":4,"ui_scalability":3,"runtime_risk":4,"reversibility":5},"risks":["Browser state management may become cumbersome as Party Mirror grows."],"non_risks":["No Node toolchain is needed for S0."],"sensitivity_points":["Number of interactive frontend surfaces"],"tradeoff_points":["Simplicity now versus frontend component scale later"],"reversibility":"high","migration_cost":"low","evidence_strength":4},
+    {"id":"CAND-002","name":"FastAPI + React/Vite","kind":"balanced_architecture","summary":"Separate typed frontend build with a React component model.","feasibility":"feasible","hard_constraint_results":[{"constraint_id":"HC-local","status":"satisfied","evidence_refs":["EV-005"]},{"constraint_id":"HC-reuse","status":"satisfied","evidence_refs":["EV-003"]}],"scores":{"simplicity":3,"modifiability":5,"ui_scalability":5,"runtime_risk":3,"reversibility":4},"risks":["Adds a second toolchain before it creates product value."],"non_risks":["A later migration is localized to the browser shell."],"sensitivity_points":["Frontend complexity growth"],"tradeoff_points":["Component scale versus added toolchain"],"reversibility":"high","migration_cost":"medium","evidence_strength":4},
+    {"id":"CAND-003","name":"Desktop shell + React + Python sidecar","kind":"assurance_or_scale_architecture","summary":"Desktop packaging with multiple runtimes.","feasibility":"conditional","hard_constraint_results":[{"constraint_id":"HC-local","status":"satisfied","evidence_refs":["EV-001"]},{"constraint_id":"HC-simplicity","status":"violated","evidence_refs":["EV-001"]}],"scores":{"simplicity":1,"modifiability":4,"ui_scalability":5,"runtime_risk":2,"reversibility":2},"risks":["Desktop packaging and sidecar lifecycle dominate S0 effort."],"non_risks":["Can be reconsidered if installed distribution becomes a product goal."],"sensitivity_points":["Need for distributable desktop binary"],"tradeoff_points":["Distribution polish versus implementation speed"],"reversibility":"medium","migration_cost":"high","evidence_strength":2}
+  ],
+  "preferred_candidate_id": "CAND-001",
+  "strongest_counterargument": "The selected frontend will eventually be less convenient than React if Party Mirror introduces several stateful surfaces and reusable components; the decision is justified only while S0 remains one tightly scoped interaction surface.",
+  "decision_rationale": ["One runtime and no frontend build reduces first-use friction.", "Domain ports preserve later engine/store/interaction replacement.", "The existing product UI effects can be implemented as adapted CSS/ES modules.", "Migration to React remains localized to the browser shell because API contracts are stable."],
+  "rejected_alternatives": ["CAND-002 deferred until frontend complexity triggers fire", "CAND-003 rejected for S0 architecture overhead"],
+  "consequences": ["S0 frontend has no framework dependency.", "Recognition readiness is explicit and separate from process health.", "Future Party Mirror attaches through an interaction/event boundary rather than modifying recognition core."],
+  "risks": [{"id":"RISK-001","statement":"Target-Mac face_recognition dependency chain may not install reproducibly on Python 3.11.","likelihood":"medium","impact":"high","mitigation":"Run mandatory compatibility smoke before claiming runtime recognition."}],
+  "assumptions": [{"id":"ASM-001","statement":"The existing repository package remains the recognition source for S0.","confidence":5,"review_trigger":"fork diverges materially or Face2AI is extracted to a separate repository"}],
+  "review_triggers": ["two or more frontend complexity triggers in ADR-001 fire", "recognition engine compatibility fails", "product moves beyond local invited-adult S0 use"],
+  "migration_signals": ["Party Mirror adds complex routing/timelines", "dedicated distribution becomes a product goal"],
+  "diagram_paths": ["docs/boilerplate/ARCHITECTURE.md"],
+  "adr_paths": ["docs/architecture/ADR-001-local-modular-monolith.md", "docs/architecture/ADR-002-voice-agent.md", "docs/architecture/ADR-003-expression-engine.md", "docs/architecture/ADR-004-expression-dynamics.md"],
+  "evidence_refs": ["EV-001", "EV-002", "EV-003", "EV-004", "EV-005"]
+}

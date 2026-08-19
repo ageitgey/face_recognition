@@ -1,0 +1,7 @@
+{
+  "name": "face2ai",
+  "label": "Face2AI",
+  "description": "Presence from the local Face2AI camera (who is in front of it right now).",
+  "version": "0.1.0",
+  "api": "plugin_api.py"
+}

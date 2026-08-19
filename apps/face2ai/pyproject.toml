@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "face2ai"
+version = "0.1.0"
+description = "Local-first visual identity product built on face_recognition."
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "fastapi==0.128.2",
+  "uvicorn==0.48.0",
+  "pydantic==2.13.4",
+  "numpy==2.3.5",
+  "Pillow==12.3.0",
+]
+
+[project.optional-dependencies]
+recognition = [
+  "face-recognition>=1.3,<2",
+  "setuptools<82",
+]
+expression = [
+  "mediapipe==0.10.21",
+  "emotiefflib==1.1.1",
+  "onnxruntime>=1.20,<2",
+]
+
+[dependency-groups]
+dev = [
+  "httpx==0.28.1",
+  "pytest==9.0.2",
+]
+
+[project.scripts]
+face2ai = "face2ai_app.main:run"
+
+[tool.uv]
+# mediapipe==0.10.21 declares numpy<2 but runs on numpy 2.3.5 (FaceLandmarker CPU delegate verified
+# on the M1, 2026-08-18: 52 blendshapes + pose matrix). Without this override the `expression`
+# extra makes the whole project unresolvable.
+override-dependencies = ["numpy==2.3.5"]
+
+[tool.uv.sources]
+face-recognition = { path = "../..", editable = true }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+face2ai_app = ["static/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

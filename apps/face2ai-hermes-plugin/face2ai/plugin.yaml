@@ -1,0 +1,45 @@
+name: face2ai
+version: 0.1.0
+manifest_version: 2
+description: >-
+  Face2AI presence for Hermes: knows who is in front of the local camera (KNOWN <name> /
+  UNKNOWN / MULTIPLE_FACES / NO_FACE / camera off) and tells the agent on every turn.
+  Consumes Face2AI's presence event stream — states, display names, counts, timestamps only,
+  never frames or face encodings.
+homepage: https://github.com/DYAI2025/face_recognition/tree/master/apps/face2ai-hermes-plugin
+license: MIT
+tags: [presence, camera, face2ai, context]
+provides_tools:
+  - presence_now
+provides_hooks:
+  - pre_llm_call
+  - pre_gateway_dispatch
+python_dependencies:
+  - httpx
+emits:
+  - presence_changed
+config_schema:
+  type: object
+  properties:
+    events_url:
+      type: string
+      description: Base URL of the Face2AI backend (default http://127.0.0.1:8765, e.g. via SSH reverse tunnel)
+    inject_context:
+      type: boolean
+      description: Inject the current presence into every turn via pre_llm_call (default true)
+    context_max_age_seconds:
+      type: integer
+      description: Do not inject presence older than this many seconds without a heartbeat (default 30)
+    platforms:
+      type: array
+      items: {type: string}
+      description: Only inject on these gateway platforms (empty = all)
+    announce_arrivals:
+      type: boolean
+      description: Proactively start a turn when a known person arrives (needs plugins.entries.face2ai.allow_gateway_injection true; default false)
+    announce_cooldown_seconds:
+      type: integer
+      description: Minimum seconds between two arrival announcements for the same person (default 120)
+    language:
+      type: string
+      description: Language hint for injected text and announcements (default de)

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#05070b" />
+  <title>Face2AI — Local Identity Interface</title>
+  <link rel="stylesheet" href="/assets/css/app.css" />
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"><div class="dot-grid"></div></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand" aria-label="Face2AI">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div><div class="brand-name">FACE2AI</div><span class="brand-sub">LOCAL IDENTITY ENGINE</span></div>
+      </div>
+
+      <div class="top-center">
+        <div class="system-pill" id="cameraPill"><span class="system-dot"></span><span id="cameraStatus">VISION OFFLINE</span></div>
+        <div class="system-pill" id="enginePill"><span class="system-dot"></span><span id="engineStatus">ENGINE CHECKING</span></div>
+        <span class="sr-only" id="statusAnnouncer" aria-live="polite"></span>
+      </div>
+
+      <div class="top-actions">
+        <span class="clock" id="clock">--:--:--</span>
+        <button class="icon-btn" id="identitiesButton" type="button" aria-label="Open identities" title="Identities">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </button>
+        <button class="icon-btn" id="visionToggle" type="button" aria-label="Activate vision" title="Activate vision">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="layout">
+      <div class="stage-wrap">
+        <section class="stage" id="stage" aria-label="Camera workspace">
+          <div class="light-rays" aria-hidden="true"></div>
+          <video class="video" id="camera" autoplay playsinline muted></video>
+          <canvas class="overlay" id="overlay" aria-hidden="true"></canvas>
+          <div class="stage-noise" aria-hidden="true"></div>
+          <div class="scan-line" aria-hidden="true"></div>
+
+          <div class="stage-head">
+            <div class="stage-label">LOCAL CAMERA</div>
+            <div class="frame-info" id="frameInfo">FRAME —</div>
+          </div>
+
+          <div class="center-state" id="centerState">
+            <div class="reticle" aria-hidden="true"><span class="arc"></span></div>
+            <div class="center-kicker">Private by default</div>
+            <h1 class="center-title">Your presence becomes context.</h1>
+            <p class="center-copy">Face2AI recognizes locally enrolled people and turns physical presence into a usable identity event. Camera frames are processed in memory on this device and are not stored.</p>
+            <button class="primary-btn magnet" id="activateButton" type="button"><span class="pulse" aria-hidden="true"></span>Activate vision</button>
+          </div>
+
+          <div class="stage-foot">
+            <div class="stage-meta">
+              <span class="meta-chip" id="faceCountChip">0 FACES</span>
+              <span class="meta-chip" id="processingChip">IDLE</span>
+            </div>
+            <div class="privacy-mark">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              LOCAL PROCESSING
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="rail">
+        <section class="card identity-card spotlight" id="identityCard" tabindex="-1" aria-labelledby="identityCardLabel">
+          <div class="eyebrow"><span id="identityCardLabel">Identity</span><span class="mini-state" id="identityMini">OFFLINE</span></div>
+          <span class="sr-only" id="identityAnnouncer" aria-live="polite"></span>
+          <div class="identity-name" id="identityName">No identity</div>
+          <div class="identity-state" id="identityState"><span class="state-orb" aria-hidden="true"></span><span id="identityStateText">Vision inactive</span></div>
+          <div class="metrics">
+            <div class="metric"><div class="metric-label">Match distance</div><div class="metric-value muted" id="distanceValue">—</div></div>
+            <div class="metric"><div class="metric-label">Faces visible</div><div class="metric-value" id="facesValue">0</div></div>
+            <div class="metric"><div class="metric-label">Recognition</div><div class="metric-value muted" id="recognitionValue">Checking</div></div>
+            <div class="metric"><div class="metric-label">Identities stored</div><div class="metric-value" id="identityCount">—</div></div>
+            <div class="metric metric-wide" id="expressionTile">
+              <div class="metric-label">Expression <span class="metric-note">a hint, not a fact</span></div>
+              <div class="metric-value muted" id="expressionValue">off</div>
+              <div class="mood-bars" id="moodBars" hidden>
+                <div class="mood-bar"><span class="mood-bar-label">Valence</span><span class="mood-bar-track" aria-hidden="true"><span class="mood-bar-fill" id="valenceFill"></span></span><span class="mood-bar-num" id="valenceValue">—</span></div>
+                <div class="mood-bar"><span class="mood-bar-label">Arousal</span><span class="mood-bar-track" aria-hidden="true"><span class="mood-bar-fill" id="arousalFill"></span></span><span class="mood-bar-num" id="arousalValue">—</span></div>
+              </div>
+              <svg class="affect-spark" id="valenceSpark" viewBox="0 0 120 24" preserveAspectRatio="none" role="img" aria-label="Valence trend across this session's last 120 readings — a hint from facial expression, not a fact" hidden><line class="affect-zero" x1="0" y1="12" x2="120" y2="12"/><polyline id="valenceLine" points=""/></svg>
+            </div>
+          </div>
+        </section>
+
+        <section class="card context-card spotlight">
+          <div class="eyebrow"><span>Context</span><span id="contextHint">OFFLINE</span></div>
+          <div class="context-row"><span>Camera</span><span id="cameraContext">Inactive</span></div>
+          <div class="context-row"><span>Engine</span><span id="engineContext">Checking</span></div>
+          <div class="context-row"><span>Session</span><span id="sessionContext">Not started</span></div>
+          <div class="context-row"><span>Greeting cooldown</span><span id="cooldownContext">—</span></div>
+          <div class="context-row"><span>Voice agent</span><span id="agentContext">Not connected</span></div>
+          <div class="context-row"><span>Live events</span><span id="eventsContext">Connecting</span></div>
+        </section>
+
+        <section class="card action-card spotlight">
+          <div class="eyebrow"><span>Actions</span><span>CONTEXTUAL</span></div>
+          <div class="action-grid">
+            <button class="ghost-btn magnet" id="learnButton" type="button" disabled><span>Learn person</span><span class="btn-icon" aria-hidden="true">+</span></button>
+            <button class="ghost-btn" id="openIdentitiesButton" type="button"><span>Identities</span><span class="btn-icon" aria-hidden="true">↗</span></button>
+            <button class="ghost-btn" id="pauseButton" type="button" disabled><span id="pauseLabel">Pause vision</span><span class="btn-icon" aria-hidden="true">Ⅱ</span></button>
+            <button class="danger-btn" id="eraseButton" type="button"><span>Erase all</span><span class="btn-icon" aria-hidden="true">×</span></button>
+            <button class="ghost-btn action-wide" id="expressionButton" type="button" disabled title="Checking the expression engine"><span id="expressionLabel">Expression: off</span><span class="btn-icon" aria-hidden="true">◐</span></button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="events" aria-label="Identity event stream">
+        <div class="event-summary">
+          <div class="eyebrow"><span>Identity stream</span><span id="eventCount">0 EVENTS</span></div>
+          <h3>Presence, translated.</h3>
+          <p>Only real camera, recognition, greeting and enrollment events appear here. The interface generates no synthetic activity.</p>
+        </div>
+        <div class="event-list" id="eventList" role="log" aria-live="polite">
+          <div class="event empty" id="emptyEvent">Waiting for the first real event.</div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog class="drawer" id="identityDialog" aria-labelledby="identityDialogTitle">
+    <div class="drawer-head">
+      <div><div class="eyebrow">LOCAL STORE</div><h2 id="identityDialogTitle">Identities</h2></div>
+      <form method="dialog"><button class="icon-btn" type="submit" aria-label="Close identities">×</button></form>
+    </div>
+    <p class="drawer-copy">Stored records contain a display name and face encodings only. Deleting a record removes it from this device's local store.</p>
+    <div class="identity-list" id="identityList"><div class="empty-list">Loading local identities…</div></div>
+    <div class="drawer-foot"><button class="danger-btn" id="drawerEraseButton" type="button"><span>Erase all identities</span><span class="btn-icon" aria-hidden="true">×</span></button></div>
+  </dialog>
+
+  <dialog class="modal-card" id="enrollDialog" aria-labelledby="enrollTitle">
+    <form method="dialog" id="enrollForm" novalidate>
+      <div class="eyebrow"><span>Enrollment</span><span>LOCAL</span></div>
+      <h2 id="enrollTitle">Learn this person</h2>
+      <p>Enrollment stores a local face encoding and the chosen display name. It is only available while exactly one unknown face is visible.</p>
+      <div class="field"><label for="displayName">Display name</label><input id="displayName" name="displayName" maxlength="80" autocomplete="off" placeholder="Name" required /></div>
+      <label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" required /><span>I consent to storing a face encoding and this display name on this device for local Face2AI recognition.</span></label>
+      <p class="fine-print">No raw camera frame is stored. The record can be deleted at any time from Identities.</p>
+      <p class="form-error" id="enrollError" role="alert" hidden></p>
+      <div class="modal-actions"><button class="ghost-btn" type="button" id="enrollCancel">Cancel</button><button class="primary-btn" type="submit" value="learn" id="enrollSubmit">Learn identity</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal-card" id="eraseDialog" aria-labelledby="eraseTitle">
+    <form method="dialog" id="eraseForm">
+      <div class="eyebrow"><span>Local storage</span><span class="danger-text">DESTRUCTIVE</span></div>
+      <h2 id="eraseTitle">Erase all identities?</h2>
+      <p>This removes every locally enrolled identity from the Face2AI store on this device. The action cannot be undone.</p>
+      <div class="modal-actions"><button class="ghost-btn" type="button" id="eraseCancel">Cancel</button><button class="danger-btn" type="submit" value="erase" id="eraseSubmit"><span>Erase all</span></button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>
