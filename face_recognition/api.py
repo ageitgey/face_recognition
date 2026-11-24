@@ -7,10 +7,15 @@ from PIL import ImageFile
 
 try:
     import face_recognition_models
-except Exception:
-    print("Please install `face_recognition_models` with this command before using `face_recognition`:\n")
-    print("pip install git+https://github.com/ageitgey/face_recognition_models")
-    quit()
+except ImportError as e:
+    raise ImportError(
+        "Could not import `face_recognition_models` ({}).\n"
+        "If it is not installed, install it with:\n\n"
+        "    pip install git+https://github.com/ageitgey/face_recognition_models\n\n"
+        "If it is already installed, the error above is the real cause "
+        "(for example, `pkg_resources` is missing because setuptools>=82 no longer ships it; "
+        "`pip install \"setuptools<82\"` works around that).".format(e)
+    ) from e
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
